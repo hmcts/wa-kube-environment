@@ -15,10 +15,12 @@ These above can all bew installed via `brew install`
 
 ### 1. Create a local cluster:
 
-  `minikube start \
+```
+  minikube start \
      --memory=8192 \
      --cpus 4 \
-     --vm-driver=hyperkit`
+     --vm-driver=hyperkit
+```
 
 ### 2. Start local WA environment:
 
@@ -37,4 +39,6 @@ These above can all bew installed via `brew install`
 
 ### 2. Update /etc/hosts to route the hosts to the minikube cluster ip
 
-  `echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db idam-web-public fr-am fr-idm sidam-api ccd-definition-store-api idam-web-admin idam-web-public ccd-definition-store-api ccd-data-store-api ccd-api-gateway ccd-orchestrator wiremock xui-webapp" | sudo tee -a /etc/hosts`
+```
+echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db idam-web-public fr-am fr-idm sidam-api ccd-definition-store-api idam-web-admin idam-web-public ccd-definition-store-api ccd-data-store-api ccd-api-gateway ccd-orchestrator wiremock xui-webapp" | sudo tee -a /etc/hosts`
+```
