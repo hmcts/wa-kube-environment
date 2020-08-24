@@ -1,0 +1,7 @@
+releases:
+
+  - name: service-auth-provider-api
+    chart: ./../charts/app
+    values:
+      - ./../values/service-auth-provider-api.yaml.gotmpl
+    wait: true

@@ -1,0 +1,7 @@
+releases:
+
+  - name: ccd-user-profile-api
+    chart: ./../charts/app
+    values:
+      - ./../values/ccd-user-profile-api.yaml.gotmpl
+    wait: true

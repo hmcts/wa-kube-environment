@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  labels:
+    app: {{ .Values.app.name }}
+    group: {{ .Values.app.group }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        group: {{ .Values.app.group }}
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: {{ .Values.app.container.image }}:{{ .Values.app.container.tag }}
+          imagePullPolicy: {{ .Values.app.container.pullPolicy | default "Never" }}
+          ports:
+              - containerPort: {{ (index .Values.app.container.ports 0).containerPort }}
+          {{- if .Values.app.volume.enabled }}
+          volumeMounts:
+            - mountPath: {{ .Values.app.volume.path }}
+              name: {{ .Values.app.volume.name }}
+          {{- end }}
+          envFrom:
+            {{- range .Values.app.container.config }}
+            - configMapRef:
+                name: {{ .name }}
+            {{- end }}
+          env:
+            {{- range .Values.app.container.env }}
+            - name: {{ .key }}
+              value: {{ .value | quote }}
+            {{- end }}
+          resources:
+            limits:
+              memory: {{ .Values.app.container.resources.limits.memory }}
+            requests:
+              memory: {{ .Values.app.container.resources.requests.memory }}
+        {{- if .Values.app.container.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{.Values.app.container.readinessProbe.httpGet.path}}
+              port: {{ .Values.app.container.readinessProbe.httpGet.port | default "8080" }}
+            initialDelaySeconds: {{.Values.app.container.readinessProbe.httpGet.initialDelaySeconds}}
+            periodSeconds: {{.Values.app.container.readinessProbe.httpGet.periodSeconds}}
+        {{- end }}
+      {{- if .Values.app.volume.enabled }}
+      volumes:
+        - name: {{ .Values.app.volume.name }}
+          emptyDir: {}
+      {{- end }}
+      {{- if .Values.app.container.authentication }}
+      imagePullSecrets:
+        - name: {{ .Values.app.container.imagePullSecrets.name }}
+      {{- end }}

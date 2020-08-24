@@ -1,0 +1,48 @@
+app:
+  name: ccd-api-gateway
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/ccd/api-gateway-web
+    tag: latest
+    ports:
+      - containerPort: 3453
+        servicePort: 80
+        name: http
+    env:
+      - key: "IDAM_BASE_URL"
+        value: http://sidam-api
+      - key: "IDAM_USER_URL"
+        value: http://sidam-api
+      - key: "IDAM_S2S_URL"
+        value: http://service-auth-provider-api
+      - key: "IDAM_SERVICE_KEY"
+        value: {{ requiredEnv "IDAM_KEY_CCD_GATEWAY" }}
+      - key: "IDAM_OAUTH2_LOGOUT_ENDPOINT"
+        value: http://sidam-api/session/:token
+      - key: "IDAM_OAUTH2_CLIENT_ID"
+        value: ccd_gateway
+      - key: "IDAM_OAUTH2_CLIENT_SECRET"
+        value: {{ requiredEnv "OAUTH2_CLIENT_CCD_GATEWAY" }}
+      - key: "IDAM_OAUTH2_TOKEN_ENDPOINT"
+        value: http://sidam-api/oauth2/token
+      - key: "ADDRESS_LOOKUP_TOKEN"
+        value: {{ requiredEnv "ADDRESS_LOOKUP_TOKEN" }}
+      - key: "PROXY_AGGREGATED"
+        value: http://ccd-data-store-api
+      - key: "PROXY_DATA"
+        value: http://ccd-data-store-api
+      - key: "PROXY_DEFINITION_IMPORT"
+        value: http://ccd-definition-store-api
+      - key: "PROXY_DEFINITION_DATA"
+        value: http://ccd-definition-store-api/api/data
+      - key: "PROXY_DEFINITION_DISPLAY"
+        value: http://ccd-definition-store-api/api/display
+      - key: "APPINSIGHTS_INSTRUMENTATIONKEY"
+        value: key
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+        port: 3453
+      initialDelaySeconds: 300
+      periodSeconds: 30

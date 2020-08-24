@@ -1,0 +1,21 @@
+app:
+  name: fr-am
+  group: backend
+  container:
+    image: hmctsprivate.azurecr.io/idam/idam-fr-am
+    tag: latest
+    authentication: true
+    imagePullSecrets:
+      name: hmcts-private-creds
+    ports:
+      - containerPort: 8080
+        servicePort: 8097
+        name: http
+      - containerPort: 1389
+        servicePort: 1389
+        name: http2
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "256Mi"

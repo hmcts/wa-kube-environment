@@ -1,0 +1,7 @@
+releases:
+
+  - name: ccd-case-management-web
+    chart: ./../charts/app
+    values:
+      - ./../values/ccd-case-management-web.yaml.gotmpl
+    wait: true

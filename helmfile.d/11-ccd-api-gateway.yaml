@@ -1,0 +1,7 @@
+releases:
+
+  - name: ccd-api-gateway
+    chart: ./../charts/app
+    values:
+      - ./../values/ccd-api-gateway.yaml.gotmpl
+    wait: true

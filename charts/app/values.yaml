@@ -1,0 +1,38 @@
+# Default values for any application.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+app:
+  name: app
+  group: app
+  replicaCount: 1
+  container:
+    image: add-image-here
+    tag: latest
+    pullPolicy: IfNotPresent
+    multiplePorts: false
+    port: 8080
+    config: []
+    env:
+      - key: key
+        value: value
+    resources:
+      limits:
+        memory: "512Mi"
+      requests:
+        memory: "256Mi"
+    readinessProbe:
+      enabled: false
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 300
+      periodSeconds: 30
+  service:
+    type: NodePort
+    port: 80
+  volume:
+    enabled: false
+    name: a-volumen-name
+    path: /data/volume-path
+

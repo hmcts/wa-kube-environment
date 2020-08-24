@@ -1,0 +1,21 @@
+app:
+  name: idam-web-admin
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/idam/web-admin
+    tag: stable
+    ports:
+      - containerPort: 8080
+        servicePort: 80
+        name: http
+    env:
+      - key: "STRATEGIC_SERVICE_URL"
+        value: http://sidam-api
+      - key: "STRATEGIC_PUBLIC_URL"
+        value: http://idam-web-public
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+      initialDelaySeconds: 300
+      periodSeconds: 30

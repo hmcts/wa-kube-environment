@@ -1,0 +1,44 @@
+app:
+  name: service-auth-provider-api
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/rpe/service-auth-provider
+    tag: latest
+    ports:
+      - containerPort: 8080
+        servicePort: 80
+        name: http
+    env:
+      - key: "SERVER_PORT"
+        value: 8080
+      - key: "JWT_KEY"
+        value: wThK0f0/lh3FlxFcL4xUWDMI5C1J9KyQBgXV4wseh1e5J1uYJIjvTvArHxQDrYoHJ23xFxjHkOnvNbR5dXRoxA==
+      - key: "TESTING_SUPPORT_ENABLED"
+        value: true
+      - key: "MICROSERVICEKEYS_CCD_DATA"
+        value: {{ requiredEnv "IDAM_KEY_CCD_DATA_STORE" }}
+      - key: "MICROSERVICEKEYS_CCD_GW"
+        value: {{ requiredEnv "IDAM_KEY_CCD_GATEWAY" }}
+      - key: "MICROSERVICEKEYS_CCD_DEFINITION"
+        value: {{ requiredEnv "IDAM_KEY_CCD_DEFINITION_STORE" }}
+      - key: "MICROSERVICEKEYS_CCD_ADMIN"
+        value: {{ requiredEnv "IDAM_KEY_CCD_ADMIN" }}
+      - key: "MICROSERVICEKEYS_FPL_CASE_SERVICE"
+        value: {{ requiredEnv "IDAM_KEY_FPL_CASE_SERVICE" }}
+      - key: "MICROSERVICEKEYS_IAC"
+        value: {{ requiredEnv "IDAM_KEY_IAC" }}
+      - key: "MICROSERVICEKEYS_EM_GW"
+        value: {{ requiredEnv "IDAM_KEY_EM_GW" }}
+      - key: "MICROSERVICEKEYS_EM_STITCHING_API"
+        value: {{ requiredEnv "IDAM_KEY_EM_STITCHING_API" }}
+      - key: "MICROSERVICEKEYS_EM_CCD_ORCHESTRATOR"
+        value: {{ requiredEnv "IDAM_KEY_EM_CCD_ORCHESTRATOR" }}
+      - key: "MICROSERVICE_KEYS_EM_GW"
+        value: {{ requiredEnv "IDAM_KEY_DM_STORE" }}
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+      initialDelaySeconds: 300
+      periodSeconds: 30
+

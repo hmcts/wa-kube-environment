@@ -1,0 +1,40 @@
+app:
+  name: ccd-user-profile-api
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/ccd/user-profile-api
+    tag: latest
+    ports:
+      - containerPort: 4453
+        servicePort: 80
+        name: http
+    env:
+      - key: "USER_PROFILE_DB_HOST"
+        value: ccd-shared-database
+      - key: "USER_PROFILE_DB_PORT"
+        value: 5432
+      - key: "USER_PROFILE_S2S_AUTHORISED_SERVICES"
+        value: ccd_data,ccd_definition,ccd_admin
+      - key: "IDAM_S2S_URL"
+        value: http://service-auth-provider-api
+      - key: "REFORM_SERVICE_NAME"
+        value: ccd-user-profile-api
+      - key: "REFORM_TEAM"
+        value: ccd
+      - key: "REFORM_ENVIRONMENT"
+        value: local
+      - key: "APPINSIGHTS_INSTRUMENTATIONKEY"
+        value: key
+      - key: "USER_PROFILE_DB_USERNAME"
+        value: {{ requiredEnv "DB_USERNAME" }}
+      - key: "USER_PROFILE_DB_PASSWORD"
+        value: {{ requiredEnv "DB_PASSWORD" }}
+      - key: "USER_PROFILE_DB_USE_SSL"
+        value: false
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+        port: 4453
+      initialDelaySeconds: 300
+      periodSeconds: 30

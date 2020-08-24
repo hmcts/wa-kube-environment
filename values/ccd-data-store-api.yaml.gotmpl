@@ -1,0 +1,60 @@
+app:
+  name: ccd-data-store-api
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/ccd/data-store-api
+    tag: latest
+    ports:
+      - containerPort: 4452
+        servicePort: 80
+        name: http
+    env:
+      - key: "POSTGRES_HOST_AUTH_METHOD"
+        value: trust
+      - key: "DATA_STORE_DB_HOST"
+        value: ccd-shared-database
+      - key: "DATA_STORE_DB_PORT"
+        value: 5432
+      - key: "DATA_STORE_DB_USERNAME"
+        value: {{ requiredEnv "DB_USERNAME" }}
+      - key: "DATA_STORE_DB_PASSWORD"
+        value: {{ requiredEnv "DB_PASSWORD" }}
+      - key: "DATA_STORE_DB_USE_SSL"
+        value: {{ requiredEnv "DB_USE_SSL" }}
+      - key: "DATA_STORE_IDAM_KEY"
+        value: {{ requiredEnv "IDAM_KEY_CCD_DATA_STORE" }}
+      - key: "DATA_STORE_TOKEN_SECRET"
+        value: iuasbcuasdcbasdgcasdgcuysachjsacyasdgjcgasdj
+      - key: "DATA_STORE_S2S_AUTHORISED_SERVICES"
+        value: ccd_gw,fpl_case_service,ccd_data,ccd_ps,iac
+      - key: "DEFINITION_STORE_HOST"
+        value: http://ccd-definition-store-api
+      - key: "USER_PROFILE_HOST"
+        value: http://ccd-user-profile-api:4453
+      - key: "IDAM_USER_URL"
+        value: http://sidam-api
+      - key: "IDAM_S2S_URL"
+        value: http://service-auth-provider-api
+      - key: "REFORM_SERVICE_NAME"
+        value: ccd-data-store-api
+      - key: "REFORM_TEAM"
+        value: ccd
+      - key: "REFORM_ENVIRONMENT"
+        value: local
+      - key: "APPINSIGHTS_INSTRUMENTATIONKEY"
+        value: key
+      - key: "ELASTIC_SEARCH_ENABLED"
+        value: false
+      - key: "ELASTIC_SEARCH_HOST"
+        value: ccd-elasticsearch
+      - key: "ELASTIC_SEARCH_DATA_NODES_HOSTS"
+        value: http://ccd-elasticsearch
+      - key: "CCD_DM_DOMAIN"
+        value: http://dm-store
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+        port: 4452
+      initialDelaySeconds: 300
+      periodSeconds: 30

@@ -1,0 +1,8 @@
+# Dynamic image tags
+.tags.env
+.workspace
+
+# IntelliJ IDEA files
+.idea/
+.vscode/
+*.iml
