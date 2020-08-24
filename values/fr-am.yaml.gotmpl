@@ -7,6 +7,9 @@ app:
     authentication: true
     imagePullSecrets:
       name: hmcts-private-creds
+    env:
+      - key: "JAVA_TOOL_OPTIONS"
+        value: -Xms128m -Xmx384m
     ports:
       - containerPort: 8080
         servicePort: 8097

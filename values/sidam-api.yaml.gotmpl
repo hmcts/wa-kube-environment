@@ -9,6 +9,8 @@ app:
         servicePort: 80
         name: http
     env:
+      - key: "JAVA_TOOL_OPTIONS"
+        value: -Xms128m -Xmx512m
       - key: "SPRING_PROFILES_ACTIVE"
         value: local
       - key: "CACHING_ENABLED"

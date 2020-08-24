@@ -20,6 +20,3 @@ kubectl create secret docker-registry $SECRET_NAME \
 
 echo "-> Starting deployments"
 helmfile -n hmcts-local sync
-
-echo "-> Applying Ingress Configuration"
-kubectl apply -f ./values/ingress.yaml -n $NAMESPACE
