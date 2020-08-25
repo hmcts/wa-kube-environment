@@ -9,7 +9,7 @@ A Kubernetes environment with all the necessary services for local development u
 - [Helm](https://helm.sh)
 - [Helmfile](https://github.com/roboll/helmfile)
 
-These above can all bew installed via `brew install`
+The above can all brew installed via `brew install`
 
 ## Quick start
 
