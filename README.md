@@ -46,3 +46,12 @@ echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-prof
 ### 3. Apply Ingress chart
 
 `kubectl apply -f ./values/ingress.yaml -n hmcts-local`
+
+
+After running the above the services should be accessible via:
+
+`http://<name-of-service>`
+
+For example:
+
+`http://xui-webapp`
