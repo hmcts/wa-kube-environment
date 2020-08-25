@@ -102,6 +102,27 @@ spec:
             backend:
               serviceName: ccd-api-gateway
               servicePort: 80
+    - host: ccd-case-management-web
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ccd-case-management-web
+              servicePort: 80
+    - host: stitching-api
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: stitching-api
+              servicePort: 80
+    - host: dm-store
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dm-store
+              servicePort: 80
     - host: ccd-orchestrator
       http:
         paths:
