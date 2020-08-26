@@ -39,6 +39,8 @@ app:
         value: http://ccd-definition-store-api/api/display
       - key: "APPINSIGHTS_INSTRUMENTATIONKEY"
         value: key
+      - key: "PROXY_DOCUMENT_MANAGEMENT"
+        value: http://dm-store
     readinessProbe:
       enabled: true
       httpGet:

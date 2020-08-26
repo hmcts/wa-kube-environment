@@ -18,7 +18,11 @@ app:
       - key: "DM_GATEWAY_BASE_URL"
         value: https://api-gateway.dev.dm.reform.hmcts.net
       - key: "OAUTH2_CLIENT_ID"
-        value: ccd_gateway"
+        value: ccd_gateway
+      - key: "DM_URL"
+        value: http://ccd-api-gateway/documents
+      - key: "DM_URL_REMOTE"
+        value: http://dm-store/documents
     readinessProbe:
       enabled: true
       httpGet:

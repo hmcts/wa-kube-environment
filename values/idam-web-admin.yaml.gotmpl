@@ -9,6 +9,8 @@ app:
         servicePort: 80
         name: http
     env:
+      - key: "JAVA_TOOL_OPTIONS"
+        value: -Xms128m -Xmx384m
       - key: "STRATEGIC_SERVICE_URL"
         value: http://sidam-api
       - key: "STRATEGIC_PUBLIC_URL"
