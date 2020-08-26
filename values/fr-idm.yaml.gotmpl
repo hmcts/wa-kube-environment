@@ -9,7 +9,7 @@ app:
       name: hmcts-private-creds
     env:
       - key: "JAVA_TOOL_OPTIONS"
-        value: -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=vm-ubuntu16 -Dcom.sun.management.jmxremote.rmi.port=9010
+        value: -Xms128m -Xmx384m -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=vm-ubuntu16 -Dcom.sun.management.jmxremote.rmi.port=9010
     ports:
       - containerPort: 18080
         servicePort: 18080

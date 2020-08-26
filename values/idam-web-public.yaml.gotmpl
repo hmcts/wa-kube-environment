@@ -18,7 +18,9 @@ app:
       - key: "REFORM_TEAM"
         value: idam
       - key: "REFORM_SERVICE_NAME"
-        value: local"
+        value: local
+      - key: "JAVA_TOOL_OPTIONS"
+        value: -Xms128m -Xmx384m
     readinessProbe:
       enabled: true
       httpGet:
