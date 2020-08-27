@@ -101,7 +101,7 @@ curl -X POST \
             }
           }
         }' \
-http://localhost:8991/__admin/mappings/new
+${WIREMOCK_URL}/__admin/mappings/new
 
 curl -X POST \
 --data '{
@@ -152,7 +152,7 @@ curl -X POST \
         }
     }
 }' \
-http://localhost:8991/__admin/mappings/new
+${WIREMOCK_URL}/__admin/mappings/new
 
 # fee-register response for fee with hearinng
 curl -X POST \
@@ -174,7 +174,7 @@ curl -X POST \
         }
     }
 }' \
-http://localhost:8991/__admin/mappings/new
+${WIREMOCK_URL}/__admin/mappings/new
 
 # fee-register response for fee without hearing
 curl -X POST \
@@ -196,7 +196,7 @@ curl -X POST \
         }
     }
 }' \
-http://localhost:8991/__admin/mappings/new
+${WIREMOCK_URL}/__admin/mappings/new
 
 curl -X POST \
 --data '{
@@ -229,7 +229,7 @@ curl -X POST \
             }
           }
         }' \
-http://localhost:8991/__admin/mappings/new
+${WIREMOCK_URL}/__admin/mappings/new
 
 #PBA accounts
 curl -X POST \
@@ -267,7 +267,7 @@ curl -X POST \
             }
           }
         }' \
-http://localhost:8991/__admin/mappings/new
+${WIREMOCK_URL}/__admin/mappings/new
 
 # make responses persistent in Docker volume
-curl -X POST http://localhost:8991/__admin/mappings/save
+curl -X POST ${WIREMOCK_URL}/__admin/mappings/save

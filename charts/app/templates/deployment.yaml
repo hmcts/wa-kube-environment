@@ -16,6 +16,10 @@ spec:
         app: {{ .Values.app.name }}
         group: {{ .Values.app.group }}
     spec:
+      hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+            - {{ .Values.app.name }}
       containers:
         - name: {{ .Values.app.name }}
           image: {{ .Values.app.container.image }}:{{ .Values.app.container.tag }}
