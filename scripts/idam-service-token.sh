@@ -11,4 +11,4 @@ microservice="${1:-ccd_gw}"
 curl --silent --show-error -X POST \
   -H "Content-Type: application/json" \
   -d '{"microservice":"'${microservice}'"}' \
-  ${SERVICE_AUTH_PROVIDER_URL}/testing-support/lease
+  ${S2S_URL}/testing-support/lease
