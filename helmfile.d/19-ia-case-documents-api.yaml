@@ -1,7 +1,7 @@
-releases:
-
-  - name: ia-case-documents-api
-    chart: ./../charts/app
-    values:
-      - ./../values/ia-case-documents-api.yaml.gotmpl
-    wait: true
+#releases:
+#
+#  - name: ia-case-documents-api
+#    chart: ./../charts/app
+#    values:
+#      - ./../values/ia-case-documents-api.yaml.gotmpl
+#    wait: true

@@ -1,9 +1,9 @@
 app:
-  name: xui-webapp
+  name: ia-case-documents-api
   group: backend
   container:
-    image: hmctspublic.azurecr.io/ia/case-notifications-api
-    tag: prod-9e20b62e
+    image: hmctspublic.azurecr.io/ia/case-documents-api
+    tag: prod-b42c9272
     ports:
       - containerPort: 8080
         servicePort: 80
@@ -11,8 +11,8 @@ app:
     env:
       - key: "PORT"
         value: 8080
-      - key: "IA_GOV_NOTIFY_KEY"
-        value: {{ requiredEnv "IA_GOV_NOTIFY_KEY" }}
+      - key: "EM_BUNDLER_URL"
+        value: http://stitching-api
       - key: "IA_EXUI_FRONTEND_URL"
         value: http://xui-webapp
       - key: "CCD_URL"
@@ -25,6 +25,10 @@ app:
         value: {{ requiredEnv "IA_IDAM_CLIENT_ID" }}
       - key: "IA_IDAM_SECRET"
         value: {{ requiredEnv "IA_IDAM_SECRET" }}
+      - key: "DOCMOSIS_ACCESS_KEY"
+        value: {{ requiredEnv "DOCMOSIS_ACCESS_KEY" }}
+      - key: "DOCMOSIS_ENDPOINT"
+        value: {{ requiredEnv "DOCMOSIS_ENDPOINT" }}
       - key: "IA_IDAM_REDIRECT_URI"
         value: http://ccd-case-management-web/oauth2redirect
       - key: "S2S_URL"
@@ -37,6 +41,6 @@ app:
       enabled: true
       httpGet:
         path: /health
-        port: 3000
+        port: 8080
       initialDelaySeconds: 300
       periodSeconds: 30

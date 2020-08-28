@@ -1,56 +1,51 @@
 app:
-  name: xui-webapp
+  name: ia-case-api
   group: backend
   container:
-    image: hmctspublic.azurecr.io/xui/webapp
-    tag: prod-e69c0d43
+    image: hmctspublic.azurecr.io/ia/case-api
+    tag: prod-b4c7b0e8
     ports:
-      - containerPort: 3000
+      - containerPort: 8080
         servicePort: 80
         name: http
     env:
-      - key: "MICROSERVICE"
-        value: iac
-      - key: "PROTOCOL"
-        value: http
-      - key: "XUI_ENV"
-        value: local
-      - key: "SERVICES_CCD_COMPONENT_API"
+      - key: "PORT"
+        value: 8080
+      - key: "IA_FEEPAYMENT_ENABLED"
+        value: false
+      - key: "IA_TIMED_EVENT_SERVICE_ENABLED"
+        value: false
+      - key: "IS_SAVE_AND_CONTINUE_ENABLED"
+        value: false
+      - key: "POSTGRES_HOST"
+        value: ccd-shared-database
+      - key: "POSTGRES_PORT"
+        value: 5432
+      - key: "POSTGRES_USERNAME"
+        value: postgres
+      - key: "POSTGRES_PASSWORD"
+        value: postgres
+      - key: "CCD_URL"
+        value: http://ccd-data-store-api
+      - key: "IA_CASE_DOCUMENTS_API_URL"
+        value: http://localhost:8080
+      - key: "IA_CASE_NOTIFICATIONS_API_URL"
+        value: http://ia-case-notifications-api
+      - key: "CCD_GW_URL"
         value: http://ccd-api-gateway
-      - key: "SERVICES_CCD_DATA_STORE_API"
-        value:  http://ccd-data-store-api
-      - key: "SERVICES_DOCUMENTS_API"
-        value: http://dm-store
-      - key: "SERVICES_S2S"
-        value: http://service-auth-provider-api
-      - key: "SERVICES_IDAM_LOGIN_URL"
-        value: http://idam-web-public
-      - key: "SERVICES_IDAM_API_URL"
+      - key: "IDAM_URL"
         value: http://sidam-api
-      - key: "SERVICES_IDAM_OAUTH_CALLBACK_URL"
-        value: oauth2/callback
-      - key: "SERVICES_IDAM_CLIENT_ID"
-        value: ccd_gateway
-      - key: "SERVICES_PAYMENTS_URL"
+      - key: "IA_IDAM_CLIENT_ID"
+        value: {{ requiredEnv "IA_IDAM_CLIENT_ID" }}
+      - key: "IA_IDAM_SECRET"
+        value: {{ requiredEnv "IA_IDAM_SECRET" }}
+      - key: "IA_IDAM_REDIRECT_URI"
+        value: http://ccd-case-management-web/oauth2redirect
+      - key: "S2S_URL"
+        value: http://service-auth-provider-api
+      - key: "DM_URL"
+        value: http://dm-store
+      - key: "IA_S2S_MICROSERVICE"
+        value: iac
+      - key: "PROF_REF_DATA_URL"
         value: http://wiremock
-      - key: "SERVICES_EM_ANNO_API"
-        value: http://ccd-api-gateway
-      - key: "FEATURE_APP_INSIGHTS_ENABLED"
-        value: false
-      - key: "FEATURE_SECURE_COOKIE_ENABLED"
-        value: false
-      - key: "APPINSIGHTS_INSTRUMENTATIONKEY"
-        value: key
-      - key: "S2S_SECRET"
-        value: {{ requiredEnv "IDAM_KEY_CCD_GATEWAY" }}
-      - key: "IDAM_SECRET"
-        value: {{ requiredEnv "OAUTH2_CLIENT_CCD_GATEWAY" }}
-      - key: "JURISDICTIONS"
-        value: IA
-    readinessProbe:
-      enabled: true
-      httpGet:
-        path: /health
-        port: 3000
-      initialDelaySeconds: 300
-      periodSeconds: 30

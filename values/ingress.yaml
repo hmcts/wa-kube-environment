@@ -144,4 +144,19 @@ spec:
             backend:
               serviceName: xui-webapp
               servicePort: 80
+    - host: ia-case-api
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ia-case-api
+              servicePort: 80
+    - host: ia-case-notifications-api
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ia-case-notifications-api
+              servicePort: 80
+
 

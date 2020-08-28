@@ -1,9 +1,9 @@
 app:
-  name: xui-webapp
+  name: ia-case-notifications-api
   group: backend
   container:
-    image: hmctspublic.azurecr.io/ia/case-api
-    tag: prod-b4c7b0e8
+    image: hmctspublic.azurecr.io/ia/case-notifications-api
+    tag: prod-9e20b62e
     ports:
       - containerPort: 8080
         servicePort: 80
@@ -11,26 +11,12 @@ app:
     env:
       - key: "PORT"
         value: 8080
-      - key: "IA_FEEPAYMENT_ENABLED"
-        value: fase
-      - key: "IA_TIMED_EVENT_SERVICE_ENABLED"
-        value: fase
-      - key: "IS_SAVE_AND_CONTINUE_ENABLED"
-        value: false
-      - key: "POSTGRES_HOST"
-        value: ccd-shared-database
-      - key: "POSTGRES_PORT"
-        value: 5432
-      - key: "POSTGRES_USERNAME"
-        value: postgres
-      - key: "POSTGRES_PASSWORD"
-        value: postgres
+      - key: "IA_GOV_NOTIFY_KEY"
+        value: {{ requiredEnv "IA_GOV_NOTIFY_KEY" }}
+      - key: "IA_EXUI_FRONTEND_URL"
+        value: http://xui-webapp
       - key: "CCD_URL"
         value: http://ccd-data-store-api
-      - key: "IA_CASE_DOCUMENTS_API_URL"
-        value: http://ia-case-documents-api
-      - key: "IA_CASE_NOTIFICATIONS_API_URL"
-        value: http://ia-case-notifications-api
       - key: "CCD_GW_URL"
         value: http://ccd-api-gateway
       - key: "IDAM_URL"
@@ -47,12 +33,10 @@ app:
         value: http://dm-store
       - key: "IA_S2S_MICROSERVICE"
         value: iac
-      - key: "PROF_REF_DATA_URL"
-        value: http;//wiremock
     readinessProbe:
       enabled: true
       httpGet:
         path: /health
-        port: 3000
+        port: 8080
       initialDelaySeconds: 300
       periodSeconds: 30
