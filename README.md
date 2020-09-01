@@ -73,8 +73,11 @@ For example:
 
 
 ## Verifying deployments
+
 We can verify the deployments were successful listing all pods under our namespace
+
  `kubectl get pods -n hmcts-local`
+
 The output should look like below:
 
 ```
