@@ -1,7 +1,0 @@
-releases:
-
-  - name: ia-case-notifications-api
-    chart: ./../charts/app
-    values:
-      - ./../values/ia-case-notifications-api.yaml.gotmpl
-    wait: true

@@ -109,20 +109,6 @@ spec:
             backend:
               serviceName: ccd-case-management-web
               servicePort: 80
-    - host: stitching-api
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: stitching-api
-              servicePort: 80
-    - host: dm-store
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: dm-store
-              servicePort: 80
     - host: ccd-orchestrator
       http:
         paths:
@@ -144,19 +130,3 @@ spec:
             backend:
               serviceName: xui-webapp
               servicePort: 80
-    - host: ia-case-api
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: ia-case-api
-              servicePort: 80
-    - host: ia-case-notifications-api
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: ia-case-notifications-api
-              servicePort: 80
-
-

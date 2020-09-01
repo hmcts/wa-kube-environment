@@ -1,7 +1,0 @@
-releases:
-
-  - name: ia-case-api
-    chart: ./../charts/app
-    values:
-      - ./../values/ia-case-api.yaml.gotmpl
-    wait: true

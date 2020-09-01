@@ -1,7 +1,0 @@
-releases:
-
-  - name: azure-storage-emulator-azurite
-    chart: ./../charts/app
-    values:
-      - ./../values/azure-storage-emulator-azurite.yaml.gotmpl
-    wait: true

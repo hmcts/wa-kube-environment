@@ -1,0 +1,52 @@
+#!/bin/bash
+
+function usage() {
+  echo "Usage: $(basename $0) <command> [options]"
+  echo
+  echo "Commands:"
+  echo "  pull  - Pre-pull list of pre-defined images to kubernetes cluster"
+  echo "  start - Deploys all images to kubernetes cluster"
+  echo "  stop  - Deletes all deployments"
+  echo
+  exit 1
+}
+
+function environment_login() {
+  ./scripts/environment/login.sh
+}
+
+function environment_pull() {
+  ./scripts/environment/pull.sh
+}
+
+function environment_start() {
+  scripts/environment/start.sh
+}
+
+function environment_stop() {
+  scripts/environment/stop.sh
+}
+
+if [ $# -lt 1 ]; then
+  usage
+fi
+
+command=$1
+shift
+case $command in
+login)
+  environment_login
+  ;;
+pull)
+  environment_pull
+  ;;
+start)
+  environment_start
+  ;;
+stop)
+  environment_stop
+  ;;
+*)
+  usage
+  ;;
+esac
