@@ -6,6 +6,8 @@ A Kubernetes environment with all the necessary services for local development u
 
 - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [azure-cli](https://docs.microsoft.com/en-gb/cli/azure/install-azure-cli)
+- [docker](https://www.docker.com/)
 - [Helm](https://helm.sh)
 - [Helmfile](https://github.com/roboll/helmfile)
 
@@ -28,14 +30,13 @@ The above can all brew installed via `brew install`
      --vm-driver=hyperkit
 ```
 
-
 ### 2. Login:
 
- `./environment login`
+  `./environment login`
 
 ### 3. Pre-pulling (Recommended but optional):
 *Note: this step could take a while to complete as it pull all the necessary images*
- `./environment pull`
+  `./environment pull`
 
 ### 4. Start local WA environment:
 
