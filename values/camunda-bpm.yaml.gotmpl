@@ -20,8 +20,11 @@ app:
         value: {{ requiredEnv "CAMUNDA_DB_USERNAME" }}
       - key: "CAMUNDA_DB_PASSWORD"
         value: {{ requiredEnv "CAMUNDA_DB_PASSWORD" }}
+      - key: "camunda.bpm.database.schema-update"
+        value: true
+
     ports:
-      - containerPort: 8080
+      - containerPort: 8999
         servicePort: 80
         name: http
     resources:
