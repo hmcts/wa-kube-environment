@@ -26,9 +26,9 @@ app:
       - key: "APPINSIGHTS_INSTRUMENTATIONKEY"
         value: key
       - key: "USER_PROFILE_DB_USERNAME"
-        value: {{ requiredEnv "DB_USERNAME" }}
+        value: {{ requiredEnv "CCD_DB_USERNAME" }}
       - key: "USER_PROFILE_DB_PASSWORD"
-        value: {{ requiredEnv "DB_PASSWORD" }}
+        value: {{ requiredEnv "CCD_DB_PASSWORD" }}
       - key: "USER_PROFILE_DB_USE_SSL"
         value: false
     readinessProbe:

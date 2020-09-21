@@ -23,6 +23,7 @@ PRIVATE_IMAGES=(
   hmctsprivate.azurecr.io/idam/shared-db:latest
   hmctsprivate.azurecr.io/idam/idam-fr-am:latest
   hmctsprivate.azurecr.io/idam/idam-fr-idm:latest
+  hmctsprivate.azurecr.io/camunda/bpm:latest
 )
 
 echo "Pulling images to kubernetes cluster"

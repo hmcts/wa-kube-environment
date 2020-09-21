@@ -1,0 +1,31 @@
+app:
+  name: camunda-bpm
+  group: backend
+  container:
+    image: hmctsprivate.azurecr.io/camunda/bpm
+    tag: latest
+    authentication: true
+    imagePullSecrets:
+      name: hmcts-private-creds
+    env:
+      - key: "CAMUNDA_NEXUS_USER"
+        value: {{ requiredEnv "WA_CAMUNDA_NEXUS_USER" }}
+      - key: "CAMUNDA_NEXUS_PASSWORD"
+        value: {{ requiredEnv "WA_CAMUNDA_NEXUS_PASSWORD" }}
+      - key: "CAMUNDA_DB_HOST"
+        value: ccd-shared-database
+      - key: "CAMUNDA_DB_PORT"
+        value: 5432
+      - key: "CAMUNDA_DB_USER_NAME"
+        value: {{ requiredEnv "CAMUNDA_DB_USERNAME" }}
+      - key: "CAMUNDA_DB_PASSWORD"
+        value: {{ requiredEnv "CAMUNDA_DB_PASSWORD" }}
+    ports:
+      - containerPort: 8080
+        servicePort: 80
+        name: http
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "256Mi"

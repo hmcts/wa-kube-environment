@@ -14,9 +14,9 @@ app:
       - key: "DEFINITION_STORE_DB_PORT"
         value: 5432
       - key: "DEFINITION_STORE_DB_USERNAME"
-        value: {{ requiredEnv "DB_USERNAME" }}
+        value: {{ requiredEnv "CCD_DB_USERNAME" }}
       - key: "DEFINITION_STORE_DB_PASSWORD"
-        value: {{ requiredEnv "DB_PASSWORD" }}
+        value: {{ requiredEnv "CCD_DB_PASSWORD" }}
       - key: "DEFINITION_STORE_DB_USE_SSL"
         value: {{ requiredEnv "DB_USE_SSL" }}
       - key: "DEFINITION_STORE_IDAM_KEY"

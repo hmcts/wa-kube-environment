@@ -5,8 +5,8 @@ function usage() {
   echo
   echo "Commands:"
   echo "  pull  - Pre-pull list of pre-defined images to kubernetes cluster"
-  echo "  start - Deploys all images to kubernetes cluster"
-  echo "  stop  - Deletes all deployments"
+  echo "  up    - Builds and deploys all images to kubernetes cluster"
+  echo "  down  - Deletes all deployments"
   echo
   exit 1
 }
@@ -19,12 +19,12 @@ function environment_pull() {
   ./scripts/environment/pull.sh
 }
 
-function environment_start() {
-  scripts/environment/start.sh
+function environment_up() {
+  scripts/environment/up.sh
 }
 
-function environment_stop() {
-  scripts/environment/stop.sh
+function environment_down {
+  scripts/environment/down.sh
 }
 
 if [ $# -lt 1 ]; then
@@ -40,11 +40,11 @@ login)
 pull)
   environment_pull
   ;;
-start)
-  environment_start
+up)
+  environment_up
   ;;
-stop)
-  environment_stop
+down)
+  environment_down
   ;;
 *)
   usage

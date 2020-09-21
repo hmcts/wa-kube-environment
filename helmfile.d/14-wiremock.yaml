@@ -5,3 +5,4 @@ releases:
     values:
       - ./../values/wiremock.yaml.gotmpl
     wait: true
+# TODO: Trigger wiremock script using post install hook.
