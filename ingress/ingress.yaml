@@ -102,13 +102,6 @@ spec:
             backend:
               serviceName: ccd-case-management-web
               servicePort: 80
-    - host: ccd-orchestrator
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: ccd-api-gateway
-              servicePort: 80
     - host: wiremock
       http:
         paths:
