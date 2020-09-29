@@ -15,19 +15,28 @@ The above can all brew installed via `brew install`
 
 ## Quick start
 
-### 0. Source environment variables
+### 0. Environment variables
 
+Source the .env file in the root of the project:
 ```
   source .env
 ```
+Set the following environment variables on your `.bash_profile`
+
+```
+export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
+export WA_CAMUNDA_NEXUS_USER=XXXXXX
+```
+**Note:** _the values for the above environment variables can be found on this [Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_
 
 ### 1. Create a local cluster:
 
 ```
-  minikube start \
-     --memory=8192 \
-     --cpus 4 \
-     --vm-driver=hyperkit
+minikube start \
+     --memory=12288 \
+     --cpus=4 \
+     --vm-driver=hyperkit \
+     --addons=ingress
 ```
 
 ### 2. Login:
@@ -38,31 +47,22 @@ The above can all brew installed via `brew install`
 *Note: this step could take a while to complete as it pull all the necessary images*
   `./environment pull`
 
-### 4. Start local WA environment:
+### 4. Build and start local WA environment:
 
-  `./environment start`
+  `./environment up`
 
-### 5. To stop local WA environment:
+### 5. To stop and teardown local WA environment:
 
-  `./environment stop`
-
-
-## Enabling Ingress
-
-### 1. Enable minikube's ingress addon
-  `minikube addons enable ingress`
+  `./environment down`
 
 
-### 2. Update /etc/hosts to route the hosts to the minikube cluster ip
+## Enabling Ingress hosts
+
+### 1. Update /etc/hosts to route the hosts to the minikube cluster ip
 
 ```
-echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db idam-web-public fr-am fr-idm sidam-api ccd-definition-store-api idam-web-admin idam-web-public ccd-definition-store-api ccd-data-store-api ccd-api-gateway ccd-orchestrator wiremock xui-webapp ccd-case-management-web" | sudo tee -a /etc/hosts
+echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db idam-web-public fr-am fr-idm sidam-api ccd-definition-store-api idam-web-admin idam-web-public ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp ccd-case-management-web camunda-bpm" | sudo tee -a /etc/hosts
 ```
-
-### 3. Apply Ingress chart
-
-`kubectl apply -f ./values/ingress.yaml -n hmcts-local`
-
 
 After running the above the services should be accessible via:
 

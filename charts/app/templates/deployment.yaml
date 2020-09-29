@@ -20,6 +20,9 @@ spec:
         - ip: "127.0.0.1"
           hostnames:
             - {{ .Values.app.name }}
+        - ip: "192.168.64.1"
+          hostnames:
+            - "host.minikube.internal"
       containers:
         - name: {{ .Values.app.name }}
           image: {{ .Values.app.container.image }}:{{ .Values.app.container.tag }}

@@ -27,6 +27,12 @@ app:
         value: {{ requiredEnv "IDAM_KEY_FPL_CASE_SERVICE" }}
       - key: "MICROSERVICEKEYS_IAC"
         value: {{ requiredEnv "IDAM_KEY_IAC" }}
+      - key: "MICROSERVICEKEYS_WA_WORKFLOW_API"
+        value: {{ requiredEnv "S2S_SECRET_WORKFLOW_API" }}
+      - key: "MICROSERVICEKEYS_WA_TASK_MANAGEMENT_API"
+        value: {{ requiredEnv "S2S_SECRET_TASK_MANAGEMENT_API" }}
+      - key: "MICROSERVICEKEYS_WA_TASK_CONFIGURATION_API"
+        value: {{ requiredEnv "S2S_SECRET_TASK_CONFIGURATION_API" }}
       - key: "MICROSERVICEKEYS_EM_GW"
         value: {{ requiredEnv "IDAM_KEY_EM_GW" }}
       - key: "MICROSERVICEKEYS_EM_STITCHING_API"

@@ -16,9 +16,9 @@ app:
       - key: "DATA_STORE_DB_PORT"
         value: 5432
       - key: "DATA_STORE_DB_USERNAME"
-        value: {{ requiredEnv "DB_USERNAME" }}
+        value: {{ requiredEnv "CCD_DB_USERNAME" }}
       - key: "DATA_STORE_DB_PASSWORD"
-        value: {{ requiredEnv "DB_PASSWORD" }}
+        value: {{ requiredEnv "CCD_DB_PASSWORD" }}
       - key: "DATA_STORE_DB_USE_SSL"
         value: {{ requiredEnv "DB_USE_SSL" }}
       - key: "DATA_STORE_IDAM_KEY"
@@ -26,7 +26,7 @@ app:
       - key: "DATA_STORE_TOKEN_SECRET"
         value: iuasbcuasdcbasdgcasdgcuysachjsacyasdgjcgasdj
       - key: "DATA_STORE_S2S_AUTHORISED_SERVICES"
-        value: ccd_gw,fpl_case_service,ccd_data,ccd_ps,iac
+        value: ccd_gw,fpl_case_service,ccd_data,ccd_ps,iac,wa_workflow_api
       - key: "DEFINITION_STORE_HOST"
         value: http://ccd-definition-store-api
       - key: "USER_PROFILE_HOST"

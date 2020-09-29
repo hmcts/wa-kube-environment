@@ -4,4 +4,5 @@ releases:
     chart: ./../charts/app
     values:
       - ./../values/xui-webapp.yaml.gotmpl
-    wait: true
+#    Disabling wait as wiremock setup script needs to be run first.
+    wait: false

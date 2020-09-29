@@ -16,13 +16,14 @@ PUBLIC_IMAGES=(
   hmctspublic.azurecr.io/ccd/api-gateway-web:latest
   hmctspublic.azurecr.io/ccd/case-management-web:latest
   hmctspublic.azurecr.io/em/ccd-orchestrator:latest
-  hmctspublic.azurecr.io/xui/webapp:prod-e69c0d43
+  hmctspublic.azurecr.io/xui/webapp:latest
 )
 
 PRIVATE_IMAGES=(
   hmctsprivate.azurecr.io/idam/shared-db:latest
   hmctsprivate.azurecr.io/idam/idam-fr-am:latest
   hmctsprivate.azurecr.io/idam/idam-fr-idm:latest
+  hmctsprivate.azurecr.io/camunda/bpm:latest
 )
 
 echo "Pulling images to kubernetes cluster"

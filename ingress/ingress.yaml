@@ -4,13 +4,6 @@ metadata:
   name: ingress
 spec:
   rules:
-    - host: ccd-shared-database
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: ccd-shared-database
-              servicePort: 5432
     - host: service-auth-provider-api
       http:
         paths:
@@ -109,13 +102,6 @@ spec:
             backend:
               serviceName: ccd-case-management-web
               servicePort: 80
-    - host: ccd-orchestrator
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: ccd-api-gateway
-              servicePort: 80
     - host: wiremock
       http:
         paths:
@@ -129,4 +115,11 @@ spec:
           - path: /
             backend:
               serviceName: xui-webapp
+              servicePort: 80
+    - host: camunda-bpm
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: camunda-bpm
               servicePort: 80

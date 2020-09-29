@@ -3,7 +3,7 @@ app:
   group: backend
   container:
     image: hmctspublic.azurecr.io/xui/webapp
-    tag: prod-e69c0d43
+    tag: latest
     ports:
       - containerPort: 3000
         servicePort: 80
@@ -18,7 +18,7 @@ app:
       - key: "SERVICES_CCD_COMPONENT_API"
         value: http://ccd-api-gateway
       - key: "SERVICES_CCD_DATA_STORE_API"
-        value:  http://ccd-data-store-api
+        value: http://ccd-data-store-api
       - key: "SERVICES_DOCUMENTS_API"
         value: http://wiremock
       - key: "SERVICES_S2S"
@@ -28,13 +28,19 @@ app:
       - key: "SERVICES_IDAM_API_URL"
         value: http://sidam-api
       - key: "SERVICES_IDAM_OAUTH_CALLBACK_URL"
-        value: oauth2/callback
+        value: /oauth2/callback
       - key: "SERVICES_IDAM_CLIENT_ID"
         value: ccd_gateway
+      - key: "SERVICES_IDAM_ISS_URL"
+        value: http://sidam-api
+      - key: "REDISCLOUD_URL"
+        value: http://dummyrediscloudurl
       - key: "SERVICES_PAYMENTS_URL"
         value: http://wiremock
       - key: "SERVICES_EM_ANNO_API"
         value: http://ccd-api-gateway
+      - key: "FEATURE_REDIS_ENABLED"
+        value: false
       - key: "FEATURE_APP_INSIGHTS_ENABLED"
         value: false
       - key: "FEATURE_SECURE_COOKIE_ENABLED"
@@ -45,6 +51,8 @@ app:
         value: {{ requiredEnv "IDAM_KEY_CCD_GATEWAY" }}
       - key: "IDAM_SECRET"
         value: {{ requiredEnv "OAUTH2_CLIENT_CCD_GATEWAY" }}
+      - key: "LAUNCH_DARKLY_CLIENT_ID"
+        value: AAAAAAAAAAAAAAAC
       - key: "JURISDICTIONS"
         value: IA
     readinessProbe:
