@@ -9,6 +9,8 @@ app:
         servicePort: 80
         name: http
     env:
+      - key: "JAVA_TOOL_OPTIONS"
+        value: -Xms128m -Xmx384m
       - key: "STRATEGIC_SERVICE_URL"
         value: http://sidam-api
       - key: "IDAM_CONTINUE_URL_VALIDATOR_ENFORCE_TLS"
@@ -19,8 +21,8 @@ app:
         value: idam
       - key: "REFORM_SERVICE_NAME"
         value: local
-      - key: "JAVA_TOOL_OPTIONS"
-        value: -Xms128m -Xmx384m
+      - key: "AppInsightsInstrumentationKey"
+        value: dummy
     readinessProbe:
       enabled: true
       httpGet:
