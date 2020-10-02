@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
@@ -8,118 +8,169 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: service-auth-provider-api
-              servicePort: 80
+              service:
+                name: service-auth-provider-api
+                port:
+                  number: 80
     - host: ccd-user-profile-api
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: ccd-user-profile-api
-              servicePort: 80
+              service:
+                name: ccd-user-profile-api
+                port:
+                  number: 80
     - host: shared-db
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: shared-db
-              servicePort: 5432
+              service:
+                name: shared-db
+                port:
+                  number: 5432
     - host: idam-web-public
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: idam-web-public
-              servicePort: 80
+              service:
+                name: idam-web-public
+                port:
+                  number: 80
     - host: fr-am
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: fr-am
-              servicePort: 8080
+              service:
+                name: fr-am
+                port:
+                  number: 8080
     - host: fr-idm
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: fr-idm
-              servicePort: 18080
+              service:
+                name: fr-idm
+                port:
+                  number: 18080
     - host: sidam-api
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: sidam-api
-              servicePort: 80
+              service:
+                name: sidam-api
+                port:
+                  number: 80
     - host: ccd-definition-store-api
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: ccd-definition-store-api
-              servicePort: 80
+              service:
+                name: ccd-definition-store-api
+                port:
+                  number: 80
     - host: idam-web-admin
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: idam-web-admin
-              servicePort: 80
+              service:
+                name: idam-web-admin
+                port:
+                  number: 80
     - host: idam-web-public
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: idam-web-public
-              servicePort: 80
+              service:
+                name: idam-web-public
+                port:
+                  number: 80
     - host: ccd-definition-store-api
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: ccd-definition-store-api
-              servicePort: 80
+              service:
+                name: ccd-definition-store-api
+                port:
+                  number: 80
     - host: ccd-data-store-api
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: ccd-data-store-api
-              servicePort: 80
+              service:
+                name: ccd-data-store-api
+                port:
+                  number: 80
     - host: ccd-api-gateway
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: ccd-api-gateway
-              servicePort: 80
+              service:
+                name: ccd-api-gateway
+                port:
+                  number: 80
     - host: ccd-case-management-web
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: ccd-case-management-web
-              servicePort: 80
+              service:
+                name: ccd-case-management-web
+                port:
+                  number: 80
     - host: wiremock
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: wiremock
-              servicePort: 80
+              service:
+                name: wiremock
+                port:
+                  number: 80
     - host: xui-webapp
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: xui-webapp
-              servicePort: 80
+              service:
+                name: xui-webapp
+                port:
+                  number: 80
     - host: camunda-bpm
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: camunda-bpm
-              servicePort: 80
+              service:
+                name: camunda-bpm
+                port:
+                  number: 80

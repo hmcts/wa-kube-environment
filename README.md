@@ -15,7 +15,18 @@ The above can all brew installed via `brew install`
 
 ## Quick start
 
-### 0. Environment variables
+
+### 0. Create a local cluster:
+
+```
+minikube start \
+     --memory=12288 \
+     --cpus=4 \
+     --vm-driver=hyperkit \
+     --addons=ingress
+```
+
+### 1. Environment variables
 
 Source the .env file in the root of the project:
 ```
@@ -28,16 +39,6 @@ export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
 export WA_CAMUNDA_NEXUS_USER=XXXXXX
 ```
 **Note:** _the values for the above environment variables can be found on this [Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_
-
-### 1. Create a local cluster:
-
-```
-minikube start \
-     --memory=12288 \
-     --cpus=4 \
-     --vm-driver=hyperkit \
-     --addons=ingress
-```
 
 ### 2. Login:
 
