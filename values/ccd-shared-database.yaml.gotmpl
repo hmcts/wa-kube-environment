@@ -15,8 +15,6 @@ initdbScripts:
 
       DB_USERNAME={{ requiredEnv "CCD_DB_USERNAME" }}
       DB_PASSWORD={{ requiredEnv "CCD_DB_PASSWORD" }}
-      DB_STITCHING_USERNAME={{ requiredEnv "EM_DB_USERNAME" }}
-      DB_STITCHING_PASSWORD={{ requiredEnv "EM_DB_PASSWORD" }}
       DB_CAMUNDA_USERNAME={{ requiredEnv "CAMUNDA_DB_USERNAME" }}
       DB_CAMUNDA_PASSWORD={{ requiredEnv "CAMUNDA_DB_PASSWORD" }}
 
@@ -36,16 +34,8 @@ initdbScripts:
         echo "Database $service: Created"
       done
 
-      psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_STITCHING_USERNAME --set PASSWORD=$DB_STITCHING_PASSWORD <<-EOSQL
-        CREATE USER :USERNAME WITH PASSWORD ':PASSWORD';
-      EOSQL
-
-      psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_STITCHING_USERNAME --set PASSWORD=$DB_STITCHING_PASSWORD --set DATABASE=emstitch <<-EOSQL
-      CREATE DATABASE :DATABASE
-      WITH OWNER = :USERNAME
-      ENCODING = 'UTF-8'
-      CONNECTION LIMIT = -1;
-      EOSQL
+      echo "Altering $DB_USERNAME user with new password"
+      psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
 
       psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_CAMUNDA_USERNAME --set PASSWORD=$DB_CAMUNDA_PASSWORD <<-EOSQL
         CREATE USER :USERNAME WITH PASSWORD ':PASSWORD';
@@ -57,12 +47,6 @@ initdbScripts:
       ENCODING = 'UTF-8'
       CONNECTION LIMIT = -1;
       EOSQL
-
-      echo "Altering $DB_USERNAME user with new password"
-      psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
-
-      echo "Altering $DB_STITCHING_USERNAME user with new password"
-      psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_STITCHING_USERNAME WITH PASSWORD '$DB_STITCHING_PASSWORD'";
 
       echo "Altering $DB_CAMUNDA_USERNAME user with new password"
       psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_CAMUNDA_USERNAME WITH PASSWORD '$DB_CAMUNDA_PASSWORD'";
