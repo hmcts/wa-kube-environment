@@ -15,15 +15,13 @@ initdbScripts:
 
       DB_USERNAME={{ requiredEnv "CCD_DB_USERNAME" }}
       DB_PASSWORD={{ requiredEnv "CCD_DB_PASSWORD" }}
-      DB_CAMUNDA_USERNAME={{ requiredEnv "CAMUNDA_DB_USERNAME" }}
-      DB_CAMUNDA_PASSWORD={{ requiredEnv "CAMUNDA_DB_PASSWORD" }}
 
       # Create roles and databases
       psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD <<-EOSQL
         CREATE USER :USERNAME WITH PASSWORD ':PASSWORD';
       EOSQL
 
-      for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer ia_case_api ia_timed_event_service; do
+      for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer ia_case_api ia_timed_event_service camunda role_assignment; do
         echo "Database $service: Creating..."
       psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD --set DATABASE=$service <<-EOSQL
         CREATE DATABASE :DATABASE
@@ -36,20 +34,6 @@ initdbScripts:
 
       echo "Altering $DB_USERNAME user with new password"
       psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
-
-      psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_CAMUNDA_USERNAME --set PASSWORD=$DB_CAMUNDA_PASSWORD <<-EOSQL
-        CREATE USER :USERNAME WITH PASSWORD ':PASSWORD';
-      EOSQL
-
-      psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_CAMUNDA_USERNAME --set PASSWORD=$DB_CAMUNDA_PASSWORD --set DATABASE=camunda <<-EOSQL
-      CREATE DATABASE :DATABASE
-      WITH OWNER = :USERNAME
-      ENCODING = 'UTF-8'
-      CONNECTION LIMIT = -1;
-      EOSQL
-
-      echo "Altering $DB_CAMUNDA_USERNAME user with new password"
-      psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_CAMUNDA_USERNAME WITH PASSWORD '$DB_CAMUNDA_PASSWORD'";
 
 service:
   type: ClusterIP
