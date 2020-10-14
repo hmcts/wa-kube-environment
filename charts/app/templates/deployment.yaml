@@ -60,7 +60,6 @@ spec:
       {{- if .Values.app.volume.enabled }}
       volumes:
         - name: {{ .Values.app.volume.name }}
-          emptyDir: {}
       {{- end }}
       {{- if .Values.app.container.authentication }}
       imagePullSecrets:

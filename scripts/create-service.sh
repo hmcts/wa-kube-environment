@@ -26,5 +26,3 @@ curl --silent --show-error ${IDAM_URL}/services \
          "oauth2Scope": "'"${SCOPE}"'",
          "selfRegistrationAllowed": '"${SELF_REG}"'
        }'
-
-echo ""

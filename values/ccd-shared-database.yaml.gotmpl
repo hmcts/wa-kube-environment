@@ -9,6 +9,24 @@ postgresqlUsername: postgres
 postgresqlPassword: postgres
 postgresqlDatabase: ccd
 
+service:
+  type: ClusterIP
+  port: 5432
+persistence:
+  enabled: true
+  existingClaim: ccd-shared-db-pvc
+volumePermissions:
+  enabled: true
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
+
+networkPolicy:
+  enabled: false
+  allowExternal: true
+
 initdbScripts:
   init.sh: |
       #!/usr/bin bash
@@ -21,7 +39,7 @@ initdbScripts:
         CREATE USER :USERNAME WITH PASSWORD ':PASSWORD';
       EOSQL
 
-      for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer ia_case_api ia_timed_event_service camunda role_assignment; do
+      for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer ia_case_api ia_timed_event_service camunda role_assignment openidm; do
         echo "Database $service: Creating..."
       psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD --set DATABASE=$service <<-EOSQL
         CREATE DATABASE :DATABASE
@@ -35,25 +53,3 @@ initdbScripts:
       echo "Altering $DB_USERNAME user with new password"
       psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
 
-service:
-  type: ClusterIP
-  port: 5432
-persistence:
-  enabled: true
-  mountPath: /bitnami/postgresql
-  subPath: ""
-  accessModes:
-    - ReadWriteOnce
-  size: 8Gi
-
-updateStrategy:
-  type: RollingUpdate
-
-resources:
-  requests:
-    memory: 256Mi
-    cpu: 250m
-
-networkPolicy:
-  enabled: false
-  allowExternal: true
