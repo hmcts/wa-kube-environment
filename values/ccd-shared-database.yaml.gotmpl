@@ -14,7 +14,8 @@ service:
   port: 5432
 persistence:
   enabled: true
-  existingClaim: ccd-shared-db-pvc
+  mountPath: /var/lib/postgresql/ccd-shared-db/data
+  existingClaim: shared-pvc
 volumePermissions:
   enabled: true
 

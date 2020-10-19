@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ccd-shared-db-pvc
+  name: shared-pvc
 spec:
   storageClassName: manual
   accessModes:

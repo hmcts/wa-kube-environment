@@ -3,7 +3,7 @@ app:
   group: backend
   container:
     image: hmctspublic.azurecr.io/idam/api
-    tag: latest
+    tag: stable
     ports:
       - containerPort: 5000
         servicePort: 80
@@ -28,11 +28,11 @@ app:
       - key: "STRATEGIC_WEBPUBLIC_URL"
         value: http://idam-web-public
       - key: "SPRING_DATASOURCE_URL"
-        value: jdbc:postgresql://ccd-shared-database:5432/openidm
+        value: jdbc:postgresql://shared-db:5432/openidm?currentSchema=fridam
       - key: "SPRING_DATASOURCE_USERNAME"
-        value: ccd
+        value: openidm
       - key: "SPRING_DATASOURCE_PASSWORD"
-        value: ccd
+        value: openidm
       - key: "SECURITY_OAUTH2_CLIENT_CLIENTSECRET"
         value: password
       - key: "SECURITY_OAUTH2_CLIENT_PRE_ESTABLISHED_REDIRECT_URI"
@@ -58,8 +58,6 @@ app:
       - key: "IDAM_SPI_FORGEROCK_IDM_PIN_DEFAULTPASSWORD"
         value: BlaBlaBlackSh33p
       - key: "AppInsightsInstrumentationKey"
-        value: dummy
-      - key: "notify-api-key"
         value: dummy
     readinessProbe:
       enabled: true
