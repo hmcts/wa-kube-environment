@@ -19,4 +19,7 @@ app:
   volume:
     enabled: true
     name: ccd-docker-idam-shared-database-data
-    path: /var/lib/postgresql/data
+    path: /var/lib/postgresql/idam-shared-db/data
+    persistence:
+      enabled: true
+      existingClaim: shared-pvc

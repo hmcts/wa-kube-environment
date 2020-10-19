@@ -1,0 +1,56 @@
+app:
+  name: am-role-assignment
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/am/role-assignment-service
+    tag: latest
+    ports:
+      - containerPort: 8080
+        servicePort: 80
+        name: http
+    env:
+      - key: "SERVER_PORT"
+        value: 8080
+      - key: "ROLE_ASSIGNMENT_DB_HOST"
+        value: ccd-shared-database
+      - key: "ROLE_ASSIGNMENT_DB_PORT"
+        value: 5432
+      - key: "ROLE_ASSIGNMENT_DB_USERNAME"
+        value: {{ requiredEnv "CCD_DB_USERNAME" }}
+      - key: "ROLE_ASSIGNMENT_DB_PASSWORD"
+        value: {{ requiredEnv "CCD_DB_PASSWORD" }}
+      - key: "ROLE_ASSIGNMENT_S2S_AUTHORISED_SERVICES"
+        value: ccd_gw,xui_webapp
+      - key: "AM_ROLE_ASSIGNMENT_SERVICE_SECRET"
+        value:  {{ requiredEnv "S2S_SECRET_ROLE_ASSIGNMENT_API" }}
+      - key: "IDAM_USER_URL"
+        value: http://sidam-api
+      - key: "IDAM_S2S_URL"
+        value: http://service-auth-provider-api
+      - key: "ROLE_ASSIGNMENT_IDAM_CLIENT_ID"
+        value: am_docker
+      - key: "ROLE_ASSIGNMENT_IDAM_CLIENT_SECRET"
+        value: am_docker_secret
+      - key: "ROLE_ASSIGNMENT_IDAM_REDIRECT_URI"
+        value: http://idam-web-public/oauth2redirect
+      - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_USERID"
+        value: {{ requiredEnv "IDAM_ADMIN_USER" }}
+      - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_PASSWORD"
+        value: {{ requiredEnv "IDAM_ADMIN_PASSWORD" }}
+      - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_SCOPE"
+        value: search-user
+      - key: "CCD_DATA_STORE_URL"
+        value: http://ccd-data-store-api
+      - key: "MICROSERVICE_NAME"
+        value: am_role_assignment_service
+      - key: "LAUNCH_DARKLY_ENV"
+        value: pr
+      - key: "LD_SDK_KEY"
+        value: {{ requiredEnv "AM_ROLE_SERVICE_SDK_KEY" }}
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+      initialDelaySeconds: 300
+      periodSeconds: 30
+

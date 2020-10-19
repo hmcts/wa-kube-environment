@@ -35,4 +35,7 @@ app:
     enabled: false
     name: a-volumen-name
     path: /data/volume-path
+    persistence:
+      enabled: false
+      existingClaim: shared-pvc
 

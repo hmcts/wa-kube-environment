@@ -8,6 +8,11 @@ echo "-> Creating $NAMESPACE namespace"
 #This might error if namespace already exist, but will not stop the script.
 kubectl create namespace $NAMESPACE
 
+echo "-> Creating persistent volume"
+kubectl apply -f ./charts/pv.yaml -n hmcts-local
+echo "-> Creating persistent volume claim"
+kubectl apply -f ./charts/pvc.yaml -n hmcts-local
+
 echo "-> Applying ingress config"
 kubectl apply -f ./ingress/ingress.yaml -n hmcts-local
 kubectl patch configmap tcp-services -n kube-system --patch '{"data":{"5432":"hmcts-local/ccd-shared-database:5432"}}'

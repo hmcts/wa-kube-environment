@@ -174,3 +174,13 @@ spec:
                 name: camunda-bpm
                 port:
                   number: 80
+    - host: role-assignment
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: am-role-assignment
+                port:
+                  number: 80

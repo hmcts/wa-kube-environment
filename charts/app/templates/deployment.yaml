@@ -60,7 +60,10 @@ spec:
       {{- if .Values.app.volume.enabled }}
       volumes:
         - name: {{ .Values.app.volume.name }}
-          emptyDir: {}
+        {{- if .Values.app.volume.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.app.volume.persistence.existingClaim }}
+        {{- end }}
       {{- end }}
       {{- if .Values.app.container.authentication }}
       imagePullSecrets:

@@ -1,0 +1,6 @@
+releases:
+
+  - name: role-assignment
+    chart: ./../charts/app
+    values:
+      - ./../values/am-role-assignment.yaml.gotmpl
