@@ -8,7 +8,7 @@ EXTERNAL_IMAGES=(
 PUBLIC_IMAGES=(
   hmctspublic.azurecr.io/rpe/service-auth-provider:latest
   hmctspublic.azurecr.io/ccd/user-profile-api:latest
-  hmctspublic.azurecr.io/idam/api:latest
+  hmctspublic.azurecr.io/idam/api:stable
   hmctspublic.azurecr.io/idam/web-admin:stable
   hmctspublic.azurecr.io/idam/web-public:stable
   hmctspublic.azurecr.io/ccd/definition-store-api:latest
