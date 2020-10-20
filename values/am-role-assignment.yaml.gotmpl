@@ -20,7 +20,7 @@ app:
       - key: "ROLE_ASSIGNMENT_DB_PASSWORD"
         value: {{ requiredEnv "CCD_DB_PASSWORD" }}
       - key: "ROLE_ASSIGNMENT_S2S_AUTHORISED_SERVICES"
-        value: ccd_gw,xui_webapp
+        value: ccd_gw,xui_webapp,iac
       - key: "AM_ROLE_ASSIGNMENT_SERVICE_SECRET"
         value:  {{ requiredEnv "S2S_SECRET_ROLE_ASSIGNMENT_API" }}
       - key: "IDAM_USER_URL"
@@ -28,9 +28,9 @@ app:
       - key: "IDAM_S2S_URL"
         value: http://service-auth-provider-api
       - key: "ROLE_ASSIGNMENT_IDAM_CLIENT_ID"
-        value: am_docker
+        value: ccd_gateway
       - key: "ROLE_ASSIGNMENT_IDAM_CLIENT_SECRET"
-        value: am_docker_secret
+        value: {{ requiredEnv "OAUTH2_CLIENT_CCD_GATEWAY" }}
       - key: "ROLE_ASSIGNMENT_IDAM_REDIRECT_URI"
         value: http://idam-web-public/oauth2redirect
       - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_USERID"
@@ -47,6 +47,12 @@ app:
         value: pr
       - key: "LD_SDK_KEY"
         value: {{ requiredEnv "AM_ROLE_SERVICE_SDK_KEY" }}
+      - key: "OPEN_ID_API_BASE_URI"
+        value: "http://sidam-api/o"
+      - key: "OIDC_ISSUER_URL"
+        value: "http://fr-am:8080/openam/oauth2/hmcts"
+      - key: "MICROSERVICE_NAME"
+        value: "am_role_assignment_service"
     readinessProbe:
       enabled: true
       httpGet:
