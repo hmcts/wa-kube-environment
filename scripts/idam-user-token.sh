@@ -5,14 +5,13 @@
 ##    - username: Role assigned to user in generated token. Default to `ccd-import@fake.hmcts.net`.
 ##    - password: ID assigned to user in generated token. Default to `London01`.
 ##
-## Returns a valid IDAM user token for the given username and password.
 
 USERNAME=${1:-ccd-import@fake.hmcts.net}
 PASSWORD=${2:-London01}
 REDIRECT_URI="http://xui-webapp/oauth2/callback"
 CLIENT_ID="ccd_gateway"
 CLIENT_SECRET="OOOOOOOOOOOOOOOO"
-SCOPE="openid%20profile%20roles"
+SCOPE="openid%20profile%20roles%20authorities"
 
 curl --silent --show-error \
     -H "Content-Type: application/x-www-form-urlencoded" \
