@@ -22,6 +22,8 @@ app:
         value: {{ requiredEnv "CCD_DB_PASSWORD" }}
       - key: "camunda.bpm.database.schema-update"
         value: true
+      - key: "CAMUNDA_API_AUTH_ENABLED"
+        value: false
 
     ports:
       - containerPort: 8999

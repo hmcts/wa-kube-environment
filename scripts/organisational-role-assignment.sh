@@ -16,7 +16,7 @@ USER_TOKEN=`./idam-user-token.sh $USERNAME $PASSWORD`
 USER_ID=`./idam-user-id.sh $USER_TOKEN`
 SERVICE_TOKEN=`./idam-service-token.sh $MICROSERVICE`
 
-curl -v -X POST "${ROLE_ASSIGNMENT_URL}/am/role-assignments" \
+curl -X POST "${ROLE_ASSIGNMENT_URL}/am/role-assignments" \
     -H "accept: application/vnd.uk.gov.hmcts.role-assignment-service.create-assignments+json;charset=UTF-8;version=1.0" \
     -H "Authorization: Bearer ${USER_TOKEN}" \
     -H "ServiceAuthorization: Bearer ${SERVICE_TOKEN}" \

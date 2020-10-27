@@ -4,7 +4,7 @@ ROLE=$1
 USER_TOKEN=$2
 SERVICE_TOKEN=$3
 
-curl --silent --show-error -XPUT \
+curl --silent --show-error -X PUT \
   ${CCD_DEFINITION_STORE}/api/user-role \
   -H "Authorization: Bearer ${USER_TOKEN}" \
   -H "ServiceAuthorization: Bearer ${SERVICE_TOKEN}" \
