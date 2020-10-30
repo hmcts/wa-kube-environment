@@ -52,7 +52,7 @@ export WA_CAMUNDA_NEXUS_USER=XXXXXX
 
   `./environment up`
 
-:+1: WARNING:  
+:warning:  
 You probably notice that the xui-webapp pod is not running. This is because it's waiting for the wiremock service to be up.
 This is a manual step for the moment. Therefore, run the following:
 
