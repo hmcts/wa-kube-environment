@@ -3,6 +3,7 @@
 # Setup Services
 echo "Setting up Services..."
 ./create-service.sh "ccd_gateway" "false" "ccd_gateway" "OOOOOOOOOOOOOOOO" "[\"${CCD_CASE_MANAGEMENT_WEB_URL}/oauth2redirect\", \"${XUI_URL}/oauth2/callback\", \"https://localhost:3000/redirectUrl\"]" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-legalrep-solicitor\", \"pui-case-manager\"]" "CCD Gateway" "CCD scope manage-user create-user openid profile roles authorities"
+./create-service.sh "${WA_IDAM_CLIENT_ID}" "false" "${WA_IDAM_CLIENT_ID}" "${WA_IDAM_CLIENT_SECRET}" "[\"${CCD_CASE_MANAGEMENT_WEB_URL}/oauth2redirect\", \"${XUI_URL}/oauth2/callback\", \"https://localhost:3000/redirectUrl\"]" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-legalrep-solicitor\", \"pui-case-manager\"]" "Work Allocation" "CCD scope manage-user create-user openid profile roles authorities"
 
 # Setup Roles
 echo ""
@@ -46,9 +47,14 @@ echo "Setting up Roles required for XUI..."
 
 # Setup Users
 echo ""
-echo "Setting up Users..."
+echo "Setting up required Users..."
 ./create-user.sh "ccd-import@fake.hmcts.net" "CCD" "Import" "London01" "ccd-import" "[{ \"code\": \"ccd-import\"}]"
 ./create-user.sh "${IA_SYSTEM_USERNAME}" "System" "user" "${IA_SYSTEM_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
+
+echo "Setting up WA Users..."
+./create-user.sh "${TEST_WA_CASEOFFICER_A_USERNAME}" "Case" "Officer" "${TEST_WA_CASEOFFICER_A_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-caseofficer\"}, { \"code\": \"payments\"}]"
+
+echo "Setting up IA Users..."
 ./create-user.sh "${TEST_CASEOFFICER_USERNAME}" "Case" "Officer" "${TEST_CASEOFFICER_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-caseofficer\"}, { \"code\": \"payments\"}]"
 ./create-user.sh "${TEST_JUDICIARY_USERNAME}" "Tribunal" "Judge" "${TEST_JUDICIARY_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-judiciary\"}]"
 ./create-user.sh "${TEST_LAW_FIRM_A_USERNAME}" "A" "Legal Rep" "${TEST_LAW_FIRM_A_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-legalrep-solicitor\"}, { \"code\": \"payments\"}]"
