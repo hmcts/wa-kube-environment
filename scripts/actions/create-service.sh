@@ -9,14 +9,15 @@ ALLOWED_ROLES="${6:-[\"caseworker\", \"caseworker-ia\"]}"
 DESCRIPTION="${7:-CCD Gateway}"
 SCOPE="${8:-openid profile roles}"
 
-apiToken=$(sh ./authenticate.sh "${IDAM_URL}" "${IDAM_ADMIN_USER}" "${IDAM_ADMIN_PASSWORD}")
+BASEDIR=$(dirname "$0")
+apiToken=$($BASEDIR/authenticate.sh "${IDAM_URL}" "${IDAM_ADMIN_USER}" "${IDAM_ADMIN_PASSWORD}")
 
 echo "\nCreating service with:\nLabel: ${LABEL}\nClient ID: ${CLIENT_ID}\nClient Secret: ${CLIENT_SECRET}\nRedirect URL: ${REDIRECT_URLS}\nRoles: ${ALLOWED_ROLES}\n"
 
 curl --silent --show-error ${IDAM_URL}/services \
-   -H 'Content-Type: application/json' \
-   -H "Authorization: AdminApiAuthToken ${apiToken}" \
-   -d '{
+  -H 'Content-Type: application/json' \
+  -H "Authorization: AdminApiAuthToken ${apiToken}" \
+  -d '{
          "allowedRoles": '"${ALLOWED_ROLES}"',
          "description": "'"${DESCRIPTION}"'",
          "label": "'"${LABEL}"'",
