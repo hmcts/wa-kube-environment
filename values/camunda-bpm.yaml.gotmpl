@@ -23,8 +23,11 @@ app:
       - key: "camunda.bpm.database.schema-update"
         value: true
       - key: "CAMUNDA_API_AUTH_ENABLED"
-        value: false
-
+        value: true
+      - key: "S2S_URL"
+        value: http://service-auth-provider-api
+      - key: "camundaGroups.work-allocation.s2sServiceNames"
+        value: wa_task_management_api
     ports:
       - containerPort: 8999
         servicePort: 80
