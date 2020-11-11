@@ -8,30 +8,17 @@ echo "Setting up required Users..."
 
 echo "Setting up WA Users and role assignments..."
 
-./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_A_USERNAME}" "CaseOfficer" "A-Public" "${TEST_WA_CASEOFFICER_PUBLIC_A_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
+./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_A_USERNAME}" "CaseOfficer" "A-Public" "${TEST_WA_CASEOFFICER_PUBLIC_A_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-caseofficer\"}]"
 ./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_PUBLIC_A_USERNAME}" "${TEST_WA_CASEOFFICER_PUBLIC_A_PASSWORD}" "PUBLIC" "tribunal-caseworker" '{"jurisdiction":"IA"}'
 
-./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_B_USERNAME}" "CaseOfficer" "B-Public" "${TEST_WA_CASEOFFICER_PUBLIC_B_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
+./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_B_USERNAME}" "CaseOfficer" "B-Public" "${TEST_WA_CASEOFFICER_PUBLIC_B_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-caseofficer\"}]"
 ./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_PUBLIC_B_USERNAME}" "${TEST_WA_CASEOFFICER_PUBLIC_B_PASSWORD}" "PUBLIC" "tribunal-caseworker" '{"jurisdiction":"IA","region":"east-england"}'
 
-./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_C_USERNAME}" "CaseOfficer" "C-Public" "${TEST_WA_CASEOFFICER_PUBLIC_C_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
+./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_C_USERNAME}" "CaseOfficer" "C-Public" "${TEST_WA_CASEOFFICER_PUBLIC_C_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-caseofficer\"}]"
 ./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_PUBLIC_C_USERNAME}" "${TEST_WA_CASEOFFICER_PUBLIC_C_PASSWORD}" "PUBLIC" "tribunal-caseworker" '{"jurisdiction":"IA","primaryLocation":"765324"}'
 
-./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_D_USERNAME}" "CaseOfficer" "D-Public" "${TEST_WA_CASEOFFICER_PUBLIC_D_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
+./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_D_USERNAME}" "CaseOfficer" "D-Public" "${TEST_WA_CASEOFFICER_PUBLIC_D_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-caseofficer\"}]"
 ./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_PUBLIC_D_USERNAME}" "${TEST_WA_CASEOFFICER_PUBLIC_D_PASSWORD}" "PUBLIC" "tribunal-caseworker" '{"jurisdiction":"IA","region":"east-england","primaryLocation":"765324"}'
-
-# Temporary disabled
-#./actions/create-user.sh "${TEST_WA_CASEOFFICER_RESTRICTED_A_USERNAME}" "CaseOfficer" "A-Restricted" "${TEST_WA_CASEOFFICER_RESTRICTED_A_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
-#./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_RESTRICTED_A_USERNAME}" "${TEST_WA_CASEOFFICER_RESTRICTED_A_PASSWORD}" "RESTRICTED" "tribunal-caseworker" '{"jurisdiction":"IA"}'
-#
-#./actions/create-user.sh "${TEST_WA_CASEOFFICER_RESTRICTED_B_USERNAME}" "CaseOfficer" "B-Restricted" "${TEST_WA_CASEOFFICER_RESTRICTED_B_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
-#./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_RESTRICTED_B_USERNAME}" "${TEST_WA_CASEOFFICER_RESTRICTED_B_PASSWORD}" "RESTRICTED" "tribunal-caseworker" '{"jurisdiction":"IA","region":"east-england"}'
-#
-#./actions/create-user.sh "${TEST_WA_CASEOFFICER_RESTRICTED_C_USERNAME}" "CaseOfficer" "C-Restricted" "${TEST_WA_CASEOFFICER_RESTRICTED_C_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
-#./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_RESTRICTED_C_USERNAME}" "${TEST_WA_CASEOFFICER_RESTRICTED_C_PASSWORD}" "RESTRICTED" "tribunal-caseworker" '{"jurisdiction":"IA","primaryLocation":"765324"}'
-#
-#./actions/create-user.sh "${TEST_WA_CASEOFFICER_RESTRICTED_D_USERNAME}" "CaseOfficer" "D-Restricted" "${TEST_WA_CASEOFFICER_RESTRICTED_D_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}]"
-#./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_RESTRICTED_D_USERNAME}" "${TEST_WA_CASEOFFICER_RESTRICTED_D_PASSWORD}" "RESTRICTED" "tribunal-caseworker" '{"jurisdiction":"IA","region":"east-england","primaryLocation":"765324"}'
 
 echo "Setting up IA Users..."
 ./actions/create-user.sh "${TEST_CASEOFFICER_USERNAME}" "Case" "Officer" "${TEST_CASEOFFICER_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-caseofficer\"}, { \"code\": \"payments\"}]"
