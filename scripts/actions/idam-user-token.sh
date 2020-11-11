@@ -14,5 +14,5 @@ CLIENT_SECRET="OOOOOOOOOOOOOOOO"
 SCOPE="openid%20profile%20roles%20authorities"
 
 curl --silent --show-error \
-    -H "Content-Type: application/x-www-form-urlencoded" \
-    -X POST "${IDAM_URL}/o/token?grant_type=password&redirect_uri=${REDIRECT_URI}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&username=${USERNAME}&password=${PASSWORD}&scope=${SCOPE}" -d "" | jq -r .access_token
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -X POST "${IDAM_URL}/o/token?grant_type=password&redirect_uri=${REDIRECT_URI}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&username=${USERNAME}&password=${PASSWORD}&scope=${SCOPE}" -d "" | jq -r .access_token
