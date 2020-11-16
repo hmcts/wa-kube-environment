@@ -1,6 +1,7 @@
 releases:
 
   - name: wiremock
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/wiremock.yaml.gotmpl

@@ -1,6 +1,7 @@
 releases:
 
   - name: ccd-definition-store-api
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/ccd-definition-store-api.yaml.gotmpl

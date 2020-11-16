@@ -1,6 +1,7 @@
 releases:
 
   - name: shared-db
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/shared-db.yaml.gotmpl

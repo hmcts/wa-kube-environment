@@ -4,6 +4,7 @@ repositories:
 
 releases:
   - name: ccd-shared-database
+    namespace: hmcts-local
     chart: bitnami/postgresql
     values:
       - ./../values/ccd-shared-database.yaml.gotmpl

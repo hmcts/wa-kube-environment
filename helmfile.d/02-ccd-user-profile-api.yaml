@@ -1,6 +1,7 @@
 releases:
 
   - name: ccd-user-profile-api
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/ccd-user-profile-api.yaml.gotmpl
