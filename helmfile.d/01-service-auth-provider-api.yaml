@@ -1,6 +1,7 @@
 releases:
 
   - name: service-auth-provider-api
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/service-auth-provider-api.yaml.gotmpl

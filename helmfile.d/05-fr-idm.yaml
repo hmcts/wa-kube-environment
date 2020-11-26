@@ -1,6 +1,7 @@
 releases:
 
   - name: fr-idm
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/fr-idm.yaml.gotmpl

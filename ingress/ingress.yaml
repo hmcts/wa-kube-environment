@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
+  namespace: hmcts-local
 spec:
   rules:
     - host: service-auth-provider-api
@@ -184,3 +185,4 @@ spec:
                 name: am-role-assignment
                 port:
                   number: 80
+

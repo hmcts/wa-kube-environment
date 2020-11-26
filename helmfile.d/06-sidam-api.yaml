@@ -1,6 +1,7 @@
 releases:
 
   - name: sidam-api
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/sidam-api.yaml.gotmpl

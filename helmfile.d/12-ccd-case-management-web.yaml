@@ -1,6 +1,7 @@
 releases:
 
   - name: ccd-case-management-web
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/ccd-case-management-web.yaml.gotmpl

@@ -1,6 +1,7 @@
 releases:
 
   - name: fr-am
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/fr-am.yaml.gotmpl

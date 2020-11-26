@@ -1,6 +1,7 @@
 releases:
 
   - name: ccd-api-gateway
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/ccd-api-gateway.yaml.gotmpl

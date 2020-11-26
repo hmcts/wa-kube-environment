@@ -1,6 +1,7 @@
 releases:
 
   - name: idam-web-admin
+    namespace: hmcts-local
     chart: ./../charts/app
     values:
       - ./../values/idam-web-admin.yaml.gotmpl
