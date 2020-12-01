@@ -10,29 +10,10 @@ https://tools.hmcts.net/confluence/display/RPE/Acceptable+Use+Policy+and+Contrac
 - Access to Azure and container registry, clone https://github.com/hmcts/devops-azure-ad
 If you can't access it, then you do not have access to private repositories(Goto previous step) and check with Devops team.
 If you can access, then create a branch something like 'adding-permissions-your-name'.
-Modify file /users/prod_users.yml by adding below permissions to the EOF.
 
-```
- - name: your.name (this should be first part of the your.name@HMCTS.NET)
-  groups:
-     - dcd_reform_dev_logs
-     - dcd_reform_sandbox_azure
-     - dcd_reform_dev_azure
-     - dcd_cnp_prod_jenkins
-     - dcd_reform_monitoring_reader
-     - dcd_ia
-     - dcd_group_sub_reader_dcd-cftapps-demo_v2
-     - dcd_group_aks_user_dcd-cftapps-demo_v2
-     - dcd_group_aks_user_dcd-cftapps-ithc_v2
-     - dcd_group_sub_reader_dcd-cftapps-ithc_v2
-     - dcd_group_sub_reader_dcd-cftapps-stg_v2
-     - dcd_group_aks_user_dcd-cftapps-stg_v2
-     - dcd_group_sub_reader_dcd-cftapps-test_v2
-     - dcd_group_aks_user_dcd-cftapps-test_v2
-     - dcd_group_wa_v2
-     - dts_cft_camunda_non_prod_access
-     - dcd_group_ld_wa_v2
-```
+Modify file /users/prod_users.yml by adding permissions to the EOF. Check with the team
+which permissions need to be included.
+
 Create a pull request and assign to a reviewer from the team and get approved.
 Post the pull request in slack channel HMCTS Reform #devops request channel to authorise your pull request. 
 Once it is approved a pipeline will be triggered automatically.
