@@ -15,7 +15,7 @@ do
 curl --header "Content-Type: multipart/form-data" "ServiceAuthorization: ${AUTHORIZATION}"\
   --request POST \
   --form data=@$file \
-  "${CAMUNDA_URL}/engine-rest/deployment/create"
+  "${CAMUNDA_URL}/deployment/create"
   fi
 done
 
@@ -26,6 +26,6 @@ do
 curl --header "Content-Type: multipart/form-data" "ServiceAuthorization: ${AUTHORIZATION}"\
   --request POST \
   --form data=@$file \
-  "${CAMUNDA_URL}/engine-rest/deployment/create"
+  "${CAMUNDA_URL}/deployment/create"
   fi
 done
