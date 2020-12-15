@@ -2,30 +2,24 @@
 ## Usage: ./camunda-deployment
 ##
 ## Options:
-##    - AUTHORIZATION: which is generated with the idam-service-token.
+##    - SERVICE_TOKEN: which is generated with the idam-service-token.
 ##
 ## deploys bpmn/dmn to camunda.
 
-AUTHORIZATION="$(sh ./actions/idam-user-token.sh)"
+SERVICE_TOKEN="$(sh ./actions/idam-service-token.sh)"
 
-for file in ${WA_BPMNS_DMNS_PATH}/*.bpmn ${WA_BPMNS_DMNS_PATH}/*.dmn
-do
-	if [ -f "$file" ]
-	then
-curl --header "Content-Type: multipart/form-data" "ServiceAuthorization: ${AUTHORIZATION}"\
-  --request POST \
-  --form data=@$file \
-  "${CAMUNDA_URL}/deployment/create"
-  fi
-done
+echo "Uploading Camunda BPMs and DMNs..."
+if [[ -z "${WA_BPMNS_DMNS_PATH}" ]]; then
+  echo "Environment variable WA_BPMNS_DMNS_PATH was not set skipping deployment."
+else
+  echo "Deploying WA Standalone Task BPMN and DMNs"
+  $WA_BPMNS_DMNS_PATH/camunda-deployment.sh $SERVICE_TOKEN
 
-for file in ${IA_TASK_DMNS_BPMNS_PATH}/*.bpmn ${IA_TASK_DMNS_BPMNS_PATH}/*.dmn
-do
-	if [ -f "$file" ]
-	then
-curl --header "Content-Type: multipart/form-data" "ServiceAuthorization: ${AUTHORIZATION}"\
-  --request POST \
-  --form data=@$file \
-  "${CAMUNDA_URL}/deployment/create"
-  fi
-done
+fi
+
+if [[ -z "${WA_BPMNS_DMNS_PATH}" ]]; then
+  echo "Environment variable IA_TASK_DMNS_BPMNS_PATH was not set skipping deployment."
+else
+  echo "Deploying IA Task Configuration BPMN and DMNs"
+  $IA_TASK_DMNS_BPMNS_PATH/camunda-deployment.sh $SERVICE_TOKEN
+fi
