@@ -108,10 +108,11 @@ sidam-api-59b66bf4cb-d24j6                   1/1     Running   0          5m19s
 wiremock-59669584fc-xcxjw                    1/1     Running   0          74s
 xui-webapp-7485d8c499-htmq5                  1/1     Running   0          71s
 ```
+
 ## Automating BPMN/DMN diagrams
 
 Add the following variables to your bash profile:
- * `WA_BPMNS_DMNS_PATH` - to the path where you WA BPMNS are stored. [Link to path here](https://github.com/hmcts/wa-standalone-task-bpmn/tree/master/src/main/resources)
+ * `WA_BPMNS_DMNS_PATH` - to the path where your WA BPMNS are stored. [Link to path here](https://github.com/hmcts/wa-standalone-task-bpmn/tree/master/src/main/resources)
  * `IA_TASK_DMNS_BPMNS_PATH` - to the path where DMNS in `IA_TASK_CONFIGURATION` are stored. [Link to path here](https://github.com/hmcts/ia-task-configuration/tree/master/src/main/resources)
 
     You will then be able to run the `camunda_deployment.sh` file inside the scripts' folder to deploy BPMNS/DMNS onto camunda.
