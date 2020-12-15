@@ -6,8 +6,7 @@
 ##
 ## deploys bpmn/dmn to camunda.
 
-AUTHORIZATION= sh ${WA_KUBE_ENV_PATH}/scripts/actions/idam-service-token.sh
-
+AUTHORIZATION="$(sh ./actions/idam-user-token.sh)"
 
 for file in ${WA_BPMNS_DMNS_PATH}/*.bpmn ${WA_BPMNS_DMNS_PATH}/*.dmn
 do
@@ -16,7 +15,7 @@ do
 curl --header "Content-Type: multipart/form-data" "ServiceAuthorization: ${AUTHORIZATION}"\
   --request POST \
   --form data=@$file \
-  "http://camunda-bpm/engine-rest/deployment/create"
+  "${CAMUNDA_URL}/engine-rest/deployment/create"
   fi
 done
 
@@ -27,6 +26,6 @@ do
 curl --header "Content-Type: multipart/form-data" "ServiceAuthorization: ${AUTHORIZATION}"\
   --request POST \
   --form data=@$file \
-  "http://camunda-bpm/engine-rest/deployment/create"
+  "${CAMUNDA_URL}/engine-rest/deployment/create"
   fi
 done
