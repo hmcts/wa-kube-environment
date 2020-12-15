@@ -15,3 +15,6 @@
 echo ""
 echo "Setup Wiremock responses for Professional Reference Data based on existing Idam users..."
 ./wiremock.sh
+
+echo "Deploying camunda bpmn and dmn"
+./camunda-deployment.sh
