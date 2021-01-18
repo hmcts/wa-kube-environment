@@ -24,7 +24,7 @@ app:
       - key: "AM_ROLE_ASSIGNMENT_SERVICE_SECRET"
         value: {{ requiredEnv "S2S_SECRET_ROLE_ASSIGNMENT_API" }}
       - key: "IDAM_USER_URL"
-        value: http://sidam-api
+        value: http://sidam-simulator
       - key: "IDAM_S2S_URL"
         value: http://service-auth-provider-api
       - key: "ROLE_ASSIGNMENT_IDAM_CLIENT_ID"
@@ -48,7 +48,7 @@ app:
       - key: "LD_SDK_KEY"
         value: {{ requiredEnv "AM_ROLE_SERVICE_SDK_KEY" }}
       - key: "OPEN_ID_API_BASE_URI"
-        value: http://sidam-api/o
+        value: http://sidam-simulator/o
       - key: "OIDC_ISSUER_URL"
         value: http://fr-am:8080/openam/oauth2/hmcts
       - key: "MICROSERVICE_NAME"

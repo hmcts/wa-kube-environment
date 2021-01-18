@@ -2,7 +2,7 @@
 ## Usage: ./idam-user-id.sh [usertoken]
 ##
 ## Options:
-##    - usertoken: Token to get the user id for. Can be generated with ./idam-user-toekn.sh.
+##    - usertoken: Token to get the user id for. Can be generated with ./idam-user-token.sh.
 ##
 ## Returns a valid IDAM user id for the given token.
 

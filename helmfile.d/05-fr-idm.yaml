@@ -1,7 +1,7 @@
-releases:
-
-  - name: fr-idm
-    chart: ./../charts/app
-    values:
-      - ./../values/fr-idm.yaml.gotmpl
-    wait: true
+#releases:
+#
+#  - name: fr-idm
+#    chart: ./../charts/app
+#    values:
+#      - ./../values/fr-idm.yaml.gotmpl
+#    wait: true
