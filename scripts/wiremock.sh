@@ -278,6 +278,9 @@ curl -X POST \
             "headers": {
               "Content-Type": {
                 "equalTo": "application/json"
+              },
+              "Authorization": {
+                "contains": "Bearer"
               }
             },
             "bodyPatterns" : [{
