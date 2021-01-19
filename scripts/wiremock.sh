@@ -281,6 +281,9 @@ curl -X POST \
               },
               "Authorization": {
                 "contains": "Bearer"
+              },
+              "ServiceAuthorization": {
+                "contains": "Bearer"
               }
             },
             "bodyPatterns" : [{
