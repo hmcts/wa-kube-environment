@@ -36,7 +36,7 @@ PRIVATE_IMAGES=(
 ##    - image_repository: The location where the image to pull is hosted
 ##
  function pull_image {
-   echo "⬇️ Attempting to pull $1 image from $2"
+   echo "⬇️  Attempting to pull $1 image from $2"
 
    if docker pull $2 --quiet > /dev/null ; then
      echo "✅  $2 pulled successfully"
@@ -45,22 +45,22 @@ PRIVATE_IMAGES=(
    fi
    }
 
-echo "ℹ️ Pulling images to kubernetes cluster"
+echo "ℹ️  Pulling images to kubernetes cluster"
 
-echo "🛠️ Configuring environment to use minikube's Docker daemon"
+echo "🛠️  Configuring environment to use minikube's Docker daemon"
 eval $(minikube docker-env)
 
-echo "↪️ Pulling external public images"
+echo "↪️  Pulling external public images"
 for repo in "${EXTERNAL_IMAGES[@]}"; do
   pull_image "external" $repo
 done
 
-echo "↪️ Pulling HMCTS public images"
+echo "↪️  Pulling HMCTS public images"
 for repo in "${PUBLIC_IMAGES[@]}"; do
   pull_image "HMCTS public" $repo
 done
 
-echo "↪️ Pulling HMCTS private images"
+echo "↪️  Pulling HMCTS private images"
 for repo in "${PRIVATE_IMAGES[@]}"; do
     pull_image "HMCTS private" $repo
 done
