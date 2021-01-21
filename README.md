@@ -62,6 +62,9 @@ and make sure the terminal can read `.bash_profile`
 ```
 export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
 export WA_CAMUNDA_NEXUS_USER=XXXXXX
+export AM_ROLE_SERVICE_SDK_KEY=XXXXX
+export WA_BPMNS_DMNS_PATH=<PATH_TO_BPMN_REPO>
+export IA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 ```
 **Note:** _the values for the above environment variables can be found on this [Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_.
 If you cannot access the page, check with one of the team members.
