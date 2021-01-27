@@ -1,0 +1,22 @@
+app:
+  name: sidam-simulator
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/hmcts/rse/rse-idam-simulator
+    tag: latest
+    ports:
+      - containerPort: 5000
+        servicePort: 80
+        name: http
+    env:
+      - key: "SERVER_PORT"
+        value: 5000
+      - key: "SIMULATOR_OPENID_BASE_URL"
+        value: http://sidam-simulator
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+        port: 5000
+      initialDelaySeconds: 300
+      periodSeconds: 30

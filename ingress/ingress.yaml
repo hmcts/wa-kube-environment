@@ -74,6 +74,16 @@ spec:
                 name: sidam-api
                 port:
                   number: 80
+    - host: sidam-simulator
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sidam-simulator
+                port:
+                  number: 80
     - host: ccd-definition-store-api
       http:
         paths:

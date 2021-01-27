@@ -1,7 +1,7 @@
-releases:
-
-  - name: idam-web-public
-    chart: ./../charts/app
-    values:
-      - ./../values/idam-web-public.yaml.gotmpl
-    wait: true
+#releases:
+#
+#  - name: idam-web-public
+#    chart: ./../charts/app
+#    values:
+#      - ./../values/idam-web-public.yaml.gotmpl
+#    wait: true

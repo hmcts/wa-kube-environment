@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Setup Services
-./create-services.sh
+#./create-services.sh
 
 # Setup Roles
-./create-roles.sh
+#./create-roles.sh
 
 # Setup Users
 ./create-users.sh

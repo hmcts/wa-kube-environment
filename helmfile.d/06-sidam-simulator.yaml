@@ -1,0 +1,7 @@
+releases:
+
+  - name: sidam-simulator
+    chart: ./../charts/app
+    values:
+      - ./../values/sidam-simulator.yaml.gotmpl
+    wait: true
