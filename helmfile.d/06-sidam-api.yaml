@@ -1,7 +1,7 @@
-releases:
-
-  - name: sidam-api
-    chart: ./../charts/app
-    values:
-      - ./../values/sidam-api.yaml.gotmpl
-    wait: true
+#releases:
+#
+#  - name: sidam-api
+#    chart: ./../charts/app
+#    values:
+#      - ./../values/sidam-api.yaml.gotmpl
+#    wait: true

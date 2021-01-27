@@ -62,6 +62,9 @@ and make sure the terminal can read `.bash_profile`
 ```
 export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
 export WA_CAMUNDA_NEXUS_USER=XXXXXX
+export AM_ROLE_SERVICE_SDK_KEY=XXXXX
+export WA_BPMNS_DMNS_PATH=<PATH_TO_BPMN_REPO>
+export IA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 ```
 **Note:** _the values for the above environment variables can be found on this [Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_.
 If you cannot access the page, check with one of the team members.
@@ -90,9 +93,10 @@ To run any of the service, Ingress should be enabled
 
 ##### 1. Update /etc/hosts to route the hosts to the minikube cluster ip
      ```
-     echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db idam-web-public fr-am fr-idm sidam-api ccd-definition-store-api idam-web-admin idam-web-public ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp ccd-case-management-web camunda-bpm role-assignment" | sudo tee -a /etc/hosts
+     echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db idam-web-public fr-am fr-idm sidam-api ccd-definition-store-api idam-web-admin idam-web-public ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp ccd-case-management-web camunda-bpm role-assignment sidam-simulator" | sudo tee -a /etc/hosts
      ```
-   replace `$(minikube ip` with minikube ip. To get minikube ip, run cmd `minikube ip` on the terminal.
+    
+`$(minikube ip` should be populated automatically. If not you can replace it manually to get minikube ip, run cmd `minikube ip` on the terminal.
 
 ##### 2. Verify the deployment
    We can verify the deployments were successful listing all pods under our namespace
