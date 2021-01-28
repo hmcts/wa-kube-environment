@@ -295,7 +295,7 @@ curl -X POST \
             "headers": {
               "Content-Type": "application/json"
             },
-            "jsonBody": {
+            "jsonBody": [{
               "caseWorkerId": "string",
               "caseWorkerLocations": [
                 {
@@ -365,7 +365,7 @@ curl -X POST \
                 "userTypeId": 0
               },
               "userTypeId": 0
-            }
+            }]
           }
         }' \
   ${WIREMOCK_URL}/__admin/mappings/new
