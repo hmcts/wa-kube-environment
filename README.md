@@ -45,7 +45,7 @@ minikube start \
 for older versions
 ```
 minikube start \
-     --memory=12288 \
+     --memory=8192 \
      --cpus=4 \
      --vm-driver=hyperkit \
      --addons=ingress
