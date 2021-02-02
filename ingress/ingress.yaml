@@ -174,14 +174,14 @@ spec:
                 name: xui-webapp
                 port:
                   number: 80
-    - host: camunda-bpm
+    - host: camunda-local-bpm
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: camunda-bpm
+                name: camunda-local-bpm
                 port:
                   number: 80
     - host: role-assignment
