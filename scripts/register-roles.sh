@@ -16,6 +16,7 @@ SERVICE_TOKEN="$(sh ./actions/idam-service-token.sh)"
 ./actions/register-role.sh "caseworker-ia-homeofficepou" "$USER_TOKEN" "$SERVICE_TOKEN"
 ./actions/register-role.sh "caseworker-ia-respondentofficer" "$USER_TOKEN" "$SERVICE_TOKEN"
 ./actions/register-role.sh "caseworker-ia-iacjudge" "$USER_TOKEN" "$SERVICE_TOKEN"
+./actions/register-role.sh "caseworker-wa-task-configuration" "$USER_TOKEN" "$SERVICE_TOKEN"
 
 ./actions/register-role.sh "citizen" "$USER_TOKEN" "$SERVICE_TOKEN"
 

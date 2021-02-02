@@ -20,6 +20,10 @@ echo "Setting up Roles..."
 ./actions/create-role.sh "payments"
 
 echo ""
+echo "Setting up Roles required for WA only..."
+./actions/create-role.sh "caseworker-wa-task-configuration"
+
+echo ""
 echo "Setting up Roles required for XUI..."
 ./actions/create-role.sh "pui-case-manager"
 ./actions/create-role.sh "pui-user-manager"
