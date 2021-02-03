@@ -1,0 +1,6 @@
+releases:
+
+  - name: camunda-local-bpm
+    chart: ./../charts/app
+    values:
+      - ./../values/camunda-local-bpm.yaml.gotmpl
