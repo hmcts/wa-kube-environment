@@ -8,6 +8,12 @@ echo "Setting up required Users..."
 ./actions/create-user.sh "${IA_SYSTEM_USERNAME}" "System" "user" "${IA_SYSTEM_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-system\"]"
 ./actions/create-user.sh "${WA_SYSTEM_USERNAME}" "WASystem" "WaUser" "${WA_SYSTEM_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-system\"]"
 
+
+echo "Setting up WA test accounts"
+./actions/create-user.sh "${TEST_WA_CASEOFFICER_A_USERNAME}" "CaseOfficer" "TestPurposes A" "${TEST_WA_CASEOFFICER_A_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-caseofficer\"]"
+./actions/create-user.sh "${TEST_WA_CASEOFFICER_B_USERNAME}" "CaseOfficer" "TestPurposes B" "${TEST_WA_CASEOFFICER_B_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-caseofficer\"]"
+./actions/create-user.sh "${TEST_WA_LAW_FIRM_USERNAME}" "LegalRep" "TestPurposes" "${TEST_WA_LAW_FIRM_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-system\", \"caseworker-ia-legalrep-solicitor\", \"payments\"]"
+
 echo "Setting up WA Users and role assignments..."
 
 ./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_A_USERNAME}" "CaseOfficer" "A-Public" "${TEST_WA_CASEOFFICER_PUBLIC_A_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-caseofficer\"]"
