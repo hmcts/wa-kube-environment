@@ -19,6 +19,9 @@ echo "Setting up Roles..."
 ./actions/create-role.sh "caseworker-ia-iacjudge"
 ./actions/create-role.sh "payments"
 
+./actions/create-role.sh "caseworker-ras-validation"
+./actions/create-role.sh "caseworker-caa"
+
 echo ""
 echo "Setting up Roles required for XUI..."
 ./actions/create-role.sh "pui-case-manager"
