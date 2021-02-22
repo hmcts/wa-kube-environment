@@ -35,6 +35,8 @@ app:
         value: {{ requiredEnv "S2S_SECRET_TASK_CONFIGURATION_API" }}
       - key: "MICROSERVICEKEYS_WA_CASE_EVENT_HANDLER"
         value: {{ requiredEnv "S2S_SECRET_CASE_EVENT_HANDLER" }}
+      - key: "MICROSERVICEKEYS_CAMUNDA_BPM"
+        value: {{ requiredEnv "S2S_SECRET_CAMUNDA_BPM" }}
       - key: "MICROSERVICEKEYS_EM_GW"
         value: {{ requiredEnv "IDAM_KEY_EM_GW" }}
       - key: "MICROSERVICEKEYS_EM_STITCHING_API"
