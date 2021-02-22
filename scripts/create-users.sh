@@ -6,7 +6,7 @@ echo "Setting up required Users..."
 
 ./actions/create-user.sh "ccd-import@fake.hmcts.net" "CCD" "Import" "London01" "ccd-import" "[\"ccd-import\"]"
 ./actions/create-user.sh "${IA_SYSTEM_USERNAME}" "System" "user" "${IA_SYSTEM_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-system\"]"
-./actions/create-user.sh "${WA_SYSTEM_USERNAME}" "WASystem" "WaUser" "${WA_SYSTEM_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-system\"]"
+./actions/create-user.sh "${WA_SYSTEM_USERNAME}" "WASystem" "WaUser" "${WA_SYSTEM_PASSWORD}" "caseworker" "[\"caseworker\", \"caseworker-ia\", \"caseworker-ia-system\", \"caseworker-wa-task-configuration\"]"
 
 
 echo "Setting up WA test accounts"
