@@ -30,6 +30,8 @@ app:
         value: wa_task_management_api,wa_task_configuration_api,wa_workflow_api,wa_case_event_handler,wa_camunda_pipeline_upload
       - key: "WA_AUTO_CONFIGURE_TASKS_ENABLED"
         value: true
+      - key: "TASK_CONFIGURATION_URL"
+        value: {{ requiredEnv "TASK_CONFIGURATION_URL" }}
     ports:
       - containerPort: 8999
         servicePort: 80
