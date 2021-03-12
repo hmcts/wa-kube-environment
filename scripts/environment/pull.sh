@@ -18,7 +18,6 @@ PUBLIC_IMAGES=(
   hmctspublic.azurecr.io/ccd/case-management-web:latest
   hmctspublic.azurecr.io/em/ccd-orchestrator:latest
   hmctspublic.azurecr.io/xui/webapp:latest
-  hmctspublic.azurecr.io/am/role-assignment-service:latest
   hmctspublic.azurecr.io/hmcts/rse/rse-idam-simulator:latest
 )
 
