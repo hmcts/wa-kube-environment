@@ -21,6 +21,7 @@ echo "Setting up Roles..."
 
 ./actions/create-role.sh "caseworker-ras-validation"
 ./actions/create-role.sh "caseworker-caa"
+./actions/create-role.sh "caseworker-approver"
 
 echo ""
 echo "Setting up Roles required for WA only..."
