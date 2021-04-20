@@ -45,3 +45,8 @@ echo "Setting up Roles required for XUI..."
 ./actions/create-role.sh "caseworker-probate-solicitor"
 ./actions/create-role.sh "caseworker-sscs"
 ./actions/create-role.sh "caseworker-sscs-dwpresponsewriter"
+
+# Roles required for Notice of Change
+echo "Setting up Roles required for Notice of Change..."
+./actions/create-role.sh "caseworker-approver"
+./actions/create-role.sh "prd-aac-system"

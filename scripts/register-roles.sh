@@ -45,5 +45,10 @@ SERVICE_TOKEN="$(sh ./actions/idam-service-token.sh)"
 ./actions/register-role.sh "caseworker-sscs-dwpresponsewriter" "$USER_TOKEN" "$SERVICE_TOKEN"
 
 ./actions/register-role.sh "payments" "$USER_TOKEN" "$SERVICE_TOKEN"
+
+# Roles required for Notice of Change
+./actions/register-role.sh "caseworker-approver" "$USER_TOKEN" "$SERVICE_TOKEN"
+./actions/register-role.sh "prd-aac-system" "$USER_TOKEN" "$SERVICE_TOKEN"
+
 echo ""
 echo "Registering CCD Roles has completed"
