@@ -1,0 +1,6 @@
+releases:
+
+  - name: ccd-message-publisher
+    chart: ./../charts/app
+    values:
+      - ./../values/ccd-message-publisher.yaml.gotmpl

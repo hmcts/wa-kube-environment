@@ -1,0 +1,23 @@
+app:
+  name: ccd-message-publisher
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/ccd/message-publisher
+    tag: latest
+    ports:
+      - containerPort: 4456
+        servicePort: 80
+        name: http
+    env:
+      - key: "DATA_STORE_DB_HOST"
+        value: ccd-shared-database
+      - key: "DATA_STORE_DB_PORT"
+        value: 5432
+      - key: "DATA_STORE_DB_USERNAME"
+        value: {{ requiredEnv "CCD_DB_USERNAME" }}
+      - key: "DATA_STORE_DB_PASSWORD"
+        value: {{ requiredEnv "CCD_DB_PASSWORD" }}
+      - key: "SERVICE_BUS_CONNECTION_STRING"
+        value: {{ requiredEnv "AZURE_SERVICE_BUS_CONNECTION_STRING" }}
+      - key: "CCD_CASE_EVENTS_DESTINATION"
+        value: ccd-case-events-demo
