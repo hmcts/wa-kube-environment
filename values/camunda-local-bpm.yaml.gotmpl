@@ -32,6 +32,8 @@ app:
         value: true
       - key: "TASK_CONFIGURATION_URL"
         value: {{ requiredEnv "TASK_CONFIGURATION_URL" }}
+      - key: "TZ"
+        value: Europe/London
     ports:
       - containerPort: 8999
         servicePort: 80
