@@ -7,18 +7,26 @@
 ##    -  TASK_CONFIG: env url
 
 microservice="${1:-wa_task_configuration_api}"
-taskManagement="${2:-http://camunda-api-aat.service.core-compute-aat.internal/engine-rest/task}"
-taskConfig="${3:-http://wa-task-configuration-api-aat.service.core-compute-aat.internal/task}"
+CAMUNDA_URL="${2:-http://camunda-api-aat.service.core-compute-aat.internal/engine-rest/task}"
+WA_TASK_CONFIGURATION_URL="${3:-http://wa-task-configuration-api-aat.service.core-compute-aat.internal/task}"
 
-serviceToken=$(curl --silent --show-error -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"microservice":"'${microservice}'"}' \
-  ${S2S_URL}/o/token
+
+serviceToken=$(curl --request POST \
+  --url https://idam-web-public.prod.platform.hmcts.net/o/token \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data client_secret=NDPH6DFQBIPA9UP7 \
+  --data client_id=iac \
+  --data redirect_uri=https://ia-case-api-prod.service.core-compute-prod.internal/oauth2/callback \
+  --data password=System01 \
+  --data grant_type=password \
+  --data username=wa-system-user@hmcts.net \
+  --data 'scope=openid profile roles'
 )
+
 
 # GET TASKS
 response=$(curl --request POST \
-  --url "${taskManagement}" \
+  --url "${CAMUNDA_URL}" \
   --header 'Content-Type: application/json' \
   --data "{
     'orQueries': [
@@ -46,7 +54,7 @@ echo ${response} > /tmp/tasks.json
 for ID in $(seq 0 $(jq length /tmp/tasks.json)); do
 ID_RESPONSE=$(cat /tmp/tasks.json | jq -r ".[${ID}].id")
 response=$(curl --request POST \
-  --url "${taskConfig}/${ID_RESPONSE}" \
+  --url "${WA_TASK_CONFIGURATION_URL}/${ID_RESPONSE}" \
   --header 'Authorization: Basic Og==' \
   --header 'Content-Type: application/json' \
   --header "ServiceAuthorization: Bearer ${serviceToken}" \
