@@ -1,0 +1,10 @@
+{
+  "name": "wa-kube-environment",
+  "version": "1.0.0",
+  "dependencies": {
+    "otp": "^1.0.1"
+  },
+  "devDependencies": {
+    "axios": "^0.21.1"
+  }
+}
