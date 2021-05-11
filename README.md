@@ -180,3 +180,21 @@ your `.bash_profile` and resource the file before running environment up.
 ```shell
 export AZURE_SERVICE_BUS_CONNECTION_STRING="Endpoint=sb://REPLACE_ME.servicebus.windows.net/;SharedAccessKeyName=REPLACE_ME;SharedAccessKey=REPLACE_ME"
 ```
+
+## Using manual task configuration
+
+To start the manual task configuration process you will use the
+
+`.configure_task.js` file with the following parameters in order.
+
+
+- CAMUNDA_URL
+- WA_TASK_CONFIGURATION_URL
+- microServiceName
+- s2sUrl
+- s2sSecret
+
+
+Example:
+`.configure_task.js CAMUNDA_URL WA_TASK_CONFIGURATION_URL microServiceName s2sUrl s2sSecret`
+
