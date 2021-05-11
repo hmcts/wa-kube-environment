@@ -51,7 +51,7 @@ async function requestServiceToken() {
 
 async function configureTasks() {
   const currentTime = moment().format('yyyy-MM-dd\'T\'HH:mm:ss.SSSZ');
-  const createdAfter = moment(currentTime).add(1, 'minute');
+  const createdBefore = moment(currentTime).subtract(1, 'minute');
 
   const headers = {
     header: {
@@ -71,17 +71,15 @@ async function configureTasks() {
         ]
       }
     ],
-    'createdAfter': createdAfter,
+    'createdBefore': createdBefore,
     'taskDefinitionKey': 'processTask',
     'processDefinitionKey': 'wa-task-initiation-ia-asylum'
   }
 
   const getCamundaTasks =  await axios.post(CAMUNDA_URL, taskQuery, headers)
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err))
 
   const serviceAuthorization = requestServiceToken();
-  getCamundaTasks.forEach( task  => async () =>{
+  getCamundaTasks.data.forEach( task  => async () =>{
     WA_TASK_CONFIGURATION_URL
     //LOOP OVER TASKS
     await axios.post(`${WA_TASK_CONFIGURATION_URL}/${task.id}`,null,{
@@ -92,7 +90,4 @@ async function configureTasks() {
       }
     });
   })
-
-
-
 }
