@@ -62,7 +62,7 @@ async function configureTasks() {
   const taskQuery = {
     'orQueries': [
       {
-        'processVariables': [
+        'taskVariables': [
           {
             'name': 'taskState',
             'operator': 'eq',
