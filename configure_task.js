@@ -3,6 +3,8 @@ const microServiceName = "S2S_MICROSERVICE_NAME";
 const s2sUrl = "S2S_URL";
 const s2sSecret = "S2S_SECRET";
 const otp = require('otp');
+//First Argument is CamundaURL second is Task-ConfigURL
+const args = process.argv;
 
 /**
  * Assembles a serviceAuthProvider request object to be used to query the service
@@ -28,7 +30,7 @@ async function configureTasks() {
       'Content-Type': 'application/json'
     }
   }
-  const CAMUNDA_URL = "http://camunda-api-aat.service.core-compute-aat.internal/engine-rest/task"
+  const CAMUNDA_URL = args[2]
   const taskQuery = {
     'orQueries': [
       {
@@ -51,7 +53,7 @@ async function configureTasks() {
 
 
   getCamundaTasks.forEach( task  => async () =>{
-    const WA_TASK_CONFIGURATION_URL = "http://wa-task-configuration-api-aat.service.core-compute-aat.internal/task/"
+    const WA_TASK_CONFIGURATION_URL = args[3]
     //LOOP OVER TASKS
     const configureTask =  await axios.post(WA_TASK_CONFIGURATION_URL+'/'+task.id,null,{
       header: {
