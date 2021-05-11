@@ -1,10 +1,14 @@
 //First Argument is CamundaURL second is Task-ConfigURL
-const args = process.argv;
 const axios = require('axios').default;
+const otp = require('otp');
+const moment = require('moment');
+const args = process.argv;
+
+const CAMUNDA_URL = args[2]
+const WA_TASK_CONFIGURATION_URL = args[3]
 const microServiceName = args[4];
 const s2sUrl = args[5];
 const s2sSecret = args[6];
-const otp = require('otp');
 
 /**
  * Assembles a serviceAuthProvider request object to be used to query the service
@@ -22,15 +26,39 @@ function buildRequest() {
   };
 }
 
+/**
+ * Sends out a request to the serviceAuthProvider and request a new service token
+ * to be passed as a header in any outgoing calls.
+ * Note: This token is stored in memory and this token is only valid for 3 hours.
+ */
+async function requestServiceToken() {
+  logger.trace('Attempting to request a S2S token', logLabel);
+  const request = buildRequest();
+  let res;
+  try {
+    res = await axios.post(request.uri, request.body);
+  } catch (err) {
+    logger.exception(err, logLabel);
+  }
+  if (res && res.data) {
+    logger.trace('Received S2S token and stored token', logLabel);
+    return  res.data;
+  } else {
+    logger.exception('Could not retrieve S2S token', logLabel);
+  }
+}
 
 
 async function configureTasks() {
+  const currentTime = moment().format('yyyy-MM-dd\'T\'HH:mm:ss.SSSZ');
+  const createdAfter = moment(currentTime).add(1, 'minute');
+
   const headers = {
     header: {
       'Content-Type': 'application/json'
     }
   }
-  const CAMUNDA_URL = args[2]
+  CAMUNDA_URL
   const taskQuery = {
     'orQueries': [
       {
@@ -43,6 +71,7 @@ async function configureTasks() {
         ]
       }
     ],
+    'createdAfter': createdAfter,
     'taskDefinitionKey': 'processTask',
     'processDefinitionKey': 'wa-task-initiation-ia-asylum'
   }
@@ -51,14 +80,14 @@ async function configureTasks() {
     .then(res => console.log(res.data))
     .catch(err => console.log(err))
 
-
+  const serviceAuthorization = requestServiceToken();
   getCamundaTasks.forEach( task  => async () =>{
-    const WA_TASK_CONFIGURATION_URL = args[3]
+    WA_TASK_CONFIGURATION_URL
     //LOOP OVER TASKS
-    const configureTask =  await axios.post(WA_TASK_CONFIGURATION_URL+'/'+task.id,null,{
+    await axios.post(`${WA_TASK_CONFIGURATION_URL}/${task.id}`,null,{
       header: {
         'Content-Type': 'application/json',
-        "ServiceAuthorization": buildRequest()
+        "ServiceAuthorization": serviceAuthorization
 
       }
     });

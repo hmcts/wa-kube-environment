@@ -2,6 +2,7 @@
   "name": "wa-kube-environment",
   "version": "1.0.0",
   "dependencies": {
+    "moment": "^2.29.1",
     "otp": "^1.0.1"
   },
   "devDependencies": {
