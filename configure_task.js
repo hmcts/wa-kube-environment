@@ -1,10 +1,10 @@
-const axios = require('axios').default;
-const microServiceName = "S2S_MICROSERVICE_NAME";
-const s2sUrl = "S2S_URL";
-const s2sSecret = "S2S_SECRET";
-const otp = require('otp');
 //First Argument is CamundaURL second is Task-ConfigURL
 const args = process.argv;
+const axios = require('axios').default;
+const microServiceName = args[4];
+const s2sUrl = args[5];
+const s2sSecret = args[6];
+const otp = require('otp');
 
 /**
  * Assembles a serviceAuthProvider request object to be used to query the service
