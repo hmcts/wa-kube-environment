@@ -1,0 +1,21 @@
+app:
+  name: azure-storage-emulator-azurite
+  group: backend
+  container:
+    image: arafato/azurite
+    tag: latest
+    ports:
+      - containerPort: 10000
+        servicePort: 80
+        name: http
+    env:
+    readinessProbe:
+      enabled: false
+      initialDelaySeconds: 300
+      periodSeconds: 30
+    volume:
+      enabled: true
+      name: ccd-docker-azure
+      path: ccd-docker-azure-blob-data:/opt/azurite/folder
+
+
