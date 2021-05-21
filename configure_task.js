@@ -1,6 +1,5 @@
 //First Argument is CamundaURL second is Task-ConfigURL
 const axios = require('axios').default;
-const otp = require('otp');
 const moment = require('moment');
 const args = process.argv;
 
@@ -8,20 +7,19 @@ const CAMUNDA_URL = args[2]
 const WA_TASK_CONFIGURATION_URL = args[3]
 const microServiceName = args[4];
 const s2sUrl = args[5];
-const s2sSecret = args[6];
 
 /**
  * Assembles a serviceAuthProvider request object to be used to query the service
  * also creates a one-time-password from the secret.
+ *
  */
 function buildRequest() {
   const uri = `${s2sUrl}/lease`;
-  const oneTimePassword = otp(s2sSecret).totp();
+
   return {
     uri: uri,
     body: {
-      microservice: microServiceName,
-      oneTimePassword: oneTimePassword
+      microservice: microServiceName
     }
   };
 }
@@ -32,33 +30,31 @@ function buildRequest() {
  * Note: This token is stored in memory and this token is only valid for 3 hours.
  */
 async function requestServiceToken() {
-  logger.trace('Attempting to request a S2S token', logLabel);
+  console.info('Attempting to request a S2S token');
   const request = buildRequest();
+
   let res;
   try {
     res = await axios.post(request.uri, request.body);
   } catch (err) {
-    logger.exception(err, logLabel);
+    console.warn(err);
   }
   if (res && res.data) {
-    logger.trace('Received S2S token and stored token', logLabel);
+    console.info('Received S2S token and stored token');
     return  res.data;
   } else {
-    logger.exception('Could not retrieve S2S token', logLabel);
+    console.warn('Could not retrieve S2S token');
   }
 }
 
 
 async function configureTasks() {
-  const currentTime = moment().format('yyyy-MM-dd\'T\'HH:mm:ss.SSSZ');
-  const createdBefore = moment(currentTime).subtract(1, 'minute');
-
+  const createdBefore = moment().subtract(1, 'minute').format('yyyy-MM-DDTHH:mm:ss.SSS+0000')
   const headers = {
     header: {
       'Content-Type': 'application/json'
     }
   }
-  CAMUNDA_URL
   const taskQuery = {
     'orQueries': [
       {
@@ -77,17 +73,23 @@ async function configureTasks() {
   }
 
   const getCamundaTasks =  await axios.post(CAMUNDA_URL, taskQuery, headers)
+  console.info(getCamundaTasks.data.length, " tasks unconfigured")
 
-  const serviceAuthorization = requestServiceToken();
-  getCamundaTasks.data.forEach( task  => async () =>{
-    WA_TASK_CONFIGURATION_URL
+  const serviceAuthorization = await requestServiceToken()
+    .catch(err => console.warn(err));
+  getCamundaTasks.data.forEach( (task) =>{
     //LOOP OVER TASKS
-    await axios.post(`${WA_TASK_CONFIGURATION_URL}/${task.id}`,null,{
-      header: {
+     axios.post(`${WA_TASK_CONFIGURATION_URL}/${task.id}`,null,{
+      headers: {
         'Content-Type': 'application/json',
-        "ServiceAuthorization": serviceAuthorization
+        "ServiceAuthorization": "Bearer " + serviceAuthorization
 
       }
-    });
+    })
   })
+
+  const getCamundaTasksAfterConfigured =  await axios.post(CAMUNDA_URL, taskQuery, headers)
+  console.info(getCamundaTasksAfterConfigured.data.length, " tasks unconfigured")
 }
+
+configureTasks();

@@ -185,14 +185,13 @@ export AZURE_SERVICE_BUS_CONNECTION_STRING="Endpoint=sb://REPLACE_ME.servicebus.
 
 To start the manual task configuration process you will use the
 
-`.configure_task.js` file with the following parameters in order.
+`node configure_task.js` file with the following parameters in order.
 
 
 - CAMUNDA_URL
 - WA_TASK_CONFIGURATION_URL
 - microServiceName
 - s2sUrl
-- s2sSecret
 
 
 Example:
