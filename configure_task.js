@@ -1,4 +1,9 @@
-//First Argument is CamundaURL second is Task-ConfigURL
+/** First Argument is CamundaURL second is Task-Config URL
+*  Second Argument is the task configuratoin URL
+*  Third Argument microserviceName 
+*  Fourth Argument s2sUrl
+*  Fith Argument s2s Secret
+*/
 const axios = require('axios').default;
 const moment = require('moment');
 const args = process.argv;
