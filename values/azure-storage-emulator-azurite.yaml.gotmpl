@@ -2,11 +2,11 @@ app:
   name: azure-storage-emulator-azurite
   group: backend
   container:
-    image: arafato/azurite
+    image: "mcr.microsoft.com/azure-storage/azurite"
     tag: latest
     ports:
       - containerPort: 10000
-        servicePort: 80
+        servicePort: 10000
         name: http
     env:
     readinessProbe:

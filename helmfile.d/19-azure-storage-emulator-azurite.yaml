@@ -4,3 +4,4 @@ releases:
     chart: ./../charts/app
     values:
       - ./../values/azure-storage-emulator-azurite.yaml.gotmpl
+    wait: true
