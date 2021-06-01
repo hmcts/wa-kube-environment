@@ -1,0 +1,6 @@
+releases:
+
+  - name: dm-store
+    chart: ./../charts/app
+    values:
+      - ./../values/dm-store.yaml.gotmpl

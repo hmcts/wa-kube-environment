@@ -1,0 +1,60 @@
+app:
+  name: dm-store
+  group: backend
+  container:
+    image: "hmctspublic.azurecr.io/dm/store"
+    tag: latest
+    ports:
+      - containerPort: 4603
+        servicePort: 80
+        name: http
+    env:
+      - key: "S2S_NAMES_WHITELIST"
+        value: sscs,divorce,ccd,em_gw,document-management-store,ccd_gw,idam-api,fpl_case_service,em_stitching_api,iac,sidam-api
+      - key: "SYSTEM_USER_NAME"
+        value: dummy
+      - key: "SYSTEM_USER_PASSWORD"
+        value: dummy
+      - key: "PACKAGES_NAME"
+        value: document-management-store
+      - key: "SPRING_DATASOURCE_URL"
+        value: jdbc:postgresql://ccd-shared-database:5432/evidence
+      - key: "SPRING_DATASOURCE_USERNAME"
+        value: {{ requiredEnv "CCD_DB_USERNAME" }}
+      - key: "SPRING_DATASOURCE_PASSWORD"
+        value: {{ requiredEnv "CCD_DB_PASSWORD" }}
+      - key: "IDAM_SECRET_KEY"
+        value: "AAAAAAAAAAAAAAAA"
+      # Defaults as explained: https://github.com/azure/azurite#usage-with-azure-storage-sdks-or-tools
+      - key: "STORAGEACCOUNT_PRIMARY_CONNECTION_STRING"
+        value: "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azure-storage-emulator-azurite:10000/devstoreaccount1;"
+      - key: "STORAGE_CONTAINER_DOCUMENT_CONTAINER_NAME"
+        value: "hmctstestcontainer"
+      - key: "BLOBSTORE_MIGRATE_CCD_PUBLIC_KEY_REQUIRED"
+        value: false
+      - key: "SPRING_PROFILES_ACTIVE"
+        value: dev
+      - key: "IDAM_TESTING_SUPPORT_ENABLED"
+        value: true
+      - key: "LOGGING_LEVEL_UK_GOV_HMCTS_IDAM"
+        value: INFO
+      - key: "IDAM_USER_BASE_URI"
+        value: http://sidam-api
+      - key: "IDAM_S2S_BASE_URI"
+        value: http://service-auth-provider-api
+      - key: "azure.storage.enabled"
+        value: true
+      - key: "postgres.storage.enabled"
+        value: false
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+        port: 4603
+      initialDelaySeconds: 300
+      periodSeconds: 30
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "256Mi"
