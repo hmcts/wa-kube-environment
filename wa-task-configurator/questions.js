@@ -1,37 +1,48 @@
 const readlineSync = require("readline-sync");
 
-const localService = "http://service-auth-provider-api";
-const aatService =
-  "http://rpe-service-auth-provider-aat.service.core-compute-aat.internal";
-const serviceList = [localService, aatService];
-const question1 = "Enter s2s url: ";
+const s2sOptions = [
+  "http://service-auth-provider-api",
+  "http://rpe-service-auth-provider-aat.service.core-compute-aat.internal",
+];
+const s2sQuestion = "Enter s2s url: ";
 
-const microServiceNameList = [
+const serviceNameOptions = [
   "wa_task_configuration_api",
   "wa_task_management_api",
 ];
-const question2 = "Enter microservice name: ";
+const serviceNameQuestion = "Enter microservice name: ";
 
-const question3 = "Enter microservice secret: ";
+const secretQuestion = "Enter microservice secret: ";
 
-const questions = [question1, question2, question3];
+const camundaUrlOptions = [
+  "http://camunda-local-bpm/engine-rest",
+  "http://camunda-api-aat.service.core-compute-aat.internal/engine-rest",
+];
+const camundaUrlQuestion = "Enter camunda url: ";
+
+const questions = [
+  s2sQuestion,
+  serviceNameQuestion,
+  secretQuestion,
+  camundaUrlQuestion,
+];
 
 function askUserQuestions() {
-  const serviceIndex = readlineSync.keyInSelect(serviceList, question1);
-  const serviceUrl = serviceList[serviceIndex];
+  const s2sUrlOption = readlineSync.keyInSelect(s2sOptions, s2sQuestion);
+  const s2sUrl = s2sOptions[s2sUrlOption];
 
-  const microserviceNameIndex = readlineSync.keyInSelect(
-    microServiceNameList,
-    question2
+  const microServiceNameOption = readlineSync.keyInSelect(
+    serviceNameOptions,
+    serviceNameQuestion
   );
-  const microserviceName = microServiceNameList[microserviceNameIndex];
+  const microServiceName = serviceNameOptions[microServiceNameOption];
 
-  const secret = readlineSync.question(question3);
+  const secret = readlineSync.question(secretQuestion);
 
   console.log("Thanks for your answers.");
   const answers = {
-    s2sUrl: serviceUrl,
-    microserviceName: microserviceName,
+    s2sUrl: s2sUrl,
+    microServiceName: microServiceName,
     secret: secret,
   };
   console.log(answers);

@@ -62,11 +62,13 @@ async function taskConfigurator() {
 
   const serviceToken = await s2sUtility.requestServiceToken(
     userAnswers.s2sUrl,
-    userAnswers.microserviceName,
+    userAnswers.microServiceName,
     userAnswers.secret
   );
 
   const tasks = await camundaService.getTasks(serviceToken);
+
+  //TODO: ask user question to get camunda url
 
   tasks.forEach((task) => {
     //call task-configuration-api/task/task.id
