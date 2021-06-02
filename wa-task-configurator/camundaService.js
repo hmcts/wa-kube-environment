@@ -24,6 +24,7 @@ const config = (serviceToken, camundaUrl) => {
     headers: {
       ServiceAuthorization: serviceToken,
       "Content-Type": "application/json",
+      "Cache-Control": "no-cache",
     },
     data: data,
   };
@@ -31,14 +32,22 @@ const config = (serviceToken, camundaUrl) => {
 
 const getTasks = async (serviceToken, camundaUrl) => {
   try {
+    console.log("\nRetrieving camunda tasks...".green);
+
     const configRequest = config(serviceToken, camundaUrl);
-    let res = await axios.post(configRequest.url, config(serviceToken));
+    console.log(`\nrequest: ${JSON.stringify(configRequest, null, 4)}`);
+    let res = await axios.post(
+      configRequest.url,
+      configRequest.data,
+      config(serviceToken)
+    );
     console.log("\nRetrieved tasks successfully:\n".green);
     console.log(
       `${JSON.stringify(res.data[0], null, 4)} ..., total tasks: ${
         res.data.length
       }`
     );
+
     return res.data;
   } catch (error) {
     console.log(error);
