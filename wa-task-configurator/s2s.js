@@ -1,4 +1,5 @@
 const axios = require("axios").default;
+const otp = require("otp");
 
 /**
  * Assembles a serviceAuthProvider request object to be used to query the service.
@@ -6,12 +7,13 @@ const axios = require("axios").default;
  *
  */
 function buildRequest(s2sUrl, microServiceName) {
-  const oneTimePassword = '';
+  const oneTimePassword = new otp({ secret: "AAAAAAAAAAAAAAAC" }).totp;
+  console.log(`oneTimePassword: ${oneTimePassword}`);
   return {
     uri: `${s2sUrl}/lease`,
     body: {
       microservice: microServiceName,
-      oneTimePassword: oneTimePassword
+      oneTimePassword: oneTimePassword,
     },
   };
 }
