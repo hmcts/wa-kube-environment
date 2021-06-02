@@ -1,6 +1,9 @@
 const readlineSync = require("readline-sync");
 const debug = require("debug")("debug:questionService");
 const colors = require("colors");
+const config = require("config");
+
+const secret = config.get("secret");
 
 const availableUserOptions = [
   {
@@ -32,11 +35,14 @@ function askUserQuestions() {
     question
   );
 
-  console.log(
-    "\n Enter the secret for the wa-task-configuration-api service in the s2s vault:"
-      .blue
-  );
-  const secret = readlineSync.question("Enter secret: ");
+  if (!secret) {
+    console.log(
+      "\n Enter the secret for the wa-task-configuration-api service in the s2s vault:"
+        .blue
+    );
+
+    const secret = readlineSync.question("Enter secret: ");
+  }
 
   console.log("Thanks for your answers!".green);
   const answers = {
