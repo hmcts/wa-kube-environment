@@ -1,8 +1,9 @@
 const axios = require("axios").default;
 const moment = require("moment");
-const s2sUtility = require("./s2sUtility");
-const questions = require("./questions");
+const s2sUtility = require("./s2sService");
+const questions = require("./questionService");
 const camundaService = require("./camundaService");
+const mainDebugger = require("debug")("debug:main");
 
 async function configureTasks() {
   const createdBefore = moment()
@@ -31,10 +32,10 @@ async function configureTasks() {
   };
 
   const getCamundaTasks = await axios.post(CAMUNDA_URL, taskQuery, headers);
-  console.info(getCamundaTasks.data.length, " tasks unconfigured");
+  mainDebugger(getCamundaTasks.data.length, " tasks unconfigured");
 
   const serviceAuthorization = await requestServiceToken().catch((err) =>
-    console.warn(err)
+    mainDebugger(err)
   );
   getCamundaTasks.data.forEach((task) => {
     //LOOP OVER TASKS
@@ -51,7 +52,7 @@ async function configureTasks() {
     taskQuery,
     headers
   );
-  console.info(
+  mainDebugger(
     getCamundaTasksAfterConfigured.data.length,
     " tasks unconfigured"
   );

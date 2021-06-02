@@ -1,4 +1,5 @@
 const axios = require("axios").default;
+const s2sdebugger = require("debug")("debug:s2sService");
 const OTP = require("otp");
 
 const buildRequest = (s2sUrl, microServiceName, secret) => {
@@ -19,20 +20,20 @@ const buildRequest = (s2sUrl, microServiceName, secret) => {
 };
 
 const requestServiceToken = async (s2sUrl, microServiceName, secret) => {
-  console.info(
+  s2sdebugger(
     `Requesting token... \nservice: ${s2sUrl} \nmicroservice: ${microServiceName}`
   );
 
   const request = buildRequest(s2sUrl, microServiceName, secret);
 
   try {
-    console.info(`request: ${JSON.stringify(request)}`);
+    s2sdebugger(`request: ${JSON.stringify(request)}`);
     let res = await axios.post(request.uri, request.body);
     const result = "Bearer " + res.data;
-    console.info(`result: ${result}`);
+    s2sdebugger(`result: ${result}`);
     return result;
   } catch (err) {
-    console.error(`There are errors: ${JSON.stringify(err)}`);
+    s2sdebugger(`There are errors: ${JSON.stringify(err)}`);
   }
 };
 

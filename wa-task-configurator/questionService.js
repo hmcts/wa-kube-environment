@@ -1,4 +1,5 @@
 const readlineSync = require("readline-sync");
+const questionServiceDebugger = require("debug")("debug:questionService");
 
 const s2sOptions = [
   "http://service-auth-provider-api",
@@ -45,14 +46,14 @@ function askUserQuestions() {
   );
   const camundaUrl = camundaUrlOptions[camundaUrlOption];
 
-  console.log("Thanks for your answers.");
+  questionServiceDebugger("Thanks for your answers.");
   const answers = {
     s2sUrl: s2sUrl,
     microServiceName: microServiceName,
     secret: secret,
     camundaUrl: camundaUrl,
   };
-  console.log(answers);
+  questionServiceDebugger(answers);
 
   return answers;
 }
