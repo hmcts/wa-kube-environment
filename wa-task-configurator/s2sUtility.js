@@ -7,9 +7,9 @@ const moment = require("moment");
  * It also creates a one-time-password from the secret.
  *
  */
-function buildRequest(s2sUrl, microServiceName, secret) {
+const buildRequest = (s2sUrl, microServiceName, secret) => {
   const options = {
-    secret: secret
+    secret: secret,
   };
 
   const otp = new OTP(options);
@@ -20,15 +20,15 @@ function buildRequest(s2sUrl, microServiceName, secret) {
     body: {
       microservice: microServiceName,
       oneTimePassword: oneTimePassword,
-    }
+    },
   };
-}
+};
 
 /**
  * Request token to the serviceAuthProviderApp
  * Note: This token is stored in memory and this token is only valid for 3 hours.
  */
-async function requestServiceToken(s2sUrl, microServiceName, secret) {
+const requestServiceToken = async (s2sUrl, microServiceName, secret) => {
   console.info(
     `Requesting token... \nservice: ${s2sUrl} \nmicroservice: ${microServiceName}`
   );
@@ -38,11 +38,12 @@ async function requestServiceToken(s2sUrl, microServiceName, secret) {
   try {
     console.info(`request: ${JSON.stringify(request)}`);
     let res = await axios.post(request.uri, request.body);
-    console.info(`result: Bearer ${res.data}`);
-    return res.data;
+    const result = "Bearer " + res.data;
+    console.info(`result: ${result}`);
+    return result;
   } catch (err) {
     console.error(`There are errors: ${JSON.stringify(err)}`);
   }
-}
+};
 
 module.exports.requestServiceToken = requestServiceToken;

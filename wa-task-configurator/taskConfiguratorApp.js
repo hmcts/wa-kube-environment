@@ -1,13 +1,8 @@
-/** First Argument is CamundaURL second is Task-Config URL
- *  Second Argument is the task configuratoin URL
- *  Third Argument microserviceName
- *  Fourth Argument s2sUrl
- *  Fith Argument s2s Secret
- */
 const axios = require("axios").default;
 const moment = require("moment");
 const s2sUtility = require("./s2sUtility");
 const questions = require("./questions");
+const david = require("./david");
 
 async function configureTasks() {
   const createdBefore = moment()
@@ -63,4 +58,18 @@ async function configureTasks() {
 }
 
 const answers = questions.askUserQuestions();
-s2sUtility.requestServiceToken(answers[0], answers[1], answers[2]);
+
+// s2sUtility.requestServiceToken(answers[0], answers[1], answers[2]);
+
+async function asyncCall() {
+  console.log("calling");
+  const token = await s2sUtility.requestServiceToken(
+    answers[0],
+    answers[1],
+    answers[2]
+  );
+  console.log(token);
+  // expected output: "resolved"
+}
+
+asyncCall();
