@@ -51,6 +51,8 @@ app:
         value: http://ccd-elasticsearch
       - key: "CCD_DM_DOMAIN"
         value: http://dm-store
+      - key: "CCD_DOCUMENT_URL_PATTERN"
+        value: https?://((dm-store:8080/documents/[A-Za-z0-9-]+(?:/binary)?)|(dm-store/documents/[A-Za-z0-9-]+(?:/binary)?))
     readinessProbe:
       enabled: true
       httpGet:

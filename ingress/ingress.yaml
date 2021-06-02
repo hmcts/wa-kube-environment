@@ -204,3 +204,13 @@ spec:
                 name: ccd-message-publisher
                 port:
                   number: 80
+    - host: dm-store
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dm-store
+                port:
+                  number: 80

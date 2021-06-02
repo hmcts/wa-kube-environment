@@ -17,10 +17,12 @@ SERVICE_TOKEN="$(sh ./actions/idam-service-token.sh)"
 ./actions/register-role.sh "caseworker-ia-respondentofficer" "$USER_TOKEN" "$SERVICE_TOKEN"
 ./actions/register-role.sh "caseworker-ia-iacjudge" "$USER_TOKEN" "$SERVICE_TOKEN"
 ./actions/register-role.sh "caseworker-wa-task-configuration" "$USER_TOKEN" "$SERVICE_TOKEN"
+./actions/register-role.sh "caseworker-ia-srcaseofficer" "$USER_TOKEN" "$SERVICE_TOKEN"
 
 ./actions/register-role.sh "caseworker-ras-validation" "$USER_TOKEN" "$SERVICE_TOKEN"
 ./actions/register-role.sh "caseworker-caa" "$USER_TOKEN" "$SERVICE_TOKEN"
 ./actions/register-role.sh "caseworker-approver" "$USER_TOKEN" "$SERVICE_TOKEN"
+./actions/register-role.sh "caseworker-ia-system-access" "$USER_TOKEN" "$SERVICE_TOKEN"
 
 ./actions/register-role.sh "citizen" "$USER_TOKEN" "$SERVICE_TOKEN"
 

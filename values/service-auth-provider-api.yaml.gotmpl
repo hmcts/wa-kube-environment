@@ -45,6 +45,8 @@ app:
         value: {{ requiredEnv "IDAM_KEY_EM_CCD_ORCHESTRATOR" }}
       - key: "MICROSERVICE_KEYS_EM_GW"
         value: {{ requiredEnv "IDAM_KEY_DM_STORE" }}
+      - key: "MICROSERVICE_KEYS_DM_GW"
+        value: {{ requiredEnv "IDAM_KEY_DM_STORE" }}
     readinessProbe:
       enabled: true
       httpGet:

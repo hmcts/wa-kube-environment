@@ -287,7 +287,7 @@ curl -X POST \
               }
             },
             "bodyPatterns" : [{
-              "equalToJson" : { "userIds": ["${json-unit.any-string}"]}
+              "contains" : "userIds"
             }]
           },
           "response": {
