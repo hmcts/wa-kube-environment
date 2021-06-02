@@ -6,10 +6,12 @@ const axios = require("axios").default;
  *
  */
 function buildRequest(s2sUrl, microServiceName) {
+  const oneTimePassword = '';
   return {
     uri: `${s2sUrl}/lease`,
     body: {
       microservice: microServiceName,
+      oneTimePassword: oneTimePassword
     },
   };
 }
@@ -20,15 +22,15 @@ function buildRequest(s2sUrl, microServiceName) {
  */
 async function requestServiceToken(s2sUrl, microServiceName) {
   console.info(
-    `Requesting token to the service-auth-provider-app(${s2sUrl}) for microservice(${microServiceName})`
+    `Requesting token... \nservice: ${s2sUrl} \nmicroservice: ${microServiceName}`
   );
 
   const request = buildRequest(s2sUrl, microServiceName);
 
   try {
-    console.info(`making s2s request(${request})...`);
+    console.info(`request: ${JSON.stringify(request)}`);
     let res = await axios.post(request.uri, request.body);
-    console.info(`s2s token requested successfully: ${res.data}`);
+    console.info(`result: Bearer ${res.data}`);
     return res.data;
   } catch (err) {
     console.error(`There are errors: ${JSON.stringify(err)}`);

@@ -7,12 +7,14 @@
 const axios = require("axios").default;
 const moment = require("moment");
 const s2sUtility = require("./s2s");
-const args = process.argv;
+const questions = require("./questions");
+
+// const args = process.argv;
 
 // const CAMUNDA_URL = args[2]
 // const WA_TASK_CONFIGURATION_URL = args[3]
-const microServiceName = args[3];
-const s2sUrl = args[2];
+// const microServiceName = args[3];
+// const s2sUrl = args[2];
 
 async function configureTasks() {
   const createdBefore = moment()
@@ -67,11 +69,5 @@ async function configureTasks() {
   );
 }
 
-async function requestS2sToken(s2sUrl, microServiceName) {
-  const token = await s2sUtility.requestServiceToken(s2sUrl, microServiceName);
-  console.info(`token: ${token}`);
-}
-
-console.log("Start...");
-s2sUtility.requestServiceToken(s2sUrl, microServiceName);
-console.log("End");
+const answers = questions.askUserQuestions();
+s2sUtility.requestServiceToken(answers[0], answers[1]);
