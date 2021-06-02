@@ -1,6 +1,5 @@
 const axios = require("axios").default;
 const OTP = require("otp");
-const moment = require("moment");
 
 /**
  * Assembles a serviceAuthProvider request object to be used to query the service.

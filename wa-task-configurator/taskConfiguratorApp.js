@@ -2,7 +2,7 @@ const axios = require("axios").default;
 const moment = require("moment");
 const s2sUtility = require("./s2sUtility");
 const questions = require("./questions");
-const david = require("./david");
+const camundaService = require("./camundaService");
 
 async function configureTasks() {
   const createdBefore = moment()
@@ -57,19 +57,20 @@ async function configureTasks() {
   );
 }
 
-const answers = questions.askUserQuestions();
+async function taskConfigurator() {
+  const userAnswers = questions.askUserQuestions();
 
-// s2sUtility.requestServiceToken(answers[0], answers[1], answers[2]);
-
-async function asyncCall() {
-  console.log("calling");
-  const token = await s2sUtility.requestServiceToken(
-    answers[0],
-    answers[1],
-    answers[2]
+  const serviceToken = await s2sUtility.requestServiceToken(
+    userAnswers.service,
+    userAnswers.microserviceName,
+    userAnswers.secret
   );
-  console.log(token);
-  // expected output: "resolved"
+
+  const tasks = await camundaService.getTasks(serviceToken);
+
+  tasks.forEach((task) => {
+    if (task.id == "01fd7b95-b99f-11eb-8455-cead2af9477c") console.log(task);
+  });
 }
 
-asyncCall();
+taskConfigurator();

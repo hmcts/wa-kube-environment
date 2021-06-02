@@ -6,14 +6,15 @@ const aatService =
 const serviceList = [localService, aatService];
 const question1 = "Enter service url: ";
 
-const microserviceNameList = ["wa_task_configuration_api", "wa_task_management_api"];
+const microserviceNameList = [
+  "wa_task_configuration_api",
+  "wa_task_management_api",
+];
 const question2 = "Enter microservice name: ";
 
-const question3 = "Enter microservice secret: "
+const question3 = "Enter microservice secret: ";
 
 const questions = [question1, question2, question3];
-
-const answers = [];
 
 function askUserQuestions() {
   const serviceIndex = readlineSync.keyInSelect(serviceList, question1);
@@ -27,9 +28,12 @@ function askUserQuestions() {
 
   const secret = readlineSync.question(question3);
 
-  answers.push(serviceUrl, microserviceName, secret);
-
   console.log("Thanks for your answers.");
+  const answers = {
+    service: serviceUrl,
+    microserviceName: microserviceName,
+    secret: secret,
+  };
   console.log(answers);
 
   return answers;
