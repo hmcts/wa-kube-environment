@@ -16,10 +16,10 @@ const data = JSON.stringify({
   processDefinitionKey: "wa-task-initiation-ia-asylum",
 });
 
-const config = (serviceToken) => {
+const config = (serviceToken, camundaUrl) => {
   return {
     method: "post",
-    url: "http://camunda-api-aat.service.core-compute-aat.internal/engine-rest/task",
+    url: `${camundaUrl}/task`,
     headers: {
       ServiceAuthorization: serviceToken,
       "Content-Type": "application/json",
@@ -28,9 +28,9 @@ const config = (serviceToken) => {
   };
 };
 
-const getTasks = async (serviceToken) => {
+const getTasks = async (serviceToken, camundaUrl) => {
   try {
-    const configRequest = config(serviceToken);
+    const configRequest = config(serviceToken, camundaUrl);
     let res = await axios.post(configRequest.url, config(serviceToken));
     console.log(JSON.stringify(res.data, null, 4));
     return res.data;

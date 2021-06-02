@@ -66,7 +66,7 @@ async function taskConfigurator() {
     userAnswers.secret
   );
 
-  const tasks = await camundaService.getTasks(serviceToken);
+  const tasks = await camundaService.getTasks(serviceToken, userAnswers.camundaUrl);
 
   //TODO: ask user question to get camunda url
 

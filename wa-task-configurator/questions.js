@@ -39,11 +39,18 @@ function askUserQuestions() {
 
   const secret = readlineSync.question(secretQuestion);
 
+  const camundaUrlOption = readlineSync.keyInSelect(
+    camundaUrlOptions,
+    camundaUrlQuestion
+  );
+  const camundaUrl = camundaUrlOptions[camundaUrlOption];
+
   console.log("Thanks for your answers.");
   const answers = {
     s2sUrl: s2sUrl,
     microServiceName: microServiceName,
     secret: secret,
+    camundaUrl: camundaUrl,
   };
   console.log(answers);
 
