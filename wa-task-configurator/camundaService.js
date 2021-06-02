@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const camundaDebugger = require("debug")("debug:camundaService");
+const debug = require("debug")("debug:camundaService");
 
 const data = JSON.stringify({
   orQueries: [
@@ -33,16 +33,15 @@ const getTasks = async (serviceToken, camundaUrl) => {
   try {
     const configRequest = config(serviceToken, camundaUrl);
     let res = await axios.post(configRequest.url, config(serviceToken));
-    camundaDebugger(
-      `retrieved tasks successfully: ${JSON.stringify(
-        res.data[0],
-        null,
-        4
-      )} ..., total tasks: ${res.data.length}`
+    console.log("\nRetrieved tasks successfully:\n".green);
+    console.log(
+      `${JSON.stringify(res.data[0], null, 4)} ..., total tasks: ${
+        res.data.length
+      }`
     );
     return res.data;
   } catch (error) {
-    camundaDebugger(error);
+    console.log(error);
   }
 };
 
