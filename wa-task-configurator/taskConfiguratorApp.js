@@ -61,7 +61,7 @@ async function taskConfigurator() {
   const userAnswers = questions.askUserQuestions();
 
   const serviceToken = await s2sUtility.requestServiceToken(
-    userAnswers.service,
+    userAnswers.s2sUrl,
     userAnswers.microserviceName,
     userAnswers.secret
   );
@@ -69,7 +69,7 @@ async function taskConfigurator() {
   const tasks = await camundaService.getTasks(serviceToken);
 
   tasks.forEach((task) => {
-    if (task.id == "01fd7b95-b99f-11eb-8455-cead2af9477c") console.log(task);
+    //call task-configuration-api/task/task.id
   });
 }
 

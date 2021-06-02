@@ -4,9 +4,9 @@ const localService = "http://service-auth-provider-api";
 const aatService =
   "http://rpe-service-auth-provider-aat.service.core-compute-aat.internal";
 const serviceList = [localService, aatService];
-const question1 = "Enter service url: ";
+const question1 = "Enter s2s url: ";
 
-const microserviceNameList = [
+const microServiceNameList = [
   "wa_task_configuration_api",
   "wa_task_management_api",
 ];
@@ -21,16 +21,16 @@ function askUserQuestions() {
   const serviceUrl = serviceList[serviceIndex];
 
   const microserviceNameIndex = readlineSync.keyInSelect(
-    microserviceNameList,
+    microServiceNameList,
     question2
   );
-  const microserviceName = microserviceNameList[microserviceNameIndex];
+  const microserviceName = microServiceNameList[microserviceNameIndex];
 
   const secret = readlineSync.question(question3);
 
   console.log("Thanks for your answers.");
   const answers = {
-    service: serviceUrl,
+    s2sUrl: serviceUrl,
     microserviceName: microserviceName,
     secret: secret,
   };
