@@ -9,7 +9,9 @@ const question1 = "Enter service url: ";
 const microserviceNameList = ["wa_task_configuration_api", "wa_task_management_api"];
 const question2 = "Enter microservice name: ";
 
-const questions = [question1, question2];
+const question3 = "Enter microservice secret: "
+
+const questions = [question1, question2, question3];
 
 const answers = [];
 
@@ -23,7 +25,9 @@ function askUserQuestions() {
   );
   const microserviceName = microserviceNameList[microserviceNameIndex];
 
-  answers.push(serviceUrl, microserviceName);
+  const secret = readlineSync.question(question3);
+
+  answers.push(serviceUrl, microserviceName, secret);
 
   console.log("Thanks for your answers.");
   console.log(answers);
