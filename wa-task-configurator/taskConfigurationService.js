@@ -17,7 +17,8 @@ const config = (serviceToken, taskConfigurationApiUrl, taskId) => {
 const reconfigureTask = async (
   serviceToken,
   taskConfigurationApiUrl,
-  taskId
+  taskId,
+  stats
 ) => {
   console.log("\nReconfiguring camunda task...".green);
   const configRequest = config(serviceToken, taskConfigurationApiUrl, taskId);
@@ -29,14 +30,20 @@ const reconfigureTask = async (
       configRequest.data,
       config(serviceToken)
     );
+    stats.numFixedTasks++;
     console.log(
       `\nTask[taskId=${taskId}] was reconfigured successfully:`.green
     );
     console.log(`result: ${JSON.stringify(res.data, null, 4)}`);
   } catch (error) {
-    console.error(`\nTask[taskId=${taskId}] failed to be reconfigured:\n`.green);
+    stats.numFailedTasks++;
+    console.error(
+      `\nTask[taskId=${taskId}] failed to be reconfigured:\n`.green
+    );
     debug(error);
   }
+  
+  return stats;
 };
 
 module.exports = {

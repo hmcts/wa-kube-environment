@@ -7,7 +7,26 @@ const mainDebugger = require("debug")("debug:main");
 const colors = require("colors");
 const taskConfigurationService = require("./taskConfigurationService");
 
-async function taskConfigurator() {
+const configureTasksAndShowStats = (tasks, serviceToken, userAnswers) => {
+  let partialStats = {
+    numFixedTasks: 0,
+    numFailedTasks: 0,
+    totalTasks: 0,
+  };
+  tasks.forEach(async (task) => {
+    const stats = await taskConfigurationService.reconfigureTask(
+      serviceToken,
+      userAnswers.taskConfigurationUrl,
+      task.id,
+      partialStats
+    );
+    partialStats.totalTasks =
+      partialStats.numFailedTasks + partialStats.numFixedTasks;
+    console.log(`stats: ${JSON.stringify(stats)}`);
+  });
+};
+
+const taskConfigurator = async () => {
   const userAnswers = questions.askUserQuestions();
 
   const serviceToken = await s2sUtility.requestServiceToken(
@@ -21,14 +40,7 @@ async function taskConfigurator() {
     userAnswers.camundaUrl
   );
 
-  tasks.forEach((task) => {
-    taskConfigurationService.reconfigureTask(
-      serviceToken,
-      userAnswers.taskConfigurationUrl,
-      task.id
-    );
-  });
-
-}
+  configureTasksAndShowStats(tasks, serviceToken, userAnswers);
+};
 
 taskConfigurator();
