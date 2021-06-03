@@ -7,25 +7,6 @@ const colors = require("colors");
 const taskConfigurationService = require("./taskConfigurationService");
 const bannerService = require("./bannerService");
 
-const configureTasksAndShowStats = (tasks, serviceToken, userAnswers) => {
-  let partialStats = {
-    numFixedTasks: 0,
-    numFailedTasks: 0,
-    totalTasks: 0,
-  };
-  tasks.forEach(async (task) => {
-    const stats = await taskConfigurationService.reconfigureTask(
-      serviceToken,
-      userAnswers.taskConfigurationUrl,
-      task.id,
-      partialStats
-    );
-    partialStats.totalTasks =
-      partialStats.numFailedTasks + partialStats.numFixedTasks;
-    console.log(`stats: ${JSON.stringify(stats)}`);
-  });
-};
-
 const taskConfigurator = async () => {
   await bannerService.banner();
 
@@ -45,7 +26,11 @@ const taskConfigurator = async () => {
   const continueResult = await questionService.doYouWantToContinue();
 
   if (continueResult)
-    configureTasksAndShowStats(tasks, serviceToken, userAnswers);
+    taskConfigurationService.configureTasksAndShowStats(
+      tasks,
+      serviceToken,
+      userAnswers
+    );
 };
 
 taskConfigurator();

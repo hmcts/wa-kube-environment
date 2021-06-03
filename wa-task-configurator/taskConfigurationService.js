@@ -42,10 +42,29 @@ const reconfigureTask = async (
     );
     debug(error);
   }
-  
+
   return stats;
 };
 
+const configureTasksAndShowStats = (tasks, serviceToken, userAnswers) => {
+  let partialStats = {
+    numFixedTasks: 0,
+    numFailedTasks: 0,
+    totalTasks: 0,
+  };
+  tasks.forEach(async (task) => {
+    const stats = await reconfigureTask(
+      serviceToken,
+      userAnswers.taskConfigurationUrl,
+      task.id,
+      partialStats
+    );
+    partialStats.totalTasks =
+      partialStats.numFailedTasks + partialStats.numFixedTasks;
+    console.log(`stats: ${JSON.stringify(stats)}`);
+  });
+};
+
 module.exports = {
-  reconfigureTask,
+  configureTasksAndShowStats,
 };
