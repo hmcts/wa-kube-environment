@@ -31,7 +31,7 @@ const askUserQuestions = () => {
 
   const question = "Choose an option:";
 
-  console.log("Choose the environment:".blue);
+  console.log("Choose the environment:".brightBlue);
   const envOptions = availableUserOptions.map((o) => o.env);
   const selectedUserOption = readlineSync.keyInSelect(
     availableUserOptions.map((o) => o.env),
@@ -63,7 +63,7 @@ const askUserQuestions = () => {
 
 const doYouWantToContinue = async () => {
   return readlineSync.keyInYN(
-    `Would you like to continue and configure the tasks?`.green
+    `\nWould you like to continue and configure the tasks?`.green
   );
 };
 
