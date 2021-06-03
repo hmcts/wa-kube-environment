@@ -31,7 +31,7 @@ const config = (serviceToken, camundaUrl) => {
 };
 
 const getTasks = async (serviceToken, camundaUrl) => {
-  console.log("\nRetrieving camunda tasks...".green);
+  console.log("\nRetrieving unconfigured tasks...".green);
   const configRequest = config(serviceToken, camundaUrl);
   console.log(`\nrequest: ${JSON.stringify(configRequest, null, 4)}`);
 
@@ -41,11 +41,11 @@ const getTasks = async (serviceToken, camundaUrl) => {
       configRequest.data,
       config(serviceToken)
     );
-    console.log("\nRetrieved tasks successfully:\n".green);
+    console.log("\nRetrieved unconfigured tasks successfully:\n".green);
     console.log(
-      `${JSON.stringify(res.data[0], null, 4)} ..., total tasks: ${
+      `${JSON.stringify(res.data[0], null, 4)} ..., Found ${
         res.data.length
-      }`
+      } unconfigured tasks:`
     );
 
     return res.data;

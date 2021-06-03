@@ -1,7 +1,7 @@
 const axios = require("axios").default;
 const moment = require("moment");
 const s2sUtility = require("./s2sService");
-const questions = require("./questionService");
+const questionService = require("./questionService");
 const camundaService = require("./camundaService");
 const mainDebugger = require("debug")("debug:main");
 const colors = require("colors");
@@ -27,7 +27,7 @@ const configureTasksAndShowStats = (tasks, serviceToken, userAnswers) => {
 };
 
 const taskConfigurator = async () => {
-  const userAnswers = questions.askUserQuestions();
+  const userAnswers = questionService.askUserQuestions();
 
   const serviceToken = await s2sUtility.requestServiceToken(
     userAnswers.s2sUrl,
@@ -40,7 +40,10 @@ const taskConfigurator = async () => {
     userAnswers.camundaUrl
   );
 
-  configureTasksAndShowStats(tasks, serviceToken, userAnswers);
+  const continueResult = await questionService.doYouWantToContinue();
+
+  if (continueResult)
+    configureTasksAndShowStats(tasks, serviceToken, userAnswers);
 };
 
 taskConfigurator();

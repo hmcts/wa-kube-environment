@@ -23,7 +23,7 @@ const availableUserOptions = [
   },
 ];
 
-function askUserQuestions() {
+const askUserQuestions = () => {
   console.log(
     "\n\nBefore starting, we ask you a few questions. It will be easy, I promise ;D ...\n\n"
       .brightGreen
@@ -59,8 +59,15 @@ function askUserQuestions() {
   console.log(`${JSON.stringify(answers, null, 4)}`);
 
   return answers;
-}
+};
+
+const doYouWantToContinue = async () => {
+  return readlineSync.keyInYN(
+    `Would you like to continue and configure the tasks?`.green
+  );
+};
 
 module.exports = {
   askUserQuestions,
+  doYouWantToContinue,
 };
