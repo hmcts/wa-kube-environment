@@ -50,7 +50,7 @@ const getTasks = async (serviceToken, camundaUrl) => {
 
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

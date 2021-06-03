@@ -34,7 +34,7 @@ const reconfigureTask = async (
     );
     console.log(`result: ${JSON.stringify(res.data, null, 4)}`);
   } catch (error) {
-    console.log(`\nTask[taskId=${taskId}] failed to be reconfigured:\n`.green);
+    console.error(`\nTask[taskId=${taskId}] failed to be reconfigured:\n`.green);
     debug(error);
   }
 };
