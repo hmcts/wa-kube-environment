@@ -1,16 +1,23 @@
 # To run the task configurator app:
 
-1. Run yarn on your terminal:
+1. Add the following `MICROSERVICEKEY_WA_TASK_CONFIGURATION_API` environment variable and the value from the s2s vault. Finally, source your profile to apply changes:
+
+```shell
+source ~/.zshrc
+```
+
+2. Run yarn inside the wa-task-configurator folder:
 
 ```shell
 yarn
 ```
 
-2. Run the app, on your terminal:
+3. Run the app, on your terminal:
 
 ```shell
-DEBUG=debug:* NODE_ENV=aat node main.js
+DEBUG=debug:* node main.js
 ```
 
-NODE_ENV values can be `aat` or empty i.e: `NODE_ENV=`. The latter sets the `default` config. DEBUG can target different
-services for debugging purpose: `DEBUG=debug:camundaService`
+## Some notes
+
+The DEBUG env var can target different services for debugging purpose: `DEBUG=debug:camundaService`.
