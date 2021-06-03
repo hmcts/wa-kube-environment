@@ -1,5 +1,4 @@
 const axios = require("axios").default;
-const moment = require("moment");
 const s2sUtility = require("./s2sService");
 const questionService = require("./questionService");
 const camundaService = require("./camundaService");

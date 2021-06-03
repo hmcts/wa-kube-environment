@@ -1,6 +1,11 @@
 const axios = require("axios").default;
 const debug = require("debug")("debug:camundaService");
 const colors = require("colors");
+const moment = require("moment");
+
+const createdBefore = moment()
+  .subtract(2, "minute")
+  .format("yyyy-MM-DDTHH:mm:ss.SSS+0000");
 
 const data = JSON.stringify({
   orQueries: [
@@ -14,6 +19,7 @@ const data = JSON.stringify({
       ],
     },
   ],
+  createdBefore: `${createdBefore}`,
   taskDefinitionKey: "processTask",
   processDefinitionKey: "wa-task-initiation-ia-asylum",
 });
