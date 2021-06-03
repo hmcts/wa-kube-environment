@@ -5,7 +5,7 @@ const camundaService = require("./camundaService");
 const mainDebugger = require("debug")("debug:main");
 const colors = require("colors");
 const taskConfigurationService = require("./taskConfigurationService");
-const art = require("ascii-art");
+const bannerService = require("./bannerService");
 
 const configureTasksAndShowStats = (tasks, serviceToken, userAnswers) => {
   let partialStats = {
@@ -26,20 +26,8 @@ const configureTasksAndShowStats = (tasks, serviceToken, userAnswers) => {
   });
 };
 
-const banner = async () => {
-  try {
-    const banner = await art
-      .font("WA  Task   configurator", "doom")
-      .completed();
-    const bannerWithStyle = await art.style(banner, "blink", true);
-    console.log(bannerWithStyle);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 const taskConfigurator = async () => {
-  await banner();
+  await bannerService.banner();
 
   const userAnswers = questionService.askUserQuestions();
 
