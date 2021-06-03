@@ -1,6 +1,7 @@
 const axios = require("axios").default;
 const debug = require("debug")("debug:s2sService");
 const OTP = require("otp");
+const colors = require("colors");
 
 const buildRequest = (s2sUrl, microServiceName, secret) => {
   const options = {

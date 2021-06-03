@@ -1,5 +1,6 @@
 const axios = require("axios").default;
 const debug = require("debug")("debug:camundaService");
+const colors = require("colors");
 
 const data = JSON.stringify({
   orQueries: [
@@ -24,18 +25,17 @@ const config = (serviceToken, camundaUrl) => {
     headers: {
       ServiceAuthorization: serviceToken,
       "Content-Type": "application/json",
-      "Cache-Control": "no-cache",
     },
     data: data,
   };
 };
 
 const getTasks = async (serviceToken, camundaUrl) => {
-  try {
-    console.log("\nRetrieving camunda tasks...".green);
+  console.log("\nRetrieving camunda tasks...".green);
+  const configRequest = config(serviceToken, camundaUrl);
+  console.log(`\nrequest: ${JSON.stringify(configRequest, null, 4)}`);
 
-    const configRequest = config(serviceToken, camundaUrl);
-    console.log(`\nrequest: ${JSON.stringify(configRequest, null, 4)}`);
+  try {
     let res = await axios.post(
       configRequest.url,
       configRequest.data,
