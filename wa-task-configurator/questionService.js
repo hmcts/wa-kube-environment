@@ -10,6 +10,7 @@ const availableUserOptions = [
     env: "local",
     s2sUrl: "http://service-auth-provider-api",
     camundaUrl: "http://camunda-local-bpm/engine-rest",
+    taskConfigurationUrl: "http://localhost:8091",
   },
   {
     env: "AAT",
@@ -17,6 +18,8 @@ const availableUserOptions = [
       "http://rpe-service-auth-provider-aat.service.core-compute-aat.internal",
     camundaUrl:
       "http://camunda-api-aat.service.core-compute-aat.internal/engine-rest",
+    taskConfigurationUrl:
+      "http://wa-task-configuration-api-aat.service.core-compute-aat.internal",
   },
 ];
 
@@ -50,6 +53,8 @@ function askUserQuestions() {
     microServiceName: "wa_task_configuration_api",
     secret: secret,
     camundaUrl: availableUserOptions[selectedUserOption].camundaUrl,
+    taskConfigurationUrl:
+      availableUserOptions[selectedUserOption].taskConfigurationUrl,
   };
   console.log(`${JSON.stringify(answers, null, 4)}`);
 

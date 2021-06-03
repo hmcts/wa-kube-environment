@@ -5,6 +5,7 @@ const questions = require("./questionService");
 const camundaService = require("./camundaService");
 const mainDebugger = require("debug")("debug:main");
 const colors = require("colors");
+const taskConfigurationService = require("./taskConfigurationService");
 
 async function taskConfigurator() {
   const userAnswers = questions.askUserQuestions();
@@ -21,8 +22,13 @@ async function taskConfigurator() {
   );
 
   tasks.forEach((task) => {
-    //call task-configuration-api/task/task.id
+    taskConfigurationService.reconfigureTask(
+      serviceToken,
+      userAnswers.taskConfigurationUrl,
+      task.id
+    );
   });
+
 }
 
 taskConfigurator();
