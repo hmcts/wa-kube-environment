@@ -6,3 +6,7 @@
 .idea/
 .vscode/
 *.iml
+node_modules/
+
+# nodejs
+yarn.lock
