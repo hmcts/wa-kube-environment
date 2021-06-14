@@ -52,13 +52,19 @@ app:
       - key: "IDAM_SECRET"
         value: {{ requiredEnv "OAUTH2_CLIENT_CCD_GATEWAY" }}
       - key: "LAUNCH_DARKLY_CLIENT_ID"
-        value: AAAAAAAAAAAAAAAC
+        value: 5de6610b23ce5408280f2268
       - key: "JURISDICTIONS"
         value: IA
       - key: "SYSTEM_USER_NAME"
         value: "dummy"
       - key: "SYSTEM_USER_PASSWORD"
         value: "dummy"
+      - key: "SERVICES_ROLE_ASSIGNMENT_API"
+        value: {{ requiredEnv "ROLE_ASSIGNMENT_URL" }}
+      - key: "SERVICES_WORK_ALLOCATION_TASK_API"
+        value: {{ requiredEnv "TASK_MANAGEMENT_API_URL" }}
+      - key: "FEATURE_WORKALLOCATION_ENABLED"
+        value: false
 
     readinessProbe:
       enabled: true
