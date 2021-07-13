@@ -12,6 +12,36 @@ share_case_b_code="$(sh ./actions/idam-user-token.sh "${TEST_LAW_FIRM_SHARE_CASE
 share_case_b_id="$(curl --silent --show-error -X GET "${IDAM_URL}/details" -H "accept: application/json" -H "authorization: Bearer ${share_case_b_code}" | jq -r .id)"
 
 curl -X POST \
+--data '{
+          "request": {
+            "method": "GET",
+            "urlPath": "/refdata/external/v1/organisations"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "jsonBody":  {
+              "contactInformation": [
+                {
+                  "addressLine1": "45 Lunar House",
+                  "addressLine2": "Spa Road",
+                  "addressLine3": "Woolworth",
+                  "county": "London",
+                  "townCity": "London",
+                  "country": "UK",
+                  "postCode": "SE1 3HP"
+                }
+              ],
+              "organisationIdentifier": "D1HRWLA",
+              "name": "Fake Org Ltd"
+          }
+        }
+      }' \
+${WIREMOCK_URL}/__admin/mappings/new
+
+curl -X POST \
   --data '{
           "request": {
             "method": "GET",
