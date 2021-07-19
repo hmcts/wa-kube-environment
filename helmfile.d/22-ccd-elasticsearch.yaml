@@ -1,0 +1,6 @@
+releases:
+
+  - name: ccd-logstash
+    chart: ./../charts/app
+    values:
+      - ./../values/ccd-elasticsearch.yaml.gotmpl

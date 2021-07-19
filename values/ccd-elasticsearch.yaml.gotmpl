@@ -1,0 +1,21 @@
+app:
+  name: ccd-elasticsearch
+  group: backend
+  container:
+    image: docker.elastic.co/elasticsearch/elasticsearch
+    tag: 6.4.2
+    ports:
+      - containerPort: 4605
+        servicePort: 80
+        name: http
+    env:
+      - key: "cluster.name"
+        value: ccd-docker-es-cluster
+      - key: "discovery.type"
+        value: single-node
+      - key: "bootstrap.memory_lock"
+        value: true
+      - key: "action.auto_create_index"
+        value: .security*,.watches,.triggered_watches,.watcher-history-*,.logstash_dead_letter,.ml*
+      - key: "ES_JAVA_OPTS"
+        value: -Xms512m -Xmx512m

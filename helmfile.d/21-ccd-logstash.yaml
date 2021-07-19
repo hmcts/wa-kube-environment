@@ -1,0 +1,7 @@
+releases:
+
+  - name: ccd-logstash
+    chart: ./../charts/app
+    values:
+      - ./../values/ccd-logstash.yaml.gotmpl
+    wait: true
