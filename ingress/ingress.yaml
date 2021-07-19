@@ -214,3 +214,23 @@ spec:
                 name: dm-store
                 port:
                   number: 80
+    - host: ccd-logstash
+        http:
+          paths:
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: ccd-logstash
+                    port:
+                      number: 80
+    - host: ccd-elasticsearch
+        http:
+          paths:
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: ccd-elasticsearch
+                    port:
+                      number: 80
