@@ -11,6 +11,54 @@ share_case_a_id="$(curl --silent --show-error -X GET "${IDAM_URL}/details" -H "a
 share_case_b_code="$(sh ./actions/idam-user-token.sh "${TEST_LAW_FIRM_SHARE_CASE_B_USERNAME}" "${TEST_LAW_FIRM_SHARE_CASE_B_PASSWORD}")"
 share_case_b_id="$(curl --silent --show-error -X GET "${IDAM_URL}/details" -H "accept: application/json" -H "authorization: Bearer ${share_case_b_code}" | jq -r .id)"
 
+
+# ccd-elasticsearch as part of the RWA-645
+curl -X POST \
+  --data '{
+    "request": {
+        "method": "POST",
+        "url": "/searchCases?ctid=Asylum",
+        "headers": {
+              "Content-Type": {
+                "equalTo": "application/json"
+              },
+              "Authorization": {
+                "contains": "Bearer"
+              },
+              "ServiceAuthorization": {
+                "contains": "Bearer"
+              }
+        },
+        "bodyPatterns" : [ {
+                "equalToJson" : "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                {\r\n                    \"match\": {\r\n                        \"state\": \"caseUnderReview\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filter\": [\r\n                {\r\n                    \"range\": {\r\n                        \"last_state_modified_date\": {\r\n                            \"lte\": \"2021-07-12\",\r\n                            \"gte\": \"2021-05-13\"\r\n                        }\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"size\": 1\r\n}"
+        } ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+                    "total": 5,
+                    "cases": [
+                      {
+                        "id": 1619996688685650,
+                        "jurisdiction": "IA",
+                        "state": "caseUnderReview"
+                      }
+                    ],
+                    "case_types_results": [
+                      {
+                        "total": 5,
+                        "case_type_id": "Asylum"
+                      }
+                    ]
+                  }
+    }
+}' \
+  ${WIREMOCK_URL}/__admin/mappings/new
+
+
 curl -X POST \
 --data '{
           "request": {
