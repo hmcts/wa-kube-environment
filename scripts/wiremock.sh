@@ -30,7 +30,7 @@ curl -X POST \
               }
         },
         "bodyPatterns" : [ {
-                "equalToJson" : "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                {\r\n                    \"match\": {\r\n                        \"state\": \"caseUnderReview\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filter\": [\r\n                {\r\n                    \"range\": {\r\n                        \"last_state_modified_date\": {\r\n                            \"lte\": \"2021-07-12\",\r\n                            \"gte\": \"2021-05-13\"\r\n                        }\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}"
+                "equalToJson" : "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                {\r\n                    \"match\": {\r\n                        \"state\": \"caseUnderReview\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filter\": [\r\n                {\r\n                    \"range\": {\r\n                        \"last_state_modified_date\": {\r\n                            \"lte\": \"2021-07-12\",\r\n                            \"gte\": \"2021-05-13\"\r\n                        }\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"size\": 276\r\n}"
         } ]
     },
     "response": {
