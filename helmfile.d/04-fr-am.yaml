@@ -1,7 +1,0 @@
-#releases:
-#
-#  - name: fr-am
-#    chart: ./../charts/app
-#    values:
-#      - ./../values/fr-am.yaml.gotmpl
-#    wait: true

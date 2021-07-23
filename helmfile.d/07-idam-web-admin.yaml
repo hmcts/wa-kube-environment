@@ -1,7 +1,0 @@
-releases:
-
-  - name: idam-web-admin
-    chart: ./../charts/app
-    values:
-      - ./../values/idam-web-admin.yaml.gotmpl
-    wait: true
