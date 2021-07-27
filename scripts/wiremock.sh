@@ -12,6 +12,53 @@ share_case_b_code="$(sh ./actions/idam-user-token.sh "${TEST_LAW_FIRM_SHARE_CASE
 share_case_b_id="$(curl --silent --show-error -X GET "${IDAM_URL}/details" -H "accept: application/json" -H "authorization: Bearer ${share_case_b_code}" | jq -r .id)"
 
 
+
+# ccd-elasticsearch as part of the RWA-662
+curl -X POST \
+  --data '{
+    "request": {
+        "method": "POST",
+        "url": "/searchCases?ctid=Asylum",
+        "headers": {
+              "Content-Type": {
+                "equalTo": "application/json"
+              },
+              "Authorization": {
+                "contains": "Bearer"
+              },
+              "ServiceAuthorization": {
+                "contains": "Bearer"
+              }
+        },
+        "bodyPatterns" : [ {
+                "equalToJson" : "{\n    \"query\": {\n        \"bool\": {\n            \"must_not\": {\n                \"exists\": {\n                    \"field\": \"data.caseManagementCategory\"\n                }\n            }\n        }\n    }\n}"
+        } ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": {
+                    "total": 5,
+                    "cases": [
+                      {
+                        "id": 1619996688685650,
+                        "jurisdiction": "IA",
+                        "state": "caseUnderReview"
+                      }
+                    ],
+                    "case_types_results": [
+                      {
+                        "total": 5,
+                        "case_type_id": "Asylum"
+                      }
+                    ]
+                  }
+    }
+}' \
+  ${WIREMOCK_URL}/__admin/mappings/new
+
 # ccd-elasticsearch as part of the RWA-645
 curl -X POST \
   --data '{
