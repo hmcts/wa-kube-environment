@@ -31,7 +31,7 @@ curl -X POST \
               }
         },
         "bodyPatterns" : [ {
-                "equalToJson" : "{\n    \"query\": {\n        \"bool\": {\n            \"must_not\": {\n                \"exists\": {\n                    \"field\": \"data.caseManagementCategory\"\n                }\n            }\n        }\n    }\n}"
+                "equalToJson" : "{\n  \"query\": {\n    \"bool\": {\n      \"must_not\": [\n        {\n          \"exists\": {\n            \"field\": \"data.caseManagementCategory\"\n          }\n        },\n        {\n          \"match\": {\n            \"state\": \"appealTakenOffline\"\n          }\n        },\n        {\n          \"match\": {\n            \"state\": \"ended\"\n          }\n        }\n      ]\n    }\n  },\n  \"_source\": [\n    \"id\"\n  ],\n  \"size\": 1000\n}\n"
         } ]
     },
     "response": {
