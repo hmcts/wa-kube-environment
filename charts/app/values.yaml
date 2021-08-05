@@ -9,7 +9,7 @@ app:
   container:
     image: add-image-here
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     multiplePorts: false
     port: 8080
     config: []
