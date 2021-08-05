@@ -53,6 +53,8 @@ app:
         value: http://fr-am:8080/openam/oauth2/hmcts
       - key: "MICROSERVICE_NAME"
         value: am_role_assignment_service
+      - key: "BYPASS_ORG_DROOL_RULE"
+        value: true
     readinessProbe:
       enabled: true
       httpGet:

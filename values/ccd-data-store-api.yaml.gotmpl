@@ -23,6 +23,10 @@ app:
         value: {{ requiredEnv "DB_USE_SSL" }}
       - key: "DATA_STORE_IDAM_KEY"
         value: {{ requiredEnv "IDAM_KEY_CCD_DATA_STORE" }}
+      - key: "IDAM_DATA_STORE_SYSTEM_USER_USERNAME"
+        value: ccd-import@fake.hmcts.net
+      - key: "IDAM_DATA_STORE_SYSTEM_USER_PASSWORD"
+        value: London01
       - key: "DATA_STORE_TOKEN_SECRET"
         value: iuasbcuasdcbasdgcasdgcuysachjsacyasdgjcgasdj
       - key: "DATA_STORE_S2S_AUTHORISED_SERVICES"
