@@ -1,0 +1,6 @@
+releases:
+
+  - name: ccd-case-document-am-api
+    chart: ./../charts/app
+    values:
+      - ./../values/ccd-case-document-am-api.yaml.gotmpl
