@@ -4,3 +4,4 @@ releases:
     chart: ./../charts/app
     values:
       - ./../values/ccd-case-document-am-api.yaml.gotmpl
+    wait: true
