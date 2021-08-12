@@ -9,8 +9,6 @@ PUBLIC_IMAGES=(
   hmctspublic.azurecr.io/am/role-assignment-service:latest
   hmctspublic.azurecr.io/rpe/service-auth-provider:latest
   hmctspublic.azurecr.io/idam/web-admin:stable
-#  hmctspublic.azurecr.io/idam/api:stable
-#  hmctspublic.azurecr.io/idam/web-public:stable
   hmctspublic.azurecr.io/ccd/user-profile-api:latest
   hmctspublic.azurecr.io/ccd/message-publisher:latest
   hmctspublic.azurecr.io/ccd/definition-store-api:latest
@@ -26,9 +24,6 @@ PUBLIC_IMAGES=(
 
 PRIVATE_IMAGES=(
   hmctsprivate.azurecr.io/camunda/bpm:latest
-#  hmctsprivate.azurecr.io/idam/shared-db:latest
-#  hmctsprivate.azurecr.io/idam/idam-fr-am:latest
-#  hmctsprivate.azurecr.io/idam/idam-fr-idm:latest
 )
 
 ## Usage: pull_image [type] [image_repository]
