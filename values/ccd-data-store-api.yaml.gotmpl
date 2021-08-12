@@ -56,9 +56,9 @@ app:
       - key: "ELASTIC_SEARCH_DATA_NODES_HOSTS"
         value: http://ccd-elasticsearch
       - key: "CCD_DM_DOMAIN"
-        value: http://dm-store
+        value: http://local-dm-store
       - key: "CCD_DOCUMENT_URL_PATTERN"
-        value: https?://((dm-store:8080/documents/[A-Za-z0-9-]+(?:/binary)?)|(dm-store/documents/[A-Za-z0-9-]+(?:/binary)?))
+        value: https?://((local-dm-store:8080/documents/[A-Za-z0-9-]+(?:/binary)?)|(local-dm-store/documents/[A-Za-z0-9-]+(?:/binary)?))
       - key: "CASE_DOCUMENT_AM_URL"
         value: http://ccd-case-document-am-api
     readinessProbe:
