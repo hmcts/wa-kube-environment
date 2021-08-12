@@ -65,6 +65,8 @@ app:
         value: {{ requiredEnv "TASK_MANAGEMENT_API_URL" }}
       - key: "FEATURE_WORKALLOCATION_ENABLED"
         value: false
+      - key: "SERVICES_DOCUMENTS_API_V2"
+        value: http://ccd-case-document-am-api
 
     readinessProbe:
       enabled: true
