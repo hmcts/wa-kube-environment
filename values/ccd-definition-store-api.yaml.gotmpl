@@ -42,7 +42,9 @@ app:
       - key: "ELASTIC_SEARCH_HOST"
         value: ccd-elasticsearch
       - key: "ELASTIC_SEARCH_FAIL_ON_IMPORT"
-        value: true
+        value: false
+      - key: "DEFINITION_STORE_TX_TIMEOUT_DEFAULT"
+        value: 120
     readinessProbe:
       enabled: true
       httpGet:

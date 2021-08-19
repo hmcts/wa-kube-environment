@@ -8,24 +8,21 @@ EXTERNAL_IMAGES=(
 PUBLIC_IMAGES=(
   hmctspublic.azurecr.io/am/role-assignment-service:latest
   hmctspublic.azurecr.io/rpe/service-auth-provider:latest
+  hmctspublic.azurecr.io/idam/web-admin:stable
   hmctspublic.azurecr.io/ccd/user-profile-api:latest
   hmctspublic.azurecr.io/ccd/message-publisher:latest
-#  hmctspublic.azurecr.io/idam/api:stable
-  hmctspublic.azurecr.io/idam/web-admin:stable
-#  hmctspublic.azurecr.io/idam/web-public:stable
   hmctspublic.azurecr.io/ccd/definition-store-api:latest
   hmctspublic.azurecr.io/ccd/data-store-api:latest
   hmctspublic.azurecr.io/ccd/api-gateway-web:latest
   hmctspublic.azurecr.io/ccd/case-management-web:latest
+  hmctspublic.azurecr.io/ccd/case-document-am-api
   hmctspublic.azurecr.io/em/ccd-orchestrator:latest
   hmctspublic.azurecr.io/xui/webapp:latest
   hmctspublic.azurecr.io/hmcts/rse/rse-idam-simulator:latest
+
 )
 
 PRIVATE_IMAGES=(
-#  hmctsprivate.azurecr.io/idam/shared-db:latest
-#  hmctsprivate.azurecr.io/idam/idam-fr-am:latest
-#  hmctsprivate.azurecr.io/idam/idam-fr-idm:latest
   hmctsprivate.azurecr.io/camunda/bpm:latest
 )
 

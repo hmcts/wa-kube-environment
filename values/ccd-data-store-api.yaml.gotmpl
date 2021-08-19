@@ -30,7 +30,7 @@ app:
       - key: "DATA_STORE_TOKEN_SECRET"
         value: iuasbcuasdcbasdgcasdgcuysachjsacyasdgjcgasdj
       - key: "DATA_STORE_S2S_AUTHORISED_SERVICES"
-        value: ccd_gw,fpl_case_service,ccd_data,ccd_ps,iac,wa_workflow_api,wa_task_configuration_api,wa_task_management_api,wa_task_monitor
+        value: ccd_gw,fpl_case_service,ccd_data,ccd_ps,iac,wa_workflow_api,wa_task_configuration_api,wa_task_management_api,wa_task_monitor,ccd_case_document_am_api
       - key: "DEFINITION_STORE_HOST"
         value: http://ccd-definition-store-api
       - key: "USER_PROFILE_HOST"
@@ -56,9 +56,11 @@ app:
       - key: "ELASTIC_SEARCH_DATA_NODES_HOSTS"
         value: http://ccd-elasticsearch
       - key: "CCD_DM_DOMAIN"
-        value: http://dm-store
+        value: http://local-dm-store
       - key: "CCD_DOCUMENT_URL_PATTERN"
-        value: https?://((dm-store:8080/documents/[A-Za-z0-9-]+(?:/binary)?)|(dm-store/documents/[A-Za-z0-9-]+(?:/binary)?))
+        value: https?://((local-dm-store:8080/documents/[A-Za-z0-9-]+(?:/binary)?)|(local-dm-store/documents/[A-Za-z0-9-]+(?:/binary)?))
+      - key: "CASE_DOCUMENT_AM_URL"
+        value: http://ccd-case-document-am-api
     readinessProbe:
       enabled: true
       httpGet:

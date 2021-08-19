@@ -20,7 +20,7 @@ app:
       - key: "SERVICES_CCD_DATA_STORE_API"
         value: http://ccd-data-store-api
       - key: "SERVICES_DOCUMENTS_API"
-        value: http://dm-store
+        value: http://local-dm-store
       - key: "SERVICES_S2S"
         value: http://service-auth-provider-api
       - key: "SERVICES_IDAM_LOGIN_URL"
@@ -65,6 +65,8 @@ app:
         value: {{ requiredEnv "TASK_MANAGEMENT_API_URL" }}
       - key: "FEATURE_WORKALLOCATION_ENABLED"
         value: false
+      - key: "SERVICES_DOCUMENTS_API_V2"
+        value: http://ccd-case-document-am-api
 
     readinessProbe:
       enabled: true

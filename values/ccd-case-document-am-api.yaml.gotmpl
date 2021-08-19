@@ -1,0 +1,42 @@
+app:
+  name: ccd-case-document-am-api
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/ccd/case-document-am-api
+    tag: latest
+    ports:
+      - containerPort: 4455
+        servicePort: 80
+        name: http
+    env:
+      - key: "CASE_DOCUMENT_AM_API_S2S_SECRET"
+        value: {{ requiredEnv "S2S_SECRET_CASE_DOCUMENT_AM_API" }}
+      - key: "CASE_DOCUMENT_S2S_AUTHORISED_SERVICES"
+        value: ccd_case_document_am_api,ccd_gw,xui_webapp,ccd_data,bulk_scan_processor
+      - key: "IDAM_API_URL"
+        value: http://sidam-simulator
+      - key: "IDAM_OIDC_URL"
+        value: http://sidam-simulator
+      - key: "S2S_URL"
+        value: http://service-auth-provider-api
+      - key: "DM_STORE_BASE_URL"
+        value: http://local-dm-store
+      - key: "CCD_DATA_STORE_API_BASE_URL"
+        value: http://ccd-data-store-api
+      - key: "REFORM_SERVICE_NAME"
+        value: ccd-case-document-am-api
+      - key: "REFORM_TEAM"
+        value: ccd
+      - key: "REFORM_ENVIRONMENT"
+        value: local
+      - key: "APPINSIGHTS_INSTRUMENTATIONKEY"
+        value: key
+      - key: "DOCUMENT_TTL"
+        value: 3600000
+    readinessProbe:
+      enabled: true
+      httpGet:
+        path: /health
+        port: 4455
+      initialDelaySeconds: 300
+      periodSeconds: 30
