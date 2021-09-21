@@ -4,6 +4,10 @@ NAMESPACE="hmcts-local"
 SECRET_NAME="hmcts-private-creds"
 
 echo "ℹ️  Setting up Local development environment"
+echo "↪️️  Switching context to minikube"
+#Switch to local cluster to avoid attempting to deploy in other clusters
+kubectl config use-context minikube
+
 echo "↪️️  Creating $NAMESPACE namespace"
 #This might error if namespace already exist, but will not stop the script.
 kubectl create namespace $NAMESPACE
