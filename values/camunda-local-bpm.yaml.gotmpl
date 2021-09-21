@@ -20,10 +20,6 @@ app:
         value: {{ requiredEnv "CCD_DB_USERNAME" }}
       - key: "CAMUNDA_DB_PASSWORD"
         value: {{ requiredEnv "CCD_DB_PASSWORD" }}
-      - key: "camunda.bpm.database.schema-update"
-        value: true
-      - key: "CAMUNDA_API_AUTH_ENABLED"
-        value: true
       - key: "S2S_URL"
         value: http://service-auth-provider-api
       - key: "camundaGroups.work-allocation.s2sServiceNames"
