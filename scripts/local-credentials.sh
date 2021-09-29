@@ -1,16 +1,9 @@
 #!/bin/bash
-## Usage: ./user-details.sh [username] [password]
+## Usage: ./local-credentials.sh
 ##
-## Options:
-##    - username: The username to used as login credential
-##    - password: The password to used as login credential
-##
-## Returns user details
+## Returns credentials
 
 BASEDIR=$(dirname "$0")
-
-USERNAME=${1:-ccd-import@fake.hmcts.net}
-PASSWORD=${2:-London01}
 
 #1. Login and obtain access token
 USER_RESPONSE=$($BASEDIR/user-details.sh "${TEST_WA_CASEOFFICER_PUBLIC_A_USERNAME}" "${TEST_WA_CASEOFFICER_PUBLIC_A_PASSWORD}")
