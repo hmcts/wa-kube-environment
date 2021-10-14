@@ -20,4 +20,4 @@ app:
       - key: "SERVICE_BUS_CONNECTION_STRING"
         value: {{ requiredEnv "AZURE_SERVICE_BUS_CONNECTION_STRING" }}
       - key: "CCD_CASE_EVENTS_DESTINATION"
-        value: ccd-case-events-demo
+        value: {{ requiredEnv "AZURE_SERVICE_BUS_TOPIC_NAME" }}
