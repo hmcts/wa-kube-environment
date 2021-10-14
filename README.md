@@ -96,6 +96,18 @@ access the page, check with one of the team members.
 ./environment pull
 ```
 
+If you get an error regarding authentication when attempting to pull the images like: 
+
+  ```
+  Attempting to pull HMCTS public image from hmctspublic.azurecr.io/am/role-assignment-service:latest
+  Error response from daemon: Head https://hmctspublic.azurecr.io/v2/am/role-assignment-service/manifests/latest: unauthorized: authentication required  
+  ```
+
+Then it is likely because an authentication token has expired. To fix it simply run:
+```shell
+docker logout hmctspublic.azurecr.io
+```
+
 ### 5. Build and start local WA environment:
 
 ```shell
