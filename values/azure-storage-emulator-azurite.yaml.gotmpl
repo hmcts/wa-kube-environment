@@ -8,6 +8,10 @@ app:
       - containerPort: 10000
         servicePort: 10000
         name: http
+    limits:
+      memory: "128Mi"
+      requests:
+        memory: "64Mi"
     env:
     readinessProbe:
       enabled: false

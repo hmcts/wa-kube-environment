@@ -1,7 +1,7 @@
 app:
   name: ccd-definition-store-api
   group: backend
-  replicaCount: 2
+  replicaCount: 1
   container:
     image: hmctspublic.azurecr.io/ccd/definition-store-api
     tag: latest
@@ -57,4 +57,4 @@ app:
       limits:
         memory: "1024Mi"
       requests:
-        memory: "256Mi"
+        memory: "512Mi"

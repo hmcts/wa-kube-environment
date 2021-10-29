@@ -31,6 +31,8 @@ app:
         value: {{ requiredEnv "CCD_DB_PASSWORD" }}
       - key: "USER_PROFILE_DB_USE_SSL"
         value: false
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
     readinessProbe:
       enabled: true
       httpGet:

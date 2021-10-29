@@ -13,10 +13,18 @@ app:
         value: 5000
       - key: "SIMULATOR_OPENID_BASE_URL"
         value: http://sidam-simulator
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
     readinessProbe:
       enabled: true
       httpGet:
         path: /health
         port: 5000
-      initialDelaySeconds: 300
+      initialDelaySeconds: 30
       periodSeconds: 30
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "256Mi"
+

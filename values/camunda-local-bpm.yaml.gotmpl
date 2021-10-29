@@ -34,6 +34,8 @@ app:
         value: {{ requiredEnv "TASK_MANAGEMENT_API_URL" }}
       - key: "TZ"
         value: Europe/London
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
     ports:
       - containerPort: 8999
         servicePort: 80
@@ -42,4 +44,4 @@ app:
       limits:
         memory: "1024Mi"
       requests:
-        memory: "256Mi"
+        memory: "512Mi"

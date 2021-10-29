@@ -41,6 +41,8 @@ app:
         value: key
       - key: "PROXY_DOCUMENT_MANAGEMENT"
         value: http://local-dm-store
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
     readinessProbe:
       enabled: true
       httpGet:
@@ -48,3 +50,8 @@ app:
         port: 3453
       initialDelaySeconds: 300
       periodSeconds: 30
+    resources:
+      limits:
+        memory: "256Mi"
+      requests:
+        memory: "64Mi"

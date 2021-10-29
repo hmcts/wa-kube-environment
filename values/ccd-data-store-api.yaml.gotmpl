@@ -1,7 +1,7 @@
 app:
   name: ccd-data-store-api
   group: backend
-  replicaCount: 2
+  replicaCount: 1
   container:
     image: hmctspublic.azurecr.io/ccd/data-store-api
     tag: latest
@@ -62,6 +62,8 @@ app:
         value: https?://((local-dm-store:8080/documents/[A-Za-z0-9-]+(?:/binary)?)|(local-dm-store/documents/[A-Za-z0-9-]+(?:/binary)?))
       - key: "CASE_DOCUMENT_AM_URL"
         value: http://ccd-case-document-am-api
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
     readinessProbe:
       enabled: true
       httpGet:

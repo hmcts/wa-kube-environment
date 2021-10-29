@@ -55,6 +55,8 @@ app:
         value: am_role_assignment_service
       - key: "BYPASS_ORG_DROOL_RULE"
         value: true
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
     readinessProbe:
       enabled: true
       httpGet:
@@ -65,5 +67,5 @@ app:
       limits:
         memory: "1024Mi"
       requests:
-        memory: "256Mi"
+        memory: "512Mi"
 

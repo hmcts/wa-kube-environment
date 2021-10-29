@@ -47,6 +47,8 @@ app:
         value: {{ requiredEnv "IDAM_KEY_EM_CCD_ORCHESTRATOR" }}
       - key: "MICROSERVICEKEYS_CCD_CASE_DOCUMENT_AM_API"
         value: {{ requiredEnv "S2S_SECRET_CASE_DOCUMENT_AM_API" }}
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
     readinessProbe:
       enabled: true
       httpGet:
