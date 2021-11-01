@@ -48,7 +48,12 @@ app:
       - key: "MICROSERVICEKEYS_CCD_CASE_DOCUMENT_AM_API"
         value: {{ requiredEnv "S2S_SECRET_CASE_DOCUMENT_AM_API" }}
       - key: "JAVA_TOOL_OPTIONS"
-        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
+        value: "-XX:+UseShenandoahGC -Xmx1G -Xms32m -XX:+UnlockExperimentalVMOptions -XX:ShenandoahUncommitDelay=3000 -XX:ShenandoahGuaranteedGCInterval=10000"
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "256Mi"
     readinessProbe:
       enabled: true
       httpGet:

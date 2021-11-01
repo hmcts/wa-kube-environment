@@ -21,5 +21,3 @@ app:
         value: {{ requiredEnv "AZURE_SERVICE_BUS_CONNECTION_STRING" }}
       - key: "CCD_CASE_EVENTS_DESTINATION"
         value: {{ requiredEnv "AZURE_SERVICE_BUS_TOPIC_NAME" }}
-      - key: "JAVA_TOOL_OPTIONS"
-        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"

@@ -32,7 +32,12 @@ app:
       - key: "USER_PROFILE_DB_USE_SSL"
         value: false
       - key: "JAVA_TOOL_OPTIONS"
-        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
+        value: "-XX:+UseShenandoahGC -Xmx1g -Xms32m -XX:+UnlockExperimentalVMOptions -XX:ShenandoahUncommitDelay=3000 -XX:ShenandoahGuaranteedGCInterval=10000"
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "256Mi"
     readinessProbe:
       enabled: true
       httpGet:

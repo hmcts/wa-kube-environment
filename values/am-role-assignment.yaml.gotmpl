@@ -56,7 +56,7 @@ app:
       - key: "BYPASS_ORG_DROOL_RULE"
         value: true
       - key: "JAVA_TOOL_OPTIONS"
-        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
+        value: "-XX:+UseShenandoahGC -Xmx2g -Xms32m -XX:+UnlockExperimentalVMOptions -XX:ShenandoahUncommitDelay=3000 -XX:ShenandoahGuaranteedGCInterval=10000"
     readinessProbe:
       enabled: true
       httpGet:
@@ -65,7 +65,7 @@ app:
       periodSeconds: 30
     resources:
       limits:
-        memory: "1024Mi"
+        memory: "2048Mi"
       requests:
         memory: "512Mi"
 

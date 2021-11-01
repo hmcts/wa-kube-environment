@@ -42,7 +42,7 @@ app:
       - key: "PROXY_DOCUMENT_MANAGEMENT"
         value: http://local-dm-store
       - key: "JAVA_TOOL_OPTIONS"
-        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
+        value: "-XX:+UseShenandoahGC -Xmx256m -Xms32m -XX:+UnlockExperimentalVMOptions -XX:ShenandoahUncommitDelay=3000 -XX:ShenandoahGuaranteedGCInterval=10000"
     readinessProbe:
       enabled: true
       httpGet:

@@ -46,6 +46,8 @@ app:
         value: false
       - key: "DEFINITION_STORE_TX_TIMEOUT_DEFAULT"
         value: 120
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UseShenandoahGC -Xmx1g -Xms32m -XX:+UnlockExperimentalVMOptions -XX:ShenandoahUncommitDelay=3000 -XX:ShenandoahGuaranteedGCInterval=10000"
     readinessProbe:
       enabled: true
       httpGet:
@@ -55,6 +57,6 @@ app:
       periodSeconds: 30
     resources:
       limits:
-        memory: "1024Mi"
+        memory: "1536Mi"
       requests:
         memory: "512Mi"

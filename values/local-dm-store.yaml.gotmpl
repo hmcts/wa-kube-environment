@@ -47,7 +47,7 @@ app:
       - key: "postgres.storage.enabled"
         value: false
       - key: "JAVA_TOOL_OPTIONS"
-        value: "-XX:+UnlockExperimentalVMOptions -XX:+UseZGC"
+        value: "-XX:+UseShenandoahGC -Xmx1g -Xms32m -XX:+UnlockExperimentalVMOptions -XX:ShenandoahUncommitDelay=3000 -XX:ShenandoahGuaranteedGCInterval=10000"
     readinessProbe:
       enabled: true
       httpGet:
@@ -57,6 +57,6 @@ app:
       periodSeconds: 30
     resources:
       limits:
-        memory: "1536Mi"
+        memory: "1024Mi"
       requests:
         memory: "256Mi"
