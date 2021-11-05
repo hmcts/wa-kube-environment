@@ -33,4 +33,4 @@ kubectl create secret docker-registry $SECRET_NAME \
   -n $NAMESPACE
 
 echo "↪️  Starting deployments"
-helmfile -n hmcts-local sync
+helmfile --log-level debug -n hmcts-local sync
