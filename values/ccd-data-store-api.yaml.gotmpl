@@ -1,7 +1,7 @@
 app:
   name: ccd-data-store-api
   group: backend
-  replicaCount: 2
+  replicaCount: 1
   container:
     image: hmctspublic.azurecr.io/ccd/data-store-api
     tag: latest
@@ -62,6 +62,8 @@ app:
         value: https?://((local-dm-store:8080/documents/[A-Za-z0-9-]+(?:/binary)?)|(local-dm-store/documents/[A-Za-z0-9-]+(?:/binary)?))
       - key: "CASE_DOCUMENT_AM_URL"
         value: http://ccd-case-document-am-api
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:+UseShenandoahGC -Xms32m -XX:+UnlockExperimentalVMOptions -XX:ShenandoahUncommitDelay=3000 -XX:ShenandoahGuaranteedGCInterval=10000"
     readinessProbe:
       enabled: true
       httpGet:
@@ -71,6 +73,6 @@ app:
       periodSeconds: 30
     resources:
       limits:
-        memory: "1024Mi"
+        memory: "2048Mi"
       requests:
         memory: "256Mi"
