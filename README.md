@@ -37,7 +37,7 @@ The above can all brew installed via `brew install`
 
 ### 1. Create a local cluster:
 
-Latest Tested minikube version v1.24.0. 
+Latest Tested minikube version `v1.24.0`
 
 If you are using minikube version v1.15.1 or later
 
