@@ -1,4 +1,8 @@
 spec:
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     spec:
       containers:
