@@ -51,11 +51,11 @@ app:
       - key: "APPINSIGHTS_INSTRUMENTATIONKEY"
         value: key
       - key: "ELASTIC_SEARCH_ENABLED"
-        value: false
+        value: true
       - key: "ELASTIC_SEARCH_HOST"
         value: ccd-elasticsearch
       - key: "ELASTIC_SEARCH_DATA_NODES_HOSTS"
-        value: http://ccd-elasticsearch
+        value: http://ccd-elasticsearch:9200
       - key: "CCD_DM_DOMAIN"
         value: http://local-dm-store
       - key: "CCD_DOCUMENT_URL_PATTERN"

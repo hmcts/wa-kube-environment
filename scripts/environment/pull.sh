@@ -4,7 +4,7 @@ EXTERNAL_IMAGES=(
   bitnami/postgresql
   rodolpheche/wiremock
   mcr.microsoft.com/azure-storage/azurite
-  docker.elastic.co/elasticsearch/elasticsearch
+  docker.elastic.co/elasticsearch/elasticsearch:6.4.2
 )
 
 PUBLIC_IMAGES=(
