@@ -1,0 +1,32 @@
+app:
+  name: ccd-logstash
+  group: backend
+  container:
+    image: hmctspublic.azurecr.io/ccd/logstash
+    tag: latest
+    ports:
+      - containerPort: 8080
+        servicePort: 80
+        name: http
+    env:
+      - key: "XPACK_MONITORING_ENABLED"
+        value: false
+      - key: "DB_URL"
+        value: jdbc:postgresql://ccd-shared-database:5432/ccd_data?stringtype=unspecified&ssl=false
+      - key: "DB_USER"
+        value: {{ requiredEnv "CCD_DB_USERNAME" }}
+      - key: "DB_PWD"
+        value: {{ requiredEnv "CCD_DB_PASSWORD" }}
+      - key: "ES_DATA_NODES_URL"
+        value: http://ccd-elasticsearch:9200
+    readinessProbe:
+      enabled: false
+      initialDelaySeconds: 300
+      periodSeconds: 30
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "256Mi"
+
+

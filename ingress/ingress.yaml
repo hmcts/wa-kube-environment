@@ -24,56 +24,6 @@ spec:
                 name: ccd-user-profile-api
                 port:
                   number: 80
-    - host: shared-db
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: shared-db
-                port:
-                  number: 5432
-    - host: idam-web-public
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: idam-web-public
-                port:
-                  number: 80
-    - host: fr-am
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: fr-am
-                port:
-                  number: 8080
-    - host: fr-idm
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: fr-idm
-                port:
-                  number: 18080
-    - host: sidam-api
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: sidam-api
-                port:
-                  number: 80
     - host: sidam-simulator
       http:
         paths:
@@ -82,36 +32,6 @@ spec:
             backend:
               service:
                 name: sidam-simulator
-                port:
-                  number: 80
-    - host: ccd-definition-store-api
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: ccd-definition-store-api
-                port:
-                  number: 80
-    - host: idam-web-admin
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: idam-web-admin
-                port:
-                  number: 80
-    - host: idam-web-public
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: idam-web-public
                 port:
                   number: 80
     - host: ccd-definition-store-api
@@ -142,16 +62,6 @@ spec:
             backend:
               service:
                 name: ccd-api-gateway
-                port:
-                  number: 80
-    - host: ccd-case-management-web
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: ccd-case-management-web
                 port:
                   number: 80
     - host: wiremock
@@ -222,5 +132,25 @@ spec:
             backend:
               service:
                 name: ccd-case-document-am-api
+                port:
+                  number: 80
+    - host: ccd-elasticsearch
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ccd-elasticsearch
+                port:
+                  number: 9200
+    - host: ccd-logstash
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ccd-logstash
                 port:
                   number: 80

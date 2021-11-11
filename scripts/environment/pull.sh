@@ -4,6 +4,7 @@ EXTERNAL_IMAGES=(
   bitnami/postgresql
   rodolpheche/wiremock
   mcr.microsoft.com/azure-storage/azurite
+  docker.elastic.co/elasticsearch/elasticsearch
 )
 
 PUBLIC_IMAGES=(
@@ -21,6 +22,7 @@ PUBLIC_IMAGES=(
   hmctspublic.azurecr.io/xui/webapp:latest
   hmctspublic.azurecr.io/hmcts/rse/rse-idam-simulator:latest
   hmctspublic.azurecr.io/dm/store:latest
+  hmctspublic.azurecr.io/ccd/logstash:latest
 )
 
 PRIVATE_IMAGES=(
