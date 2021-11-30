@@ -6,7 +6,9 @@
 ##
 ## deploys bpmn/dmn to camunda.
 
-SERVICE_TOKEN="$(sh ./actions/idam-service-token.sh "wa_camunda_pipeline_upload")"
+dir=$(dirname "${0}")
+
+SERVICE_TOKEN="$(sh ${dir}/actions/idam-service-token.sh "wa_camunda_pipeline_upload")"
 
 echo "Uploading Camunda BPMs and DMNs..."
 if [[ -z "${WA_BPMNS_DMNS_PATH}" ]]; then

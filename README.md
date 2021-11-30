@@ -11,13 +11,13 @@ helmfile.
   https://tools.hmcts.net/confluence/display/RPE/Acceptable+Use+Policy+and+Contractor+Security+Guidance
 - Access to Azure and container registry, clone https://github.com/hmcts/devops-azure-ad
   If you can't access it, then you do not have access to private repositories(Goto previous step) and check with Devops
-  team. If you can access, then create a branch something like 'adding-permissions-your-name'.
+  team. If you can access, then create a branch something like `'adding-permissions-your-name'`.
 
-Modify file /users/prod_users.yml by adding permissions to the EOF. Check with the team which permissions need to be
+Modify file `/users/prod_users.yml` by adding permissions to the EOF. Check with the team which permissions need to be
 included.
 
 Create a pull request and assign to a reviewer from the team and get approved. Post the pull request in slack channel
-HMCTS Reform #devops request channel to authorise your pull request. Once it is approved a pipeline will be triggered
+HMCTS Reform `#platops-code-review` channel to authorise your pull request. Once it is approved a pipeline will be triggered
 automatically.
 
 - [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
@@ -123,7 +123,7 @@ To run any of the service, Ingress should be enabled
 echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
 ```
 
-`$(minikube ip` should be populated automatically. If not you can replace it manually to get minikube ip, run
+`$(minikube ip)` should be populated automatically. If not you can replace it manually to get minikube ip, run
 cmd `minikube ip` on the terminal.
 
 ##### 2. Verify the deployment
@@ -171,6 +171,21 @@ If you need to stop and teardown run cmd
 ```shell
 ./environment down
 ```
+
+**NOTE:** The above command destroys all containers - any database state is NOT persisted, so rebuilding the 
+environment using `.environment down` followed by `./environment up`, will require re-running any of the database
+population scripts (`./scripts/setup.sh`) 
+
+### 8. Restarting individual services in the local WA environment:
+
+To restart an individual service (dm store, in this instance), you can stop and restart it using the following commands
+
+```shell
+helmfile -f ./helmfile.d/20-local-dm-store.yaml -n hmcts-local destroy
+helmfile -f ./helmfile.d/20-local-dm-store.yaml -n hmcts-local sync
+```
+
+where the yaml file in `helmfile.d` represents the service
 
 ## Features
 
