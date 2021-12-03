@@ -20,7 +20,7 @@ app:
       - key: "ROLE_ASSIGNMENT_DB_PASSWORD"
         value: {{ requiredEnv "CCD_DB_PASSWORD" }}
       - key: "ROLE_ASSIGNMENT_S2S_AUTHORISED_SERVICES"
-        value: ccd_gw,xui_webapp,iac,wa_task_management_api,wa_task_configuration_api
+        value: ccd_gw,am_role_assignment_service,am_org_role_mapping_service,wa_task_management_api,wa_task_configuration_api,iac,xui_webapp,aac_manage_case_assignment,ccd_data
       - key: "AM_ROLE_ASSIGNMENT_SERVICE_SECRET"
         value: {{ requiredEnv "S2S_SECRET_ROLE_ASSIGNMENT_API" }}
       - key: "IDAM_USER_URL"
