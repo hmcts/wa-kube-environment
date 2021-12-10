@@ -120,7 +120,7 @@ To run any of the service, Ingress should be enabled
 ##### 1. Update /etc/hosts to route the hosts to the minikube cluster ip
 
 ```shell
-echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm role-assignment sidam-simulator local-dm-store ccd-case-document-am-api ccd-elasticsearch ccd-logstash" | sudo tee -a /etc/hosts
+echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api ccd-elasticsearch ccd-logstash" | sudo tee -a /etc/hosts
 ```
 
 `$(minikube ip` should be populated automatically. If not you can replace it manually to get minikube ip, run

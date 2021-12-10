@@ -94,7 +94,7 @@ spec:
                 name: camunda-local-bpm
                 port:
                   number: 80
-    - host: role-assignment
+    - host: am-role-assignment
       http:
         paths:
           - path: /
