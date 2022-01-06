@@ -17,6 +17,8 @@ app:
         value: true
       - key: "MICROSERVICEKEYS_CCD_DATA"
         value: {{ requiredEnv "IDAM_KEY_CCD_DATA_STORE" }}
+      - key: "MICROSERVICEKEYS_SSCS"
+        value: {{ requiredEnv "IDAM_KEY_SSCS" }}
       - key: "MICROSERVICEKEYS_CCD_GW"
         value: {{ requiredEnv "IDAM_KEY_CCD_GATEWAY" }}
       - key: "MICROSERVICEKEYS_CCD_DEFINITION"
