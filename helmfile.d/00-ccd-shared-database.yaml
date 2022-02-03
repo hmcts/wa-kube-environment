@@ -5,6 +5,7 @@ repositories:
 releases:
   - name: ccd-shared-database
     chart: bitnami/postgresql
+    version: 10.16.2
     values:
       - ./../values/ccd-shared-database.yaml.gotmpl
     wait: true
