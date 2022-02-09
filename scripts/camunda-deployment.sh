@@ -27,6 +27,16 @@ else
   $IA_TASK_DMNS_BPMNS_PATH/camunda-deployment.sh $SERVICE_TOKEN
 fi
 
+if [[ -z "${SSCS_TASK_DMNS_BPMNS_PATH}" ]]; then
+  echo ""
+  echo "Environment variable SSCS_TASK_DMNS_BPMNS_PATH was not set skipping deployment."
+else
+  echo ""
+  echo ""
+  echo "Deploying SSCS Task Configuration BPMN and DMNs..."
+  $SSCS_TASK_DMNS_BPMNS_PATH/camunda-deployment.sh $SERVICE_TOKEN
+fi
+
 if [[ -z "${WA_TASK_DMNS_BPMNS_PATH}" ]]; then
   echo ""
   echo "Environment variable WA_TASK_DMNS_BPMNS_PATH was not set skipping deployment."
