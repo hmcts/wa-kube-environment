@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+scriptsFolder=$(dirname "${0}")
+
 # Setup Services
 #./create-services.sh
 
@@ -7,14 +9,14 @@
 #./create-roles.sh
 
 # Setup Users
-./create-users.sh
+"${scriptsFolder}/create-users.sh"
 
 # Register roles
-./register-roles.sh
+"${scriptsFolder}/register-roles.sh"
 
 echo ""
 echo "Setup Wiremock responses for Professional Reference Data based on existing Idam users..."
-./wiremock.sh
+"${scriptsFolder}/wiremock.sh"
 
 echo "Deploying camunda bpmn and dmn"
-./camunda-deployment.sh
+"${scriptsFolder}/camunda-deployment.sh"
