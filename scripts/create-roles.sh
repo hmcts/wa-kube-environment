@@ -28,6 +28,7 @@ echo ""
 echo "Setting up Roles required for WA only..."
 ./actions/create-role.sh "caseworker-wa-task-configuration"
 ./actions/create-role.sh "caseworker-wa"
+./actions/create-role.sh "caseworker-wa-task-officer"
 
 echo ""
 echo "Setting up Roles required for XUI..."
