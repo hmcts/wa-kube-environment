@@ -46,6 +46,8 @@ app:
         value: true
       - key: "postgres.storage.enabled"
         value: false
+      - key: "RUN_DB_MIGRATION_ON_STARTUP"
+        value: true
     readinessProbe:
       enabled: true
       httpGet:
