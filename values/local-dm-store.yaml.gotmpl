@@ -46,6 +46,8 @@ app:
         value: true
       - key: "postgres.storage.enabled"
         value: false
+      - key: "RUN_DB_MIGRATION_ON_STARTUP"
+        value: true
     readinessProbe:
       enabled: true
       httpGet:
@@ -55,6 +57,6 @@ app:
       periodSeconds: 30
     resources:
       limits:
-        memory: "1024Mi"
+        memory: "1636Mi"
       requests:
         memory: "256Mi"
