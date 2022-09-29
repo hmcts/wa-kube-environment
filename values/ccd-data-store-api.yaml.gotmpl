@@ -64,6 +64,8 @@ app:
         value: http://ccd-case-document-am-api
       - key: "ROLE_ASSIGNMENT_URL"
         value: http://am-role-assignment
+      - key: "DATA_STORE_DEFAULT_LOG_LEVEL"
+        value: info
     readinessProbe:
       enabled: true
       httpGet:
@@ -73,6 +75,6 @@ app:
       periodSeconds: 30
     resources:
       limits:
-        memory: "1634Mi"
+        memory: "3000Mi"
       requests:
         memory: "512Mi"
