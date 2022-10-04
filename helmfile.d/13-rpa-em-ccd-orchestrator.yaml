@@ -1,7 +1,0 @@
-#releases:
-#
-#  - name: rpa-em-ccd-orchestrator
-#    chart: ./../charts/app
-#    values:
-#      - ./../values/rpa-em-ccd-orchestrator.yaml.gotmpl
-#    wait: true
