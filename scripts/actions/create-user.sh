@@ -7,7 +7,7 @@ PASSWORD="${4:-London01}"
 USER_GROUP="${5:-ccd-import}"
 ROLES="${6:-[\"ccd-import\"\]}"
 
-echo "\nCreating user with:\nEmail: ${EMAIL}\nPassword: ${PASSWORD}\nForename: ${FORENAME}\nSurname: ${SURNAME}\nUser group: ${USER_GROUP}\nRoles: ${ROLES}\n"
+echo "\n\nCreating user with:\nEmail: ${EMAIL}\nPassword: ${PASSWORD}\nForename: ${FORENAME}\nSurname: ${SURNAME}\nUser group: ${USER_GROUP}\nRoles: ${ROLES}\n"
 
 curl --silent --show-error \
   ${IDAM_URL}/testing-support/accounts \

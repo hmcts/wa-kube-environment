@@ -29,7 +29,7 @@ app:
       - key: "camundaGroups.work-allocation.s2sServiceNames"
         value: wa_task_management_api,wa_task_configuration_api,wa_workflow_api,wa_case_event_handler,wa_camunda_pipeline_upload
       - key: "WA_AUTO_CONFIGURE_TASKS_ENABLED"
-        value: true
+        value: false
       - key: "TASK_MANAGEMENT_API_URL"
         value: {{ requiredEnv "TASK_MANAGEMENT_API_URL" }}
       - key: "TZ"
