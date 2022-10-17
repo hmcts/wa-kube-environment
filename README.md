@@ -40,6 +40,7 @@ The above can all brew installed via `brew install`
 Latest Tested minikube version `v1.24.0`
 
 If you are using minikube version v1.15.1 or later
+(you may need to replace hyperkit with docker)
 
 ```shell
 minikube start \
@@ -108,7 +109,7 @@ docker logout hmctspublic.azurecr.io
 
 :warning: You probably notice that the xui-webapp pod is not running. This is because it's waiting for the wiremock
 service to be up. This is a manual step for the moment. Therefore, run the following:
-
+Note: to run this you will need to have run the line that updates the /etc/hosts file at least once on this box
 ```shell
 ./scripts/setup.sh
 ```
@@ -118,6 +119,7 @@ service to be up. This is a manual step for the moment. Therefore, run the follo
 To run any of the service, Ingress should be enabled
 
 ##### 1. Update /etc/hosts to route the hosts to the minikube cluster ip
+Note: This should only be done once on a box as it will just grow your hosts file with duplicate lines.
 
 ```shell
 echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
