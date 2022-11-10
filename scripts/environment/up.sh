@@ -20,6 +20,7 @@ kubectl apply -f ./charts/pvc.yaml -n hmcts-local
 echo "↪️  Applying ingress config"
 kubectl apply -f ./ingress/ingress.yaml -n hmcts-local
 kubectl patch configmap tcp-services -n ingress-nginx --patch '{"data":{"5432":"hmcts-local/ccd-shared-database:5432"}}'
+kubectl patch configmap tcp-services -n ingress-nginx --patch '{"data":{"5433":"hmcts-local/ccd-shared-database-replica:5433"}}'
 kubectl patch deployment ingress-nginx-controller --patch "$(cat ./ingress/ingress-patch.yaml)" -n ingress-nginx
 
 echo "↪️  Obtaining ACR token"
