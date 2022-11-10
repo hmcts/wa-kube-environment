@@ -128,7 +128,7 @@ Generally this step need only be done once per installation, some environments l
 It definitely needs to have been run once before setup script above is run.
 
 ```shell
-echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
+echo "$(minikube ip) ccd-shared-database ccd-shared-database-replica service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
 ```
 
 `$(minikube ip)` should be populated automatically. If not you can replace it manually to get minikube ip, run
@@ -151,6 +151,7 @@ The output should look like below:
    ccd-definition-store-api-74b455764b-zdbgj    1/1     Running   0          3m48s
    ccd-orchestrator-65ffd6747c-s9w77            1/1     Running   0          101s
    ccd-shared-database-0                        1/1     Running   0          6m46s
+   ccd-shared-database-replica-0                1/1     Running   0          6m47s
    ccd-user-profile-api-749dd8d668-4b8cd        1/1     Running   0          5m49s
    fr-am-6b69cb5f95-2tlz4                       1/1     Running   0          5m25s
    fr-idm-575d89f957-fb6rl                      1/1     Running   0          5m22s
