@@ -18,9 +18,24 @@ echo "Setting up WA Users and role assignments..."
 ./actions/create-user.sh "${WA_SYSTEM_USERNAME}" "WASystem" "WaUser" "${WA_SYSTEM_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}, { \"code\": \"caseworker-wa\"}, { \"code\": \"caseworker-wa-task-configuration\"}]"
 
 ./actions/create-user.sh "${WA_CASEOFFICER_USERNAME}" "WaCaseOfficer" "case worker" "${WA_CASEOFFICER_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-wa\"}, {\"code\": \"caseworker-wa-task-officer\"}]"
-./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_USERNAME}" "${WA_CASEOFFICER_USERNAME}" "PUBLIC" "case-allocator" '{"jurisdiction":"WA","primaryLocation":"765324"}'
-./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_USERNAME}" "${WA_CASEOFFICER_USERNAME}" "PUBLIC" "task-supervisor" '{"jurisdiction":"WA","primaryLocation":"765324"}'
-./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_USERNAME}" "${WA_CASEOFFICER_USERNAME}" "PUBLIC" "tribunal-caseworker" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_USERNAME}" "${WA_CASEOFFICER_PASSWORD}" "PUBLIC" "case-allocator" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_USERNAME}" "${WA_CASEOFFICER_PASSWORD}" "PUBLIC" "task-supervisor" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_USERNAME}" "${WA_CASEOFFICER_PASSWORD}" "PUBLIC" "tribunal-caseworker" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+
+./actions/create-user.sh "${WA_CASEOFFICER_GP_USERNAME}" "WaCaseOfficerGp" "case worker" "${WA_CASEOFFICER_GP_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-wa\"}, {\"code\": \"caseworker-wa-task-officer\"}]"
+./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_GP_USERNAME}" "${WA_CASEOFFICER_GP_PASSWORD}" "PUBLIC" "case-allocator" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_GP_USERNAME}" "${WA_CASEOFFICER_GP_PASSWORD}" "PUBLIC" "task-supervisor" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+./actions/organisational-role-assignment.sh "${WA_CASEOFFICER_GP_USERNAME}" "${WA_CASEOFFICER_GP_PASSWORD}" "PUBLIC" "tribunal-caseworker" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+
+
+./actions/create-user.sh "${WA_TRIBUNAL_CASEOFFICER_GP_USERNAME}" "WaTribunalCaseOfficer" "case worker" "${WA_TRIBUNAL_CASEOFFICER_GP_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-wa\"}, {\"code\": \"caseworker-wa-task-officer\"}]"
+./actions/organisational-role-assignment.sh "${WA_TRIBUNAL_CASEOFFICER_GP_USERNAME}" "${WA_TRIBUNAL_CASEOFFICER_GP_PASSWORD}" "PUBLIC" "tribunal-caseworker" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+
+./actions/create-user.sh "${WA_SENIOR_TRIBUNAL_CASEOFFICER_GP_USERNAME}" "WaSeniorTribunalCaseOfficer" "case worker" "${WA_SENIOR_TRIBUNAL_CASEOFFICER_GP_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-wa\"}, {\"code\": \"caseworker-wa-task-officer\"}]"
+./actions/organisational-role-assignment.sh "${WA_SENIOR_TRIBUNAL_CASEOFFICER_GP_USERNAME}" "${WA_SENIOR_TRIBUNAL_CASEOFFICER_GP_PASSWORD}" "PUBLIC" "senior-tribunal-caseworker" '{"jurisdiction":"WA","primaryLocation":"765324"}'
+
+./actions/create-user.sh "${WA_TASK_SUPERVISOR_GP_USERNAME}" "WaTaskSupervisor" "case worker" "${WA_TASK_SUPERVISOR_GP_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-wa\"}, {\"code\": \"caseworker-wa-task-officer\"}]"
+./actions/organisational-role-assignment.sh "${WA_TASK_SUPERVISOR_GP_USERNAME}" "${WA_TASK_SUPERVISOR_GP_PASSWORD}" "PUBLIC" "task-supervisor" '{"jurisdiction":"WA","primaryLocation":"765324"}'
 
 ./actions/create-user.sh "${TEST_WA_CASEOFFICER_PUBLIC_A_USERNAME}" "CaseOfficer" "A-Public" "${TEST_WA_CASEOFFICER_PUBLIC_A_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-caseofficer\"}]"
 ./actions/organisational-role-assignment.sh "${TEST_WA_CASEOFFICER_PUBLIC_A_USERNAME}" "${TEST_WA_CASEOFFICER_PUBLIC_A_PASSWORD}" "PUBLIC" "case-allocator" '{"jurisdiction":"IA","primaryLocation":"765324"}'
