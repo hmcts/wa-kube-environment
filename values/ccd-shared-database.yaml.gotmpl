@@ -28,6 +28,8 @@ networkPolicy:
   enabled: false
   allowExternal: true
 
+postgresqlExtendedConf: {"wal_level": "logical"}
+
 initdbScripts:
   init.sh: |
     #!/usr/bin bash
