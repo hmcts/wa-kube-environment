@@ -65,7 +65,6 @@ export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
 export WA_CAMUNDA_NEXUS_USER=XXXXXX
 export AM_ROLE_SERVICE_SDK_KEY=XXXXX
 export WA_BPMNS_DMNS_PATH=<PATH_TO_BPMN_REPO>
-export IA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 export WA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 ```
 
@@ -83,12 +82,11 @@ access the page, check with one of the team members.
 
 *Note: this step could take a while to complete as it pull all the necessary images*
 
-
 ```shell
 ./environment pull
 ```
 
-If you get an error regarding authentication when attempting to pull the images like: 
+If you get an error regarding authentication when attempting to pull the images like:
 
   ```
   Attempting to pull HMCTS public image from hmctspublic.azurecr.io/am/role-assignment-service:latest
@@ -96,6 +94,7 @@ If you get an error regarding authentication when attempting to pull the images 
   ```
 
 Then it is likely because an authentication token has expired. To fix it simply run:
+
 ```shell
 docker logout hmctspublic.azurecr.io
 ```

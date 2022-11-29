@@ -18,7 +18,7 @@ curl -X POST \
   --data '{
     "request": {
         "method": "POST",
-        "url": "/searchCases?ctid=Asylum",
+        "url": "/searchCases?ctid=WaCaseType",
         "headers": {
               "Content-Type": {
                 "equalTo": "application/json"
@@ -44,14 +44,14 @@ curl -X POST \
                     "cases": [
                       {
                         "id": 1619996688685650,
-                        "jurisdiction": "IA",
+                        "jurisdiction": "WA",
                         "state": "caseUnderReview"
                       }
                     ],
                     "case_types_results": [
                       {
                         "total": 5,
-                        "case_type_id": "Asylum"
+                        "case_type_id": "WaCaseType"
                       }
                     ]
                   }
@@ -64,7 +64,7 @@ curl -X POST \
   --data '{
     "request": {
         "method": "POST",
-        "url": "/searchCases?ctid=Asylum",
+        "url": "/searchCases?ctid=WaCaseType",
         "headers": {
               "Content-Type": {
                 "equalTo": "application/json"
@@ -90,14 +90,14 @@ curl -X POST \
                     "cases": [
                       {
                         "id": 1619996688685650,
-                        "jurisdiction": "IA",
+                        "jurisdiction": "WA",
                         "state": "caseUnderReview"
                       }
                     ],
                     "case_types_results": [
                       {
                         "total": 5,
-                        "case_type_id": "Asylum"
+                        "case_type_id": "WaCaseType"
                       }
                     ]
                   }
@@ -159,10 +159,10 @@ curl -X POST \
                     "pui-case-manager",
                     "caseworker",
                     "caseworker-divorce-solicitor",
-                    "caseworker-ia",
+                    "caseworker-wa",
                     "pui-user-manager",
                     "caseworker-publiclaw",
-                    "caseworker-ia-legalrep-solicitor",
+                    "caseworker-wa-legalrep-solicitor",
                     "caseworker-probate-solicitor",
                     "pui-organisation-manager",
                     "caseworker-divorce",
@@ -189,10 +189,10 @@ curl -X POST \
                     "caseworker-divorce-financialremedy",
                     "caseworker-divorce-solicitor",
                     "caseworker-probate",
-                    "caseworker-ia",
+                    "caseworker-wa",
                     "caseworker-divorce-financialremedy-solicitor",
                     "caseworker-publiclaw",
-                    "caseworker-ia-legalrep-solicitor",
+                    "caseworker-wa-legalrep-solicitor",
                     "caseworker-probate-solicitor"
                   ],
                   "idamStatus": "ACTIVE",
@@ -212,10 +212,10 @@ curl -X POST \
                     "caseworker-divorce-financialremedy",
                     "caseworker-divorce-solicitor",
                     "caseworker-probate",
-                    "caseworker-ia",
+                    "caseworker-wa",
                     "caseworker-divorce-financialremedy-solicitor",
                     "caseworker-publiclaw",
-                    "caseworker-ia-legalrep-solicitor",
+                    "caseworker-wa-legalrep-solicitor",
                     "caseworker-probate-solicitor"
                   ],
                   "idamStatus": "ACTIVE",
@@ -371,7 +371,7 @@ curl -X POST \
             "jsonBody": {
               "organisationEntityResponse" : {
                 "organisationIdentifier": "0UFUG4Z",
-                "name": "ia-legal-rep-org",
+                "name": "wa-legal-rep-org",
                 "status": "ACTIVE",
                 "sraId": null,
                 "sraRegulated": false,
@@ -430,7 +430,7 @@ curl -X POST \
                     "suspended": "false",
                     "created_time": "2021-01-28T13:24:22.132928",
                     "last_updated_time": "2021-01-28T13:24:22.132939",
-                    "email_id": "ia.caseofficer.3.ccd@protonmail.com",
+                    "email_id": "wa.caseofficer.3.ccd@protonmail.com",
                     "region": null,
                     "base_location": [
                         {

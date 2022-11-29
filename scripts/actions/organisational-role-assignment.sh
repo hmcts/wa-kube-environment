@@ -6,7 +6,6 @@
 ##    - password: Password for user. Default to `London01`.
 ##    - role_classification: Role assignment classification. Default to `PUBLIC`.
 ##    - role_name: Name of the role for role-assignment. Default to `tribunal-caseworker`.
-##    - role_attributes: Role attributes to add to role assignment. Default to `jurisdiction: "IA"`.
 ##    - microservice_name: Name of the microservice to obtain S2S token. Default to `ccd_gw`.
 ##
 
@@ -14,7 +13,7 @@ USERNAME=${1:-ccd-import@fake.hmcts.net}
 PASSWORD=${2:-London01}
 ROLE_CLASSIFICATION="${3:-PUBLIC}"
 ROLE_NAME="${4:-"tribunal-caseworker"}"
-ROLE_ATTRIBUTES="${5:-'{"jurisdiction":"IA"}'}"
+ROLE_ATTRIBUTES="${5:-'{"jurisdiction":"WA"}'}"
 MICROSERVICE="${6:-wa_task_management_api}"
 
 BASEDIR=$(dirname "$0")
