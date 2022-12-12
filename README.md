@@ -37,14 +37,14 @@ The above can all brew installed via `brew install`
 
 ### 1. Create a local cluster:
 
-Latest Tested minikube version `v1.24.0`
+Latest Tested minikube version `v1.28.0`
 
 If you are using minikube version v1.15.1 or later
 
 ```shell
 minikube start \
      --memory=8192 \
-     --cpus=2 \
+     --cpus=4 \
      --driver=hyperkit \
      --addons=ingress
 ```
@@ -183,4 +183,14 @@ your `.bash_profile` and resource the file before running environment up.
 
 ```shell
 export AZURE_SERVICE_BUS_CONNECTION_STRING="Endpoint=sb://REPLACE_ME.servicebus.windows.net/;SharedAccessKeyName=REPLACE_ME;SharedAccessKey=REPLACE_ME"
+```
+
+## Set-up Environment using makefile
+
+Open `makefile` and set `PROJECT_PATH` value. `pwd` command returns project path.
+
+Open idea terminal run following command.
+
+```shell
+make environment-up
 ```
