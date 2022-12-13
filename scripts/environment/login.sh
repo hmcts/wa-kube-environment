@@ -1,6 +1,8 @@
 #!/bin/sh
 
 echo "-> Performing Login"
+az login
+az account set -s 8999dec3-0104-4a27-94ee-6588559729d1
 TOKEN=$(az acr login --name hmctsprivate --subscription DCD-CNP-PROD --expose-token | jq --raw-output '.accessToken')
 
 

@@ -23,6 +23,8 @@ kubectl patch configmap tcp-services -n ingress-nginx --patch '{"data":{"5432":"
 kubectl patch deployment ingress-nginx-controller --patch "$(cat ./ingress/ingress-patch.yaml)" -n ingress-nginx
 
 echo "↪️  Obtaining ACR token"
+az login
+az account set -s 8999dec3-0104-4a27-94ee-6588559729d1
 TOKEN=$(az acr login --name hmctsprivate --subscription DCD-CNP-PROD --expose-token | jq --raw-output '.accessToken')
 
 echo "↪️  Saving Token as secret"
