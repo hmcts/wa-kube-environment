@@ -37,14 +37,14 @@ The above can all brew installed via `brew install`
 
 ### 1. Create a local cluster:
 
-Latest Tested minikube version `v1.24.0`
+Latest Tested minikube version `v1.28.0`
 
 If you are using minikube version v1.15.1 or later
 
 ```shell
 minikube start \
      --memory=8192 \
-     --cpus=2 \
+     --cpus=4 \
      --driver=hyperkit \
      --addons=ingress
 ```
@@ -65,7 +65,6 @@ export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
 export WA_CAMUNDA_NEXUS_USER=XXXXXX
 export AM_ROLE_SERVICE_SDK_KEY=XXXXX
 export WA_BPMNS_DMNS_PATH=<PATH_TO_BPMN_REPO>
-export IA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 export WA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 ```
 
@@ -83,12 +82,11 @@ access the page, check with one of the team members.
 
 *Note: this step could take a while to complete as it pull all the necessary images*
 
-
 ```shell
 ./environment pull
 ```
 
-If you get an error regarding authentication when attempting to pull the images like: 
+If you get an error regarding authentication when attempting to pull the images like:
 
   ```
   Attempting to pull HMCTS public image from hmctspublic.azurecr.io/am/role-assignment-service:latest
@@ -96,6 +94,7 @@ If you get an error regarding authentication when attempting to pull the images 
   ```
 
 Then it is likely because an authentication token has expired. To fix it simply run:
+
 ```shell
 docker logout hmctspublic.azurecr.io
 ```
@@ -184,4 +183,14 @@ your `.bash_profile` and resource the file before running environment up.
 
 ```shell
 export AZURE_SERVICE_BUS_CONNECTION_STRING="Endpoint=sb://REPLACE_ME.servicebus.windows.net/;SharedAccessKeyName=REPLACE_ME;SharedAccessKey=REPLACE_ME"
+```
+
+## Set-up Environment using makefile
+
+Open `makefile` and set `PROJECT_PATH` value. `pwd` command returns project path.
+
+Open idea terminal run following command.
+
+```shell
+make environment-up
 ```
