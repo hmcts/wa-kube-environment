@@ -1,20 +1,31 @@
 .PHONY: start
 
-PROJECT_PATH:=/Users/YOUR_USER_NAME/YOUR_PROJECT_FOLDER_NAME
+PROJECT_PATH:=PROVIDE_YOUR_PROJECT_PATH
 GIT_COMMANDS:=git checkout master; git gc; git pull origin master;
 
 # Start Environment
 environment-up:
 	@echo "Environment setup started!!!!"
-	az login
+	#az login
 
-	minikube start --memory=8192 --cpus=4 --driver=hyperkit --addons=ingress
+	open -a docker
+	@read  -p "Is Docker up (y/n)?: " INPUT; \
+	if [ "y" != "$$INPUT" ]; then \
+		while [ "y" != "$$INPUT" ] ; do \
+				echo "\n\nIs Docker up (y/n)?"; \
+				sleep 4; \
+				read INPUT; \
+			done; \
+			true; \
+	fi
 
-	sudo sed -i "" '/192.168/d' /etc/hosts
-	@echo "Old minikube ip removed from /etc/hosts"
-	sleep 2;
-	@echo "$$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store" | sudo tee -a /etc/hosts
-	@echo "New minikube ip put into /etc/hosts"
+	minikube start --addons=ingress,ingress-dns --driver=docker
+
+#	sudo sed -i "" '/192.168/d' /etc/hosts
+#	@echo "Old minikube ip removed from /etc/hosts"
+#	sleep 2;
+#	@echo "$$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store" | sudo tee -a /etc/hosts
+#	@echo "New minikube ip put into /etc/hosts"
 
 	@echo "wa-kube-environment starting"
 	osascript \
@@ -43,6 +54,58 @@ environment-up:
 			true; \
 	fi
 
+	@echo "Minikube Tunnel"
+	sleep 2;
+	osascript \
+    -e 'tell application "iTerm" to activate' \
+        -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
+    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
+    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "Minikube Tunnel"' \
+    	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
+    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-kube-environment;"' \
+        -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
+        -e 'tell application "System Events" to tell process "iTerm" to keystroke "sudo minikube tunnel;"' \
+        -e 'tell application "System Events" to tell process "iTerm" to key code 52';
+
+	@read  -p "Is minikube tunnelling started (y/n)?: " INPUT; \
+    	if [ "y" != "$$INPUT" ]; then \
+    		while [ "y" != "$$INPUT" ] ; do \
+    				echo "\nIs minikube tunnelling started (y/n)?\n"; \
+    				sleep 4; \
+    				read INPUT; \
+    			done; \
+    			true; \
+    	fi
+
+	@echo "Fetch POSTGRES_PORT"
+	sleep 2;
+	osascript \
+    -e 'tell application "iTerm" to activate' \
+    -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "POSTGRES_PORT"' \
+	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
+    -e 'tell application "System Events" to tell process "iTerm" to keystroke "minikube service ccd-shared-database --url -n hmcts-local;"' \
+    -e 'tell application "System Events" to tell process "iTerm" to key code 52';
+
+	sudo sed -i "" '/POSTGRES_PORT/d' ~/.bash_profile
+	@echo "POSTGRES_PORT removed from ~/.bash_profile"
+	sleep 1;
+
+	@read  -p "Please provide POSTGRES_PORT?: " INPUT; \
+    	if [ "" != "$$INPUT" ]; then \
+    		echo "export POSTGRES_PORT=$${INPUT}" | sudo tee -a ~/.bash_profile \
+    		true; \
+    	fi
+
+	@echo "New POSTGRES_PORT put into ~/.bash_profile"
+	sleep 5;
+	osascript \
+        -e 'tell application "iTerm" to activate' \
+		-e 'tell application "System Events" to tell process "iTerm" to keystroke "$$(source ~/.bash_profile);"' \
+		-e 'tell application "System Events" to tell process "iTerm" to key code 52';
+
+	sleep 5;
 	@echo "run setup script"
 	osascript \
     -e 'tell application "iTerm" to activate' \
@@ -275,3 +338,16 @@ pull:
 	sleep 4;
 
 	@echo "All done!!!!"
+
+test:
+	sudo sed -i "" '/POSTGRES_PORT/d' ~/.bash_profile
+	@echo "POSTGRES_PORT removed from ~/.bash_profile"
+	#sleep 2;
+
+	@read  -p "Please provide POSTGRES_PORT?: " INPUT; \
+    	if [ "" != "$$INPUT" ]; then \
+    		echo "export POSTGRES_PORT=$${INPUT}" | sudo tee -a ~/.bash_profile \
+    		true; \
+    	fi
+
+	@echo "New POSTGRES_PORT put into ~/.bash_profile"
