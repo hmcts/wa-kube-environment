@@ -6,13 +6,12 @@ GIT_COMMANDS:=git checkout master; git gc; git pull origin master;
 # Start Environment
 environment-up:
 	@echo "Environment setup started!!!!"
-	#az login
 
 	open -a docker
 	@read  -p "Is Docker up (y/n)?: " INPUT; \
 	if [ "y" != "$$INPUT" ]; then \
 		while [ "y" != "$$INPUT" ] ; do \
-				echo "\n\nIs Docker up (y/n)?"; \
+				echo "\nIs Docker up (y/n)?\n"; \
 				sleep 4; \
 				read INPUT; \
 			done; \
@@ -21,13 +20,31 @@ environment-up:
 
 	minikube start --addons=ingress,ingress-dns --driver=docker
 
-#	sudo sed -i "" '/192.168/d' /etc/hosts
-#	@echo "Old minikube ip removed from /etc/hosts"
-#	sleep 2;
-#	@echo "$$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store" | sudo tee -a /etc/hosts
-#	@echo "New minikube ip put into /etc/hosts"
+	@echo "Minikube Tunnel"
+	sleep 2;
+	osascript \
+    -e 'tell application "iTerm" to activate' \
+        -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
+    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
+    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "Minikube Tunnel"' \
+    	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
+    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-kube-environment;"' \
+        -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
+        -e 'tell application "System Events" to tell process "iTerm" to keystroke "sudo minikube tunnel;"' \
+        -e 'tell application "System Events" to tell process "iTerm" to key code 52';
+
+	@read  -p "Is minikube tunnelling started (y/n)?: " INPUT; \
+    	if [ "y" != "$$INPUT" ]; then \
+    		while [ "y" != "$$INPUT" ] ; do \
+    				echo "\nHas minikube tunnelling started (y/n)?\n"; \
+    				sleep 4; \
+    				read INPUT; \
+    			done; \
+    			true; \
+    	fi
 
 	@echo "wa-kube-environment starting"
+	sleep 5;
 	osascript \
     -e 'tell application "iTerm" to activate' \
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
@@ -47,35 +64,13 @@ environment-up:
 	if [ "y" != "$$INPUT" ]; then \
 		while [ "y" != "$$INPUT" ] ; do \
 				kubectl get pods -n hmcts-local ; \
-				echo "\n\nIs kube environment up (y/n)?\n\n"; \
+				echo "\nIs kube environment up (y/n)?\n"; \
 				sleep 4; \
 				read INPUT; \
 			done; \
 			true; \
 	fi
 
-	@echo "Minikube Tunnel"
-	sleep 2;
-	osascript \
-    -e 'tell application "iTerm" to activate' \
-        -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
-    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
-    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "Minikube Tunnel"' \
-    	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
-    	-e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-kube-environment;"' \
-        -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
-        -e 'tell application "System Events" to tell process "iTerm" to keystroke "sudo minikube tunnel;"' \
-        -e 'tell application "System Events" to tell process "iTerm" to key code 52';
-
-	@read  -p "Is minikube tunnelling started (y/n)?: " INPUT; \
-    	if [ "y" != "$$INPUT" ]; then \
-    		while [ "y" != "$$INPUT" ] ; do \
-    				echo "\nIs minikube tunnelling started (y/n)?\n"; \
-    				sleep 4; \
-    				read INPUT; \
-    			done; \
-    			true; \
-    	fi
 
 	@echo "Fetch POSTGRES_PORT"
 	sleep 2;
@@ -83,7 +78,7 @@ environment-up:
     -e 'tell application "iTerm" to activate' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
-	-e 'tell application "System Events" to tell process "iTerm" to keystroke "POSTGRES_PORT"' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "Set POSTGRES_PORT"' \
 	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "minikube service ccd-shared-database --url -n hmcts-local;"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52';
@@ -92,13 +87,13 @@ environment-up:
 	@echo "POSTGRES_PORT removed from ~/.bash_profile"
 	sleep 1;
 
-	@read  -p "Please provide POSTGRES_PORT?: " INPUT; \
+	@read  -p "Please provide POSTGRES_PORT: " INPUT; \
     	if [ "" != "$$INPUT" ]; then \
     		echo "export POSTGRES_PORT=$${INPUT}" | sudo tee -a ~/.bash_profile \
     		true; \
     	fi
 
-	@echo "New POSTGRES_PORT put into ~/.bash_profile"
+	@echo "New POSTGRES_PORT putting into ~/.bash_profile"
 	sleep 5;
 	osascript \
         -e 'tell application "iTerm" to activate' \
@@ -106,12 +101,12 @@ environment-up:
 		-e 'tell application "System Events" to tell process "iTerm" to key code 52';
 
 	sleep 5;
-	@echo "run setup script"
+	@echo "setup script is starting..."
 	osascript \
     -e 'tell application "iTerm" to activate' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
-	-e 'tell application "System Events" to tell process "iTerm" to keystroke "setup.sh"' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "Kube Setup Script"' \
 	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-kube-environment;"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
@@ -119,18 +114,18 @@ environment-up:
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "cd scripts; ./setup.sh"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52';
 
-	@read  -p "Is setup script completed (y/n)?: " INPUT; \
+	@read  -p "Has setup script completed (y/n)?: " INPUT; \
 	if [ "y" != "$$INPUT" ]; then \
 	  	sleep 4; \
 		while [ "y" != "$$INPUT" ] ; do \
-				echo "\n\nIs setup script completed (y/n)?\n\n"; \
+				echo "\nHas setup script completed (y/n)?\n"; \
 				sleep 4; \
 				read INPUT; \
 			done; \
 			true; \
 	fi
 
-	@echo "wa-ccd-definitions starting"
+	@echo "wa-ccd-definitions is starting..."
 	sleep 5;
 	osascript \
     -e 'tell application "iTerm" to activate' \
@@ -143,7 +138,7 @@ environment-up:
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "yarn upload-wa;"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52';
 
-	@echo "wa-workflow-api starting"
+	@echo "wa-workflow-api is starting..."
 	sleep 10;
 	osascript \
     -e 'tell application "iTerm" to activate' \
@@ -224,7 +219,7 @@ environment-up:
 					-e 'tell application "System Events" to tell process "iTerm" to key code 52'; \
             fi
 
-	@echo "\n\n\n\nAll environment will be ready in a few seconds!!!!\n\n\n\n"
+	@echo "\n\n\n\nAll environment will be ready in a few seconds!!!!"
 
 # Pull latest images
 pull:
@@ -339,15 +334,3 @@ pull:
 
 	@echo "All done!!!!"
 
-test:
-	sudo sed -i "" '/POSTGRES_PORT/d' ~/.bash_profile
-	@echo "POSTGRES_PORT removed from ~/.bash_profile"
-	#sleep 2;
-
-	@read  -p "Please provide POSTGRES_PORT?: " INPUT; \
-    	if [ "" != "$$INPUT" ]; then \
-    		echo "export POSTGRES_PORT=$${INPUT}" | sudo tee -a ~/.bash_profile \
-    		true; \
-    	fi
-
-	@echo "New POSTGRES_PORT put into ~/.bash_profile"
