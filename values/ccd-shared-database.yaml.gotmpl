@@ -1,56 +1,63 @@
 image:
+  debug: true
   repository: bitnami/postgresql
-  tag: 11.12.0
+  tag: 11.16.0
   pullPolicy: IfNotPresent
 
 fullnameOverride: ccd-shared-database
 
-postgresqlUsername: postgres
-postgresqlPassword: postgres
-postgresqlDatabase: ccd
+postgresqlDataDir: /var/lib/postgresql/ccd-shared-db/data/wa
+
+auth:
+  username: postgres
+  password: postgres
+  database: ccd
 
 service:
   type: ClusterIP
   port: 5432
-persistence:
-  enabled: true
-  mountPath: /var/lib/postgresql/ccd-shared-db/data
-  existingClaim: shared-pvc
+
 volumePermissions:
   enabled: true
-
-resources:
-  requests:
-    memory: 256Mi
-    cpu: 250m
 
 networkPolicy:
   enabled: false
   allowExternal: true
 
-initdbScripts:
-  init.sh: |
-    #!/usr/bin bash
+primary:
+  persistence:
+    enabled: true
+    mountPath: /var/lib/postgresql/ccd-shared-db/data
+    existingClaim: shared-pvc
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 250m
+  initdb:
+    scripts:
+      db_init.sh: |
+        #!/usr/bin bash
+        echo "Setting up database"
 
-    DB_USERNAME={{ requiredEnv "CCD_DB_USERNAME" }}
-    DB_PASSWORD={{ requiredEnv "CCD_DB_PASSWORD" }}
+        DB_USERNAME={{ requiredEnv "CCD_DB_USERNAME" }}
+        DB_PASSWORD={{ requiredEnv "CCD_DB_PASSWORD" }}
 
-    # Create roles and databases
-    psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD <<-EOSQL
-      CREATE USER :USERNAME WITH PASSWORD ':PASSWORD';
-    EOSQL
+        # Create roles and databases
+        psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD <<-EOSQL
+          CREATE USER :USERNAME WITH PASSWORD ':PASSWORD';
+        EOSQL
 
-    for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer camunda role_assignment openidm wa_workflow_api cft_task_db wa_case_event_messages_db; do
-      echo "Database $service: Creating..."
-    psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD --set DATABASE=$service <<-EOSQL
-      CREATE DATABASE :DATABASE
-        WITH OWNER = :USERNAME
-        ENCODING = 'UTF-8'
-        CONNECTION LIMIT = -1;
-    EOSQL
-      echo "Database $service: Created"
-    done
+        for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer ia_case_api ia_timed_event_service camunda role_assignment openidm wa_workflow_api cft_task_db wa_case_event_messages_db; do
+          echo "Database $service: Creating..."
+        psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD --set DATABASE=$service <<-EOSQL
+          CREATE DATABASE :DATABASE
+            WITH OWNER = :USERNAME
+            ENCODING = 'UTF-8'
+            CONNECTION LIMIT = -1;
+        EOSQL
+          echo "Database $service: Created"
+        done
 
-    echo "Altering $DB_USERNAME user with new password"
-    psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
+        echo "Altering $DB_USERNAME user with new password"
+        psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
 
