@@ -44,7 +44,7 @@ environment-up:
     	fi
 
 	@echo "wa-kube-environment starting"
-	sleep 5;
+	sleep 1;
 	osascript \
     -e 'tell application "iTerm" to activate' \
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
@@ -73,7 +73,7 @@ environment-up:
 
 
 	@echo "Fetch POSTGRES_PORT"
-	sleep 2;
+	sleep 1;
 	osascript \
     -e 'tell application "iTerm" to activate' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
@@ -94,13 +94,13 @@ environment-up:
     	fi
 
 	@echo "New POSTGRES_PORT putting into ~/.bash_profile"
-	sleep 5;
+	sleep 2;
 	osascript \
         -e 'tell application "iTerm" to activate' \
 		-e 'tell application "System Events" to tell process "iTerm" to keystroke "$$(source ~/.bash_profile);"' \
 		-e 'tell application "System Events" to tell process "iTerm" to key code 52';
 
-	sleep 5;
+	sleep 2;
 	@echo "setup script is starting..."
 	osascript \
     -e 'tell application "iTerm" to activate' \
@@ -118,7 +118,6 @@ environment-up:
 	if [ "y" != "$$INPUT" ]; then \
 	  	sleep 4; \
 		while [ "y" != "$$INPUT" ] ; do \
-				echo "\nHas setup script completed (y/n)?\n"; \
 				sleep 4; \
 				read INPUT; \
 			done; \
@@ -126,7 +125,7 @@ environment-up:
 	fi
 
 	@echo "wa-ccd-definitions is starting..."
-	sleep 5;
+	sleep 2;
 	osascript \
     -e 'tell application "iTerm" to activate' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
@@ -139,7 +138,7 @@ environment-up:
     -e 'tell application "System Events" to tell process "iTerm" to key code 52';
 
 	@echo "wa-workflow-api is starting..."
-	sleep 10;
+	sleep 2;
 	osascript \
     -e 'tell application "iTerm" to activate' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using command down' \
@@ -170,8 +169,7 @@ environment-up:
 
 	@read  -p "Would you like to run wa-task-monitor (y/n)?: " INPUT; \
             if [ "y" = "$$INPUT" ]; then \
-				@sleep 4; \
-                osascript \
+              osascript \
                     -e 'tell application "iTerm" to activate' \
                     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using command down' \
 					-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
@@ -183,7 +181,6 @@ environment-up:
 
 	@read  -p "Would you like to run wa-case-event-handler (y/n)?: " INPUT; \
             if [ "y" = "$$INPUT" ]; then \
-				@sleep 4; \
                 osascript \
                     -e 'tell application "iTerm" to activate' \
                     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using command down' \
@@ -202,7 +199,6 @@ environment-up:
 
 	@read  -p "Would you like to run wa-post-deployment-ft-tests (y/n)?: " INPUT; \
             if [ "y" = "$$INPUT" ]; then \
-				@sleep 4; \
                 osascript \
                     -e 'tell application "iTerm" to activate' \
                     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using command down' \
