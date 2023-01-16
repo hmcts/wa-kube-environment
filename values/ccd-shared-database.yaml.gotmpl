@@ -6,7 +6,7 @@ image:
 
 fullnameOverride: ccd-shared-database
 
-postgresqlDataDir: /var/lib/postgresql/ccd-shared-db/data/wa
+postgresqlDataDir: /bitnami/postgresql/wa
 
 auth:
   username: postgres
@@ -26,8 +26,9 @@ networkPolicy:
 
 primary:
   extendedConfiguration: |-
-    wal_level: logical
-    shared_buffers: 256MB
+    wal_level = 'logical'
+    shared_buffers = 256MB
+    max_replication_slots = 1
   pgHbaConfiguration: |-
     host     all            all             0.0.0.0/0               trust
     host     all            all             ::/0                    trust
@@ -39,7 +40,7 @@ primary:
     host    replication     repl_user       ::1/128                 trust
   persistence:
     enabled: true
-    mountPath: /var/lib/postgresql/ccd-shared-db/data
+    mountPath: /bitnami/postgresql/
     existingClaim: shared-pvc
   resources:
     limits:
@@ -81,27 +82,10 @@ primary:
           echo "Database $service: Created"
         done
 
-        psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_REPL_USERNAME --set PASSWORD=$DB_REPL_PASSWORD <<-EOSQL
-          CREATE ROLE :USERNAME REPLICATION LOGIN PASSWORD ':PASSWORD';
-        EOSQL
-
-        for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer ia_case_api ia_timed_event_service camunda role_assignment openidm wa_workflow_api cft_task_db cft_task_db_replica wa_case_event_messages_db; do
-          echo "Database $service: Creating..."
-        psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD --set DATABASE=$service <<-EOSQL
-          CREATE DATABASE :DATABASE
-            WITH OWNER = :USERNAME
-            ENCODING = 'UTF-8'
-            CONNECTION LIMIT = -1;
-        EOSQL
-          echo "Database $service: Created"
-        done
-
-        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO repl_user;";
-        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db_replica -c "GRANT CONNECT ON DATABASE cft_task_db_replica TO repl_user;";
-
         echo "Altering $DB_USERNAME user with new password"
         psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
         psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $WA_USERNAME WITH PASSWORD '$WA_PASSWORD'";
+        psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_REPL_USERNAME WITH PASSWORD '$DB_REPL_PASSWORD'";
 
         psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO repl_user;";
         psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db_replica -c "GRANT CONNECT ON DATABASE cft_task_db_replica TO repl_user;";
