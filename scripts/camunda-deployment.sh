@@ -17,15 +17,6 @@ else
 
 fi
 
-if [[ -z "${IA_TASK_DMNS_BPMNS_PATH}" ]]; then
-  echo ""
-  echo "Environment variable IA_TASK_DMNS_BPMNS_PATH was not set skipping deployment."
-else
-  echo ""
-  echo ""
-  echo "Deploying IA Task Configuration BPMN and DMNs..."
-  $IA_TASK_DMNS_BPMNS_PATH/camunda-deployment.sh $SERVICE_TOKEN
-fi
 
 if [[ -z "${WA_TASK_DMNS_BPMNS_PATH}" ]]; then
   echo ""

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 EMAIL="${1:-ccd-import@fake.hmcts.net}"
 FORENAME="${2:-CCD}"

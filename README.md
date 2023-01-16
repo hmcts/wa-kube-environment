@@ -37,17 +37,19 @@ The above can all brew installed via `brew install`
 
 ### 1. Create a local cluster:
 
-Latest Tested minikube version `v1.24.0`
+Latest Tested minikube version `v1.28.0`
 
 If you are using minikube version v1.15.1 or later
 
 ```shell
 minikube start \
      --memory=8192 \
-     --cpus=2 \
+     --cpus=4 \
      --driver=hyperkit \
      --addons=ingress
 ```
+
+Note the --driver value could be docker rather than hyperkit 
 
 ### 2. Environment variables
 
@@ -65,7 +67,6 @@ export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
 export WA_CAMUNDA_NEXUS_USER=XXXXXX
 export AM_ROLE_SERVICE_SDK_KEY=XXXXX
 export WA_BPMNS_DMNS_PATH=<PATH_TO_BPMN_REPO>
-export IA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 export WA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 ```
 
@@ -83,12 +84,11 @@ access the page, check with one of the team members.
 
 *Note: this step could take a while to complete as it pull all the necessary images*
 
-
 ```shell
 ./environment pull
 ```
 
-If you get an error regarding authentication when attempting to pull the images like: 
+If you get an error regarding authentication when attempting to pull the images like:
 
   ```
   Attempting to pull HMCTS public image from hmctspublic.azurecr.io/am/role-assignment-service:latest
@@ -96,6 +96,7 @@ If you get an error regarding authentication when attempting to pull the images 
   ```
 
 Then it is likely because an authentication token has expired. To fix it simply run:
+
 ```shell
 docker logout hmctspublic.azurecr.io
 ```
@@ -109,8 +110,11 @@ docker logout hmctspublic.azurecr.io
 :warning: You probably notice that the xui-webapp pod is not running. This is because it's waiting for the wiremock
 service to be up. This is a manual step for the moment. Therefore, run the following:
 
+Note to run setup.sh you must have already run the first step to run the service below
+
 ```shell
-./scripts/setup.sh
+   cd scripts
+   ./setup.sh
 ```
 
 ### 6. Run service:
@@ -119,11 +123,15 @@ To run any of the service, Ingress should be enabled
 
 ##### 1. Update /etc/hosts to route the hosts to the minikube cluster ip
 
+Generally this step need only be done once per installation, some environments like WSL do sometimes sneakily regnerate your hosts file.
+
+It definitely needs to have been run once before setup script above is run.
+
 ```shell
 echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
 ```
 
-`$(minikube ip` should be populated automatically. If not you can replace it manually to get minikube ip, run
+`$(minikube ip)` should be populated automatically. If not you can replace it manually to get minikube ip, run
 cmd `minikube ip` on the terminal.
 
 ##### 2. Verify the deployment
@@ -164,6 +172,8 @@ For example:
 
 If you are using safari browser and if you see page error. Try with chrome.
 
+Users running under WSL will find this harder as they cannot so easily see the pages from the Windows GUI.
+
 ### 7. To stop and teardown local WA environment:
 
 If you need to stop and teardown run cmd
@@ -171,6 +181,12 @@ If you need to stop and teardown run cmd
 ```shell
 ./environment down
 ```
+To remove all traces
+```shell
+minikube stop
+minikube delete
+```
+
 
 ## Features
 
@@ -184,4 +200,14 @@ your `.bash_profile` and resource the file before running environment up.
 
 ```shell
 export AZURE_SERVICE_BUS_CONNECTION_STRING="Endpoint=sb://REPLACE_ME.servicebus.windows.net/;SharedAccessKeyName=REPLACE_ME;SharedAccessKey=REPLACE_ME"
+```
+
+## Set-up Environment using makefile
+
+Open `makefile` and set `PROJECT_PATH` value. `pwd` command returns project path.
+
+Open idea terminal run following command.
+
+```shell
+make environment-up
 ```

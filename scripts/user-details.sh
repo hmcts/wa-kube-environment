@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 ## Usage: ./user-details.sh [username] [password]
 ##
 ## Options:
