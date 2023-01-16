@@ -49,6 +49,8 @@ minikube start \
      --addons=ingress
 ```
 
+Note the --driver value could be docker rather than hyperkit 
+
 ### 2. Environment variables
 
 Source the .env file in the root of the project:
@@ -108,8 +110,11 @@ docker logout hmctspublic.azurecr.io
 :warning: You probably notice that the xui-webapp pod is not running. This is because it's waiting for the wiremock
 service to be up. This is a manual step for the moment. Therefore, run the following:
 
+Note to run setup.sh you must have already run the first step to run the service below
+
 ```shell
-./scripts/setup.sh
+   cd scripts
+   ./setup.sh
 ```
 
 ### 6. Run service:
@@ -118,11 +123,15 @@ To run any of the service, Ingress should be enabled
 
 ##### 1. Update /etc/hosts to route the hosts to the minikube cluster ip
 
+Generally this step need only be done once per installation, some environments like WSL do sometimes sneakily regnerate your hosts file.
+
+It definitely needs to have been run once before setup script above is run.
+
 ```shell
 echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
 ```
 
-`$(minikube ip` should be populated automatically. If not you can replace it manually to get minikube ip, run
+`$(minikube ip)` should be populated automatically. If not you can replace it manually to get minikube ip, run
 cmd `minikube ip` on the terminal.
 
 ##### 2. Verify the deployment
@@ -163,6 +172,8 @@ For example:
 
 If you are using safari browser and if you see page error. Try with chrome.
 
+Users running under WSL will find this harder as they cannot so easily see the pages from the Windows GUI.
+
 ### 7. To stop and teardown local WA environment:
 
 If you need to stop and teardown run cmd
@@ -170,6 +181,12 @@ If you need to stop and teardown run cmd
 ```shell
 ./environment down
 ```
+To remove all traces
+```shell
+minikube stop
+minikube delete
+```
+
 
 ## Features
 
