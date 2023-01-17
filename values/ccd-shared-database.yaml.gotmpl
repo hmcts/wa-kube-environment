@@ -29,6 +29,7 @@ primary:
     wal_level = 'logical'
     shared_buffers = 256MB
     max_replication_slots = 10
+    max_connections = 200
   pgHbaConfiguration: |-
     host     all            all             0.0.0.0/0               trust
     host     all            all             ::/0                    trust
