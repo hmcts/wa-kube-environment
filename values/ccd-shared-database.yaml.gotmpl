@@ -69,7 +69,7 @@ primary:
         EOSQL
 
         psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_REPL_USERNAME --set PASSWORD=$DB_REPL_PASSWORD <<-EOSQL
-          CREATE ROLE :USERNAME REPLICATION LOGIN PASSWORD ':PASSWORD';
+          CREATE ROLE :USERNAME SUPERUSER REPLICATION LOGIN PASSWORD ':PASSWORD';
         EOSQL
 
         for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer camunda role_assignment openidm wa_workflow_api cft_task_db cft_task_db_replica wa_case_event_messages_db; do
@@ -90,3 +90,5 @@ primary:
 
         psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO repl_user;";
         psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db_replica -c "GRANT CONNECT ON DATABASE cft_task_db_replica TO repl_user;";
+        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO wa_user;";
+        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db_replica -c "GRANT CONNECT ON DATABASE cft_task_db_replica TO wa_user;";
