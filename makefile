@@ -13,7 +13,7 @@ environment-up:
 	sudo sed -i "" '/192.168/d' /etc/hosts
 	@echo "Old minikube ip removed from /etc/hosts"
 	sleep 2;
-	@echo "$$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store" | sudo tee -a /etc/hosts
+	@echo "$$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
 	@echo "New minikube ip put into /etc/hosts"
 
 	@echo "wa-kube-environment starting"
