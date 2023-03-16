@@ -53,7 +53,7 @@ primary:
       db_init.sh: |
         #!/usr/bin bash
 
-        echo "Setting up database"
+        echo "Setting up replica database"
 
         DB_REPL_USERNAME="${REPL_DB_USERNAME:-repl_user}"
         DB_REPL_PASSWORD="${REPL_DB_PASSWORD:-repl_password}"
@@ -63,7 +63,7 @@ primary:
           CREATE ROLE :USERNAME SUPERUSER LOGIN PASSWORD ':PASSWORD';
         EOSQL
 
-        for service in cft_task_db cft_task_db_replica; do
+        for service in cft_task_db; do
           echo "Database $service: Creating..."
         psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_REPL_USERNAME --set PASSWORD=$DB_REPL_PASSWORD --set DATABASE=$service <<-EOSQL
           CREATE DATABASE :DATABASE
