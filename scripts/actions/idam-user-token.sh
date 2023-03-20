@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Usage: ./idam-user-token.sh [user] [password]
 ##
 ## Options:

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Usage: ./user-details.sh [username] [password]
 ##
 ## Options:
