@@ -128,7 +128,7 @@ Generally this step need only be done once per installation, some environments l
 It definitely needs to have been run once before setup script above is run.
 
 ```shell
-echo "$(minikube ip) ccd-shared-database service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
+echo "$(minikube ip) ccd-shared-database ccd-shared-database-replica service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
 ```
 
 `$(minikube ip)` should be populated automatically. If not you can replace it manually to get minikube ip, run
@@ -158,6 +158,7 @@ The output should look like below:
    idam-web-public-c8cf99759-s86g4              1/1     Running   0          4m15s
    service-auth-provider-api-5744c5f89b-9rtm5   1/1     Running   0          6m2s
    shared-db-76d8954d5c-24t2g                   1/1     Running   0          5m28s
+   ccd-shared-database-replica-0                1/1     Running   0          2m
    sidam-api-59b66bf4cb-d24j6                   1/1     Running   0          5m19s
    wiremock-59669584fc-xcxjw                    1/1     Running   0          74s
    xui-webapp-7485d8c499-htmq5                  1/1     Running   0          71s
@@ -201,6 +202,9 @@ your `.bash_profile` and resource the file before running environment up.
 ```shell
 export AZURE_SERVICE_BUS_CONNECTION_STRING="Endpoint=sb://REPLACE_ME.servicebus.windows.net/;SharedAccessKeyName=REPLACE_ME;SharedAccessKey=REPLACE_ME"
 ```
+
+### Database replication
+There are now 2 containers with Postrgesql databases, one is the primary and the second is a replica. This uses logical replication and the scripts to setup that repication is in task-management-api. The replica can be connected to on Host:ccd-shared-database-replica Database: cft_task_db Port:5433, with the same wa_user. You will need to rerun the script above to add the new host name to your /etc/hosts file.
 
 ## Set-up Environment using makefile
 
