@@ -15,12 +15,9 @@ PUBLIC_IMAGES=(
   hmctspublic.azurecr.io/ccd/definition-store-api:latest
   hmctspublic.azurecr.io/ccd/data-store-api:latest
   hmctspublic.azurecr.io/ccd/api-gateway-web:latest
-  hmctspublic.azurecr.io/ccd/case-management-web:latest
   hmctspublic.azurecr.io/ccd/case-document-am-api
-  hmctspublic.azurecr.io/em/ccd-orchestrator:latest
   hmctspublic.azurecr.io/xui/webapp:latest
   hmctspublic.azurecr.io/hmcts/rse/rse-idam-simulator:latest
-  hmctspublic.azurecr.io/dm/store:latest
 )
 
 PRIVATE_IMAGES=(
