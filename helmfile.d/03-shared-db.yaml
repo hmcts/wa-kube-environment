@@ -1,7 +1,0 @@
-#releases:
-#
-#  - name: shared-db
-#    chart: ./../charts/app
-#    values:
-#      - ./../values/shared-db.yaml.gotmpl
-#    wait: true
