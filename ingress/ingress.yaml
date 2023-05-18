@@ -204,16 +204,6 @@ spec:
                 name: ccd-message-publisher
                 port:
                   number: 80
-    - host: local-dm-store
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: local-dm-store
-                port:
-                  number: 80
     - host: ccd-case-document-am-api
       http:
         paths:

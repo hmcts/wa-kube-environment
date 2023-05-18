@@ -1,6 +1,0 @@
-releases:
-
-  - name: local-dm-store
-    chart: ./../charts/app
-    values:
-      - ./../values/local-dm-store.yaml.gotmpl
