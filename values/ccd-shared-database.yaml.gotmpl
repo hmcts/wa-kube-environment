@@ -8,7 +8,10 @@ fullnameOverride: ccd-shared-database
 
 postgresqlDataDir: /bitnami/postgresql/wa
 
-
+auth:
+  username: postgres
+  password: postgres
+  database: ccd
 
 service:
   type: ClusterIP
