@@ -55,8 +55,8 @@ primary:
 
         echo "Setting up replica database"
 
-        DB_REPL_USERNAME="${REPL_DB_USERNAME:-repl_user}"
-        DB_REPL_PASSWORD="${REPL_DB_PASSWORD:-repl_password}"
+        DB_REPL_USERNAME="${REPLICATION_USERNAME:-repl_user}"
+        DB_REPL_PASSWORD="${REPLICATION_PASSWORD:-repl_password}"
 
         # Create roles and databases
         psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_REPL_USERNAME --set PASSWORD=$DB_REPL_PASSWORD <<-EOSQL
@@ -77,4 +77,4 @@ primary:
         echo "Altering $$REPL_DB_USERNAME user with new password"
         psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_REPL_USERNAME WITH PASSWORD '$DB_REPL_PASSWORD'";
 
-        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db_replica -c "GRANT CONNECT ON DATABASE cft_task_db_replica TO repl_user;";
+        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO repl_user;";
