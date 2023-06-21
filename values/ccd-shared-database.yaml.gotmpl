@@ -56,8 +56,8 @@ primary:
         DB_PASSWORD={{ requiredEnv "CCD_DB_PASSWORD" }}
         WA_USERNAME={{ requiredEnv "POSTGRES_USERNAME" }}
         WA_PASSWORD={{ requiredEnv "POSTGRES_PASSWORD" }}
-        DB_REPL_USERNAME="${REPL_DB_USERNAME:-repl_user}"
-        DB_REPL_PASSWORD="${REPL_DB_PASSWORD:-repl_password}"
+        DB_REPL_USERNAME="${REPLICATION_USERNAME:-repl_user}"
+        DB_REPL_PASSWORD="${REPLICATION_PASSWORD:-repl_password}"
 
         # Create roles and databases
         psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD <<-EOSQL
@@ -66,7 +66,7 @@ primary:
         EOSQL
 
         psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_REPL_USERNAME --set PASSWORD=$DB_REPL_PASSWORD <<-EOSQL
-          CREATE ROLE :USERNAME SUPERUSER REPLICATION LOGIN PASSWORD ':PASSWORD';
+          CREATE ROLE :USERNAME SUPERUSER LOGIN PASSWORD ':PASSWORD';
         EOSQL
 
         for service in idam ccd_user_profile ccd_definition ccd_data ccd_definition_designer camunda role_assignment openidm wa_workflow_api cft_task_db wa_case_event_messages_db; do
@@ -83,7 +83,6 @@ primary:
         echo "Altering $DB_USERNAME user with new password"
         psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
         psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $WA_USERNAME WITH PASSWORD '$WA_PASSWORD'";
-        psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_REPL_USERNAME WITH PASSWORD '$DB_REPL_PASSWORD'";
 
-        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO repl_user;";
         psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO wa_user;";
+        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO repl_user;";

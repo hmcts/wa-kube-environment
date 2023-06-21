@@ -48,33 +48,3 @@ primary:
     requests:
       memory: 256Mi
       cpu: 250m
-  initdb:
-    scripts:
-      db_init.sh: |
-        #!/usr/bin bash
-
-        echo "Setting up replica database"
-
-        DB_REPL_USERNAME="${REPL_DB_USERNAME:-repl_user}"
-        DB_REPL_PASSWORD="${REPL_DB_PASSWORD:-repl_password}"
-
-        # Create roles and databases
-        psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_REPL_USERNAME --set PASSWORD=$DB_REPL_PASSWORD <<-EOSQL
-          CREATE ROLE :USERNAME SUPERUSER LOGIN PASSWORD ':PASSWORD';
-        EOSQL
-
-        for service in cft_task_db; do
-          echo "Database $service: Creating..."
-        psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_REPL_USERNAME --set PASSWORD=$DB_REPL_PASSWORD --set DATABASE=$service <<-EOSQL
-          CREATE DATABASE :DATABASE
-            WITH OWNER = :USERNAME
-            ENCODING = 'UTF-8'
-            CONNECTION LIMIT = -1;
-        EOSQL
-          echo "Database $service: Created"
-        done
-
-        echo "Altering $$REPL_DB_USERNAME user with new password"
-        psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_REPL_USERNAME WITH PASSWORD '$DB_REPL_PASSWORD'";
-
-        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db_replica -c "GRANT CONNECT ON DATABASE cft_task_db_replica TO repl_user;";
