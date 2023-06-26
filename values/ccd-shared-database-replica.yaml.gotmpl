@@ -29,6 +29,7 @@ primary:
     shared_buffers = 256MB
     max_replication_slots = 10
     max_connections = 200
+    log_min_messages = NOTICE
   pgHbaConfiguration: |-
     host     all            all             0.0.0.0/0               trust
     host     all            all             ::/0                    trust
