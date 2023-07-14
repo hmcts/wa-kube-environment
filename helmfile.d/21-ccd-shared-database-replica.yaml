@@ -3,9 +3,9 @@ repositories:
     url: https://charts.bitnami.com/bitnami
 
 releases:
-  - name: ccd-shared-database
+  - name: ccd-shared-database-replica
     chart: bitnami/postgresql
     version: 11.9.13
     values:
-      - ./../values/ccd-shared-database.yaml.gotmpl
+      - ./../values/ccd-shared-database-replica.yaml.gotmpl
     wait: true

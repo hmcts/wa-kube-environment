@@ -1,12 +1,12 @@
 image:
   debug: true
   repository: bitnami/postgresql
-  tag: 11.16.0
+  tag: 14.5.0
   pullPolicy: IfNotPresent
 
 fullnameOverride: ccd-shared-database
 
-postgresqlDataDir: /var/lib/postgresql/ccd-shared-db/data/wa
+postgresqlDataDir: /bitnami/postgresql/wa
 
 auth:
   username: postgres
@@ -25,11 +25,24 @@ networkPolicy:
   allowExternal: true
 
 primary:
+  extendedConfiguration: |-
+    wal_level = 'logical'
+    shared_buffers = 256MB
+    max_replication_slots = 10
+    max_connections = 200
+  pgHbaConfiguration: |-
+    host     all            all             0.0.0.0/0               trust
+    host     all            all             ::/0                    trust
+    local    all            all                                     trust
+    host     all            all             127.0.0.1/32            trust
+    host     all            all             ::1/128                 trust
   persistence:
     enabled: true
-    mountPath: /var/lib/postgresql/ccd-shared-db/data
+    mountPath: /bitnami/postgresql/
     existingClaim: shared-pvc
   resources:
+    limits:
+      memory: 1024Mi
     requests:
       memory: 256Mi
       cpu: 250m
@@ -37,12 +50,14 @@ primary:
     scripts:
       db_init.sh: |
         #!/usr/bin bash
-        echo "Setting up database"
+        echo "Setting up primary database"
 
         DB_USERNAME={{ requiredEnv "CCD_DB_USERNAME" }}
         DB_PASSWORD={{ requiredEnv "CCD_DB_PASSWORD" }}
         WA_USERNAME={{ requiredEnv "POSTGRES_USERNAME" }}
         WA_PASSWORD={{ requiredEnv "POSTGRES_PASSWORD" }}
+        DB_REPL_USERNAME="${REPLICATION_USERNAME:-repl_user}"
+        DB_REPL_PASSWORD="${REPLICATION_PASSWORD:-repl_password}"
 
         # Create roles and databases
         psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD <<-EOSQL
@@ -50,7 +65,11 @@ primary:
           CREATE USER $WA_USERNAME SUPERUSER;
         EOSQL
 
-        for service in idam ccd_user_profile ccd_definition ccd_data evidence ccd_definition_designer camunda role_assignment openidm wa_workflow_api cft_task_db wa_case_event_messages_db; do
+        psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_REPL_USERNAME --set PASSWORD=$DB_REPL_PASSWORD <<-EOSQL
+          CREATE ROLE :USERNAME SUPERUSER REPLICATION LOGIN PASSWORD ':PASSWORD';
+        EOSQL
+
+        for service in idam ccd_user_profile ccd_definition ccd_data ccd_definition_designer camunda role_assignment openidm wa_workflow_api cft_task_db wa_case_event_messages_db; do
           echo "Database $service: Creating..."
         psql -v ON_ERROR_STOP=1 --username postgres --set USERNAME=$DB_USERNAME --set PASSWORD=$DB_PASSWORD --set DATABASE=$service <<-EOSQL
           CREATE DATABASE :DATABASE
@@ -65,3 +84,5 @@ primary:
         psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $DB_USERNAME WITH PASSWORD '$DB_PASSWORD'";
         psql -v ON_ERROR_STOP=1 --username postgres -c "ALTER USER $WA_USERNAME WITH PASSWORD '$WA_PASSWORD'";
 
+        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO wa_user;";
+        psql -v ON_ERROR_STOP=1 --username postgres -d cft_task_db -c "GRANT CONNECT ON DATABASE cft_task_db TO repl_user;";

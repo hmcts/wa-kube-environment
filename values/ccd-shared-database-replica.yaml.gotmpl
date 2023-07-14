@@ -1,0 +1,50 @@
+image:
+  repository: bitnami/postgresql
+  tag: 14.5.0
+  pullPolicy: IfNotPresent
+
+fullnameOverride: ccd-shared-database-replica
+
+postgresqlDataDir: /bitnami/postgresql/wa
+
+auth:
+  username: postgres
+  password: postgres
+  database: ccd
+
+service:
+  type: ClusterIP
+  port: 5432
+
+volumePermissions:
+  enabled: true
+
+networkPolicy:
+  enabled: false
+  allowExternal: true
+
+primary:
+  extendedConfiguration: |-
+    wal_level = 'logical'
+    shared_buffers = 256MB
+    max_replication_slots = 10
+    max_connections = 200
+  pgHbaConfiguration: |-
+    host     all            all             0.0.0.0/0               trust
+    host     all            all             ::/0                    trust
+    local    all            all                                     trust
+    host     all            all             127.0.0.1/32            trust
+    host     all            all             ::1/128                 trust
+    local   replication     repl_user                               trust
+    host    replication     repl_user       127.0.0.1/32            trust
+    host    replication     repl_user       ::1/128                 trust
+  persistence:
+    enabled: true
+    mountPath: /bitnami/postgresql/
+    existingClaim: shared-pvc
+  resources:
+    limits:
+      memory: 1024Mi
+    requests:
+      memory: 256Mi
+      cpu: 250m

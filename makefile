@@ -100,6 +100,36 @@ environment-up:
 		-e 'tell application "System Events" to tell process "iTerm" to keystroke "$$(source ~/.bash_profile);"' \
 		-e 'tell application "System Events" to tell process "iTerm" to key code 52';
 
+
+	@echo "Fetch POSTGRES_REPLICA_PORT"
+	sleep 3;
+	osascript \
+    -e 'tell application "iTerm" to activate' \
+    -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "Set POSTGRES_REPLICA_PORT"' \
+	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
+    -e 'tell application "System Events" to tell process "iTerm" to keystroke "minikube service ccd-shared-database-replica --url -n hmcts-local;"' \
+    -e 'tell application "System Events" to tell process "iTerm" to key code 52';
+
+	sudo sed -i "" '/POSTGRES_REPLICA_PORT/d' ~/.bash_profile
+	@echo "POSTGRES_REPLICA_PORT removed from ~/.bash_profile"
+	sleep 3;
+
+	@read  -p "Please provide POSTGRES_REPLICA_PORT: " INPUT; \
+    	if [ "" != "$$INPUT" ]; then \
+    		echo "export POSTGRES_REPLICA_PORT=$${INPUT}" | sudo tee -a ~/.bash_profile \
+    		true; \
+    	fi
+
+	@echo "New POSTGRES_REPLICA_PORT putting into ~/.bash_profile"
+	sleep 4;
+	osascript \
+        -e 'tell application "iTerm" to activate' \
+		-e 'tell application "System Events" to tell process "iTerm" to keystroke "$$(source ~/.bash_profile);"' \
+		-e 'tell application "System Events" to tell process "iTerm" to key code 52';
+
+
 	sleep 2;
 	@echo "setup script is starting..."
 	osascript \
