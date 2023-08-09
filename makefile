@@ -53,10 +53,8 @@ environment-up:
 	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-kube-environment;"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
-    \
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "$$(source .env);"' \
 	-e 'tell application "System Events" to tell process "iTerm" to key code 52' \
-    \
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "./environment up"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 
@@ -93,16 +91,8 @@ environment-up:
     		true; \
     	fi
 
-	@echo "New POSTGRES_PORT putting into ~/.bash_profile"
-	sleep 2;
-	osascript \
-        -e 'tell application "iTerm" to activate' \
-		-e 'tell application "System Events" to tell process "iTerm" to keystroke "$$(source ~/.bash_profile);"' \
-		-e 'tell application "System Events" to tell process "iTerm" to key code 52';
-
-
 	@echo "Fetch POSTGRES_REPLICA_PORT"
-	sleep 3;
+	sleep 1;
 	osascript \
     -e 'tell application "iTerm" to activate' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
@@ -114,7 +104,7 @@ environment-up:
 
 	sudo sed -i "" '/POSTGRES_REPLICA_PORT/d' ~/.bash_profile
 	@echo "POSTGRES_REPLICA_PORT removed from ~/.bash_profile"
-	sleep 3;
+	sleep 1;
 
 	@read  -p "Please provide POSTGRES_REPLICA_PORT: " INPUT; \
     	if [ "" != "$$INPUT" ]; then \
@@ -122,15 +112,22 @@ environment-up:
     		true; \
     	fi
 
-	@echo "New POSTGRES_REPLICA_PORT putting into ~/.bash_profile"
-	sleep 4;
+	@echo "Ingress Update"
+	sleep 1;
 	osascript \
-        -e 'tell application "iTerm" to activate' \
-		-e 'tell application "System Events" to tell process "iTerm" to keystroke "$$(source ~/.bash_profile);"' \
-		-e 'tell application "System Events" to tell process "iTerm" to key code 52';
+    -e 'tell application "iTerm" to activate' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using {command down, shift down}' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "ingress-update"' \
+	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
+    -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-kube-environment/;"' \
+    -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "$$(source ~/.bash_profile);"' \
+	-e 'tell application "System Events" to tell process "iTerm" to key code 52' \
+	-e 'tell application "System Events" to tell process "iTerm" to keystroke "./environment patch"' \
+    -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 
-
-	sleep 2;
+	sleep 5;
 	@echo "setup script is starting..."
 	osascript \
     -e 'tell application "iTerm" to activate' \
@@ -140,7 +137,6 @@ environment-up:
 	-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
     -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-kube-environment;"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
-    \
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "cd scripts; ./setup.sh"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52';
 
@@ -193,7 +189,7 @@ environment-up:
 					-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
 					-e 'tell application "System Events" to tell process "iTerm" to keystroke "wa-task-management-api"' \
 					-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
-                    -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-task-management-api; bootRun;"' \
+                    -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-task-management-api; export SPRING_PROFILES_ACTIVE=replica; bootRun;"' \
                     -e 'tell application "System Events" to tell process "iTerm" to key code 52'; \
             fi
 
@@ -359,4 +355,3 @@ pull:
 	sleep 4;
 
 	@echo "All done!!!!"
-
