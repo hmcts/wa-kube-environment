@@ -19,6 +19,7 @@ kubectl apply -f ./charts/pvc.yaml -n hmcts-local
 
 echo "↪️  Applying ingress config"
 kubectl apply -f ./ingress/ingress.yaml -n hmcts-local
+#kubectl patch deployment ingress-nginx-controller --patch "$(cat ./ingress/ingress-patch.yaml)" -n ingress-nginx
 
 echo "↪️  Obtaining ACR token"
 az login
