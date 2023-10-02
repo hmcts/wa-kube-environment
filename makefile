@@ -1,6 +1,6 @@
 .PHONY: start
 
-PROJECT_PATH:=PROVIDE_YOUR_PROJECT_PATH
+PROJECT_PATH:=$(PROVIDE_YOUR_PROJECT_PATH)
 GIT_COMMANDS:=git checkout master; git gc; git pull origin master;
 
 # Start Environment

@@ -59,10 +59,11 @@ Source the .env file in the root of the project:
 source .env
 ```
 
-Set the following environment variables on your `.bash_profile`
+Set the following environment variables on your `.bash_profile` or `.zprofile`(for M2 & M1 chip macs)
 and make sure the terminal can read `.bash_profile`
 
 ```
+#export PROVIDE_YOUR_PROJECT_PATH=<PROJECT_PATH>
 export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
 export WA_CAMUNDA_NEXUS_USER=XXXXXX
 export AM_ROLE_SERVICE_SDK_KEY=XXXXX
