@@ -75,8 +75,8 @@ export WA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 this [Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_. If you cannot
 access the page, check with one of the team members.
 
-**WA_BPMNS_DMNS_PATH** = File path of the repository [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn)
-**WA_TASK_DMNS_BPMNS_PATH** = File path of the repository [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
+**WA_BPMNS_DMNS_PATH** = File path to the repository [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn)
+**WA_TASK_DMNS_BPMNS_PATH** = File path to the repository [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
 
 ### 3. Login:
 
