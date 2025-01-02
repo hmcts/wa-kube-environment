@@ -12,6 +12,7 @@ helmfile.
 - Access to Azure and container registry, clone https://github.com/hmcts/devops-azure-ad
   If you can't access it, then you do not have access to private repositories(Goto previous step) and check with Devops
   team. If you can access, then create a branch something like 'adding-permissions-your-name'.
+- A local clone of the following repositories [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn) & [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
 
 Modify file /users/prod_users.yml by adding permissions to the EOF. Check with the team which permissions need to be
 included.
@@ -74,6 +75,9 @@ export WA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 **Note:** _the values for the above environment variables can be found on
 this [Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_. If you cannot
 access the page, check with one of the team members.
+
+**WA_BPMNS_DMNS_PATH** = File path to the repository [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn)
+**WA_TASK_DMNS_BPMNS_PATH** = File path to the repository [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
 
 ### 3. Login:
 
