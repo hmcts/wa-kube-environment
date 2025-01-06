@@ -13,6 +13,7 @@ helmfile.
   If you can't access it, then you do not have access to private repositories(Goto previous step) and check with Devops
   team. If you can access, then create a branch something like 'adding-permissions-your-name'.
 - A local clone of the following repositories [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn) & [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
+- The master branch must be used with Mac M1, M2 chip. For Intel chip, use the branch 'https://github.com/hmcts/wa-kube-environment/tree/kube-env-mac_intel_chips'.
 
 Modify file /users/prod_users.yml by adding permissions to the EOF. Check with the team which permissions need to be
 included.
@@ -44,13 +45,20 @@ If you are using minikube version v1.15.1 or later
 
 ```shell
 minikube start \
-     --memory=8192 \
-     --cpus=4 \
-     --driver=hyperkit \
-     --addons=ingress
+     --memory=15000 \
+     --cpus=8 \
+     --addons=ingress,ingress-dns \
+     --driver=docker
 ```
 
-Note the --driver value could be docker rather than hyperkit 
+Note: 
+We can use this commands to set the memory and cpu for the minikube cluster.
+`minikube config set memory 15000`
+`minikube config set cpus 8`
+`minikube config set driver docker;`
+
+To view the set configuration, run `minikube config view`
+
 
 ### 2. Environment variables
 
