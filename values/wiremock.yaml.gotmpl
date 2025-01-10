@@ -2,7 +2,7 @@ app:
   name: wiremock
   group: backend
   container:
-    image: rodolpheche/wiremock
+    image: wiremock/wiremock
     tag: latest
     ports:
       - containerPort: 8080
@@ -10,7 +10,7 @@ app:
         name: http
     resources:
       limits:
-        memory: "128Mi"
+        memory: "1024Mi"
       requests:
         memory: "56Mi"
   volume:

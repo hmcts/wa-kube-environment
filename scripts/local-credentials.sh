@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Usage: ./local-credentials.sh
 ##
 ## Returns credentials

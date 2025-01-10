@@ -25,10 +25,14 @@ networkPolicy:
 
 primary:
   extendedConfiguration: |-
-    wal_level = 'logical'
+    wal_level = 'replica'
     shared_buffers = 256MB
     max_replication_slots = 10
     max_connections = 200
+    log_destination = 'csvlog'
+    logging_collector = on
+    log_directory = 'pg_log'
+    log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
   pgHbaConfiguration: |-
     host     all            all             0.0.0.0/0               trust
     host     all            all             ::/0                    trust
