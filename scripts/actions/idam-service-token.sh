@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Usage: ./idam-service-token.sh [microservice_name]
 ##
 ## Options:

@@ -46,6 +46,10 @@ app:
         value: false
       - key: "DEFINITION_STORE_TX_TIMEOUT_DEFAULT"
         value: 120
+      - key: "WELSH_TRANSLATION_ENABLED"
+        value: false
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:UseSVE=0"
     readinessProbe:
       enabled: true
       httpGet:
@@ -55,6 +59,6 @@ app:
       periodSeconds: 30
     resources:
       limits:
-        memory: "1024Mi"
+        memory: "6000Mi"
       requests:
-        memory: "256Mi"
+        memory: "512Mi"

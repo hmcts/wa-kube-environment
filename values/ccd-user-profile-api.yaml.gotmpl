@@ -31,6 +31,8 @@ app:
         value: {{ requiredEnv "CCD_DB_PASSWORD" }}
       - key: "USER_PROFILE_DB_USE_SSL"
         value: false
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:UseSVE=0"
     readinessProbe:
       enabled: true
       httpGet:
@@ -38,3 +40,8 @@ app:
         port: 4453
       initialDelaySeconds: 300
       periodSeconds: 30
+    resources:
+      limits:
+        memory: "3000Mi"
+      requests:
+        memory: "512Mi"

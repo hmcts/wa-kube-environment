@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Register role in CCD
 
 ROLE=$1

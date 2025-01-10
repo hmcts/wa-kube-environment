@@ -17,5 +17,10 @@ app:
       enabled: true
       name: ccd-docker-azure
       path: ccd-docker-azure-blob-data:/opt/azurite/folder
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "256Mi"
 
 

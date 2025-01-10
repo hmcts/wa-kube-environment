@@ -33,6 +33,8 @@ app:
         value: key
       - key: "DOCUMENT_TTL"
         value: 3600000
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:UseSVE=0"
     readinessProbe:
       enabled: true
       httpGet:
@@ -40,3 +42,8 @@ app:
         port: 4455
       initialDelaySeconds: 300
       periodSeconds: 30
+    resources:
+      limits:
+        memory: "3000Mi"
+      requests:
+        memory: "512Mi"
