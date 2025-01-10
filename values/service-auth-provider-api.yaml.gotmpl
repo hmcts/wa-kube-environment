@@ -45,10 +45,17 @@ app:
         value: {{ requiredEnv "IDAM_KEY_EM_CCD_ORCHESTRATOR" }}
       - key: "MICROSERVICEKEYS_CCD_CASE_DOCUMENT_AM_API"
         value: {{ requiredEnv "S2S_SECRET_CASE_DOCUMENT_AM_API" }}
+      - key: "MICROSERVICEKEYS_TS_TRANSLATION_SERVICE"
+        value: {{ requiredEnv "S2S_SECRET_TS_TRANSLATION_SERVICE" }}
     readinessProbe:
       enabled: true
       httpGet:
         path: /health
       initialDelaySeconds: 300
       periodSeconds: 30
+    resources:
+      limits:
+        memory: "3000Mi"
+      requests:
+        memory: "512Mi"
 

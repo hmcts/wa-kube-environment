@@ -13,6 +13,8 @@ helmfile.
   If you can't access it, then you do not have access to private repositories(Goto previous step) and check with Devops
   team. If you can access, then create a branch something like 'adding-permissions-your-name'.
 - A local clone of the following repositories [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn) & [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
+- This environment setup is intended to be used with Apple Mac machines running Apple silicone such as M1, M2, M3, M4 / M4 Max and other silicon chips. 
+  For Intel chip, use the branch 'https://github.com/hmcts/wa-kube-environment/tree/kube-env-mac_intel_chips'.
 
 Modify file /users/prod_users.yml by adding permissions to the EOF. Check with the team which permissions need to be
 included.
@@ -44,13 +46,21 @@ If you are using minikube version v1.15.1 or later
 
 ```shell
 minikube start \
-     --memory=8192 \
-     --cpus=4 \
-     --driver=hyperkit \
-     --addons=ingress
+     --memory=15000 \
+     --cpus=8 \
+     --addons=ingress,ingress-dns \
+     --driver=docker
 ```
 
-Note the --driver value could be docker rather than hyperkit 
+Note: 
+We can use these commands to set the memory and cpu for the minikube cluster.
+Adjust the values as is suitable for your particular machine
+`minikube config set memory 15000`
+`minikube config set cpus 8`
+`minikube config set driver docker;`
+
+To view the set configuration, run `minikube config view`
+
 
 ### 2. Environment variables
 
@@ -60,10 +70,11 @@ Source the .env file in the root of the project:
 source .env
 ```
 
-Set the following environment variables on your `.bash_profile`
+Set the following environment variables on your `.bash_profile` or `.zprofile`(for M2 & M1 chip macs)
 and make sure the terminal can read `.bash_profile`
 
 ```
+#export PROVIDE_YOUR_PROJECT_PATH=<PROJECT_PATH>
 export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
 export WA_CAMUNDA_NEXUS_USER=XXXXXX
 export AM_ROLE_SERVICE_SDK_KEY=XXXXX
