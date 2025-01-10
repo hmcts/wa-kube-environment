@@ -19,6 +19,10 @@ function environment_pull() {
   ./scripts/environment/pull.sh
 }
 
+function environment_patch() {
+  ./scripts/environment/patch.sh
+}
+
 function environment_up() {
   scripts/environment/up.sh
 }
@@ -39,6 +43,9 @@ login)
   ;;
 pull)
   environment_pull
+  ;;
+patch)
+  environment_patch
   ;;
 up)
   environment_up

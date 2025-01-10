@@ -34,12 +34,14 @@ app:
         value: {{ requiredEnv "WA_TASK_MANAGEMENT_API_URL" }}
       - key: "TZ"
         value: Europe/London
+      - key: "ROOT_LOGGING_LEVEL"
+        value: debug
     ports:
       - containerPort: 8999
         servicePort: 80
         name: http
     resources:
       limits:
-        memory: "1024Mi"
+        memory: "3000Mi"
       requests:
-        memory: "256Mi"
+        memory: "512Mi"
