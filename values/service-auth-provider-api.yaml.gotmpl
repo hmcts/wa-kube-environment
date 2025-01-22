@@ -47,6 +47,8 @@ app:
         value: {{ requiredEnv "S2S_SECRET_CASE_DOCUMENT_AM_API" }}
       - key: "MICROSERVICEKEYS_TS_TRANSLATION_SERVICE"
         value: {{ requiredEnv "S2S_SECRET_TS_TRANSLATION_SERVICE" }}
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:InitialRAMPercentage=30.0 -XX:MaxRAMPercentage=65.0 -XX:MinRAMPercentage=30.0 -javaagent:/opt/app/applicationinsights-agent-3.4.18.jar -Dfile.encoding=UTF-8 -XX:UseSVE=0"
     readinessProbe:
       enabled: true
       httpGet:

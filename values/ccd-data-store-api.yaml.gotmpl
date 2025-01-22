@@ -66,6 +66,8 @@ app:
         value: http://am-role-assignment
       - key: "DATA_STORE_DEFAULT_LOG_LEVEL"
         value: info
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:UseSVE=0"
     readinessProbe:
       enabled: true
       httpGet:

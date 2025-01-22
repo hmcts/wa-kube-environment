@@ -48,6 +48,8 @@ app:
         value: 120
       - key: "WELSH_TRANSLATION_ENABLED"
         value: false
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:UseSVE=0"
     readinessProbe:
       enabled: true
       httpGet:
