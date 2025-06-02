@@ -1,20 +1,28 @@
 # Work Allocation Dev Environment
 
-A Kubernetes environment with all the necessary services for local development using helm charts and deployed with
+[![License: MIT](https://img.shields.io/github/license/hmcts/wa-task-management-api)](https://opensource.org/licenses/MIT)
+
+Last reviewed on: 02/06/2025
+
+## Summary
+
+A local development Kubernetes environment which provides all the dependencies required for the WA Task Management common service.  Uses helm charts and deployed with
 helmfile.
+
+Developers will need this running to be able to successfully run Functional Tests.
 
 ## Prerequisites
 
 - HMCTS account
 - Github access to public and private repositories. Need to have a Jira ticket (Reporting Mgr/Tech Lead will handle)
-  Once the ticket got assigned, DevOps team will ask for user acceptance which can be done on this page
+  Once the ticket is assigned, DevOps team will ask for user acceptance which can be done on this page
   https://tools.hmcts.net/confluence/display/RPE/Acceptable+Use+Policy+and+Contractor+Security+Guidance
 - Access to Azure and container registry, clone https://github.com/hmcts/devops-azure-ad
   If you can't access it, then you do not have access to private repositories(Goto previous step) and check with Devops
   team. If you can access, then create a branch something like 'adding-permissions-your-name'.
 - A local clone of the following repositories [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn) & [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
 - This environment setup is intended to be used with Apple Mac machines running Apple silicone such as M1, M2, M3, M4 / M4 Max and other silicon chips. 
-  For Intel chip, use the branch 'https://github.com/hmcts/wa-kube-environment/tree/kube-env-mac_intel_chips'.
+  For older Macs using Intel chips, use the branch: 'https://github.com/hmcts/wa-kube-environment/tree/kube-env-mac_intel_chips'.
 
 Modify file /users/prod_users.yml by adding permissions to the EOF. Check with the team which permissions need to be
 included.
@@ -34,7 +42,7 @@ automatically.
 - [Helm](https://helm.sh)
 - [Helmfile](https://github.com/roboll/helmfile)
 
-The above can all brew installed via `brew install`
+The above can all brew installed via `brew install` or your preferred package manager.
 
 ## Quick start
 
@@ -86,8 +94,8 @@ export WA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 this [Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_. If you cannot
 access the page, check with one of the team members.
 
-**WA_BPMNS_DMNS_PATH** = File path to the repository [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn)
-**WA_TASK_DMNS_BPMNS_PATH** = File path to the repository [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
+**WA_BPMNS_DMNS_PATH** = File path to your local copy of the repository [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn)
+**WA_TASK_DMNS_BPMNS_PATH** = File path to your local copy of the repository [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
 
 ### 3. Login:
 
@@ -219,13 +227,15 @@ export AZURE_SERVICE_BUS_CONNECTION_STRING="Endpoint=sb://REPLACE_ME.servicebus.
 ```
 
 ### Database replication
-There are now 2 containers with Postrgesql databases, one is the primary and the second is a replica. This uses logical replication and the scripts to setup that repication is in task-management-api. The replica can be connected to on Host:ccd-shared-database-replica Database: cft_task_db Port:5433, with the same wa_user. You will need to rerun the script above to add the new host name to your /etc/hosts file.
+For the Task Management app there are now 2 containers with Postrgesql databases called `cft_task_db` - Primary and Replica.  This uses logical replication and the scripts to setup that repication is in task-management-api and are run on startup. The replica can be connected to on Host:ccd-shared-database-replica Database: cft_task_db Port:5433, with the same wa_user. You will need to rerun the script above to add the new host name to your /etc/hosts file.
 
 ## Set-up Environment using makefile
 
-Open `makefile` and set `PROJECT_PATH` value. `pwd` command returns project path.
+To streamline the setup process there is a `makefile` which will run all the setup commands in sequence.  To use it:
 
-Open idea terminal run following command.
+Open `makefile` and set `PROJECT_PATH` value. The `pwd` command in a terminal returns project path.
+
+Open a terminal run following command.
 
 ```shell
 make environment-up
