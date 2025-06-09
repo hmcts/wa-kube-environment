@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/github/license/hmcts/wa-task-management-api)](https://opensource.org/licenses/MIT)
 
-Last reviewed on: 02/06/2025
+Last reviewed on: 09/06/2025
 
 ## Summary
 
@@ -82,17 +82,33 @@ Set the following environment variables on your `.bash_profile` or `.zprofile`(f
 and make sure the terminal can read `.bash_profile`
 
 ```
+# Camunda
+export WA_CAMUNDA_NEXUS_PASSWORD=change-me
+export WA_CAMUNDA_NEXUS_USER=change-me
+
+# Access Management
+export AM_ROLE_SERVICE_SDK_KEY=change-me
+
+#Launch Darkly Keys
+export LAUNCH_DARKLY_SDK_KEY=change-me
+export LAUNCH_DARKLY_ACCESS_TOKEN=change-me
+
+# Docmosis and Address Lookup services
+export ADDRESS_LOOKUP_TOKEN=change-me
+export DOCMOSIS_ACCESS_KEY=change-me
+
+```
+
+**Note:** The values for sensitive environment values above can be found in the Azure Vault.
+Please see the following [Private Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_ for more info or check with one of the Work Allocation / Task Management team members.
+
+You will also need to provide the paths to essential Camunda artifacts
+
+```
 #export PROVIDE_YOUR_PROJECT_PATH=<PROJECT_PATH>
-export WA_CAMUNDA_NEXUS_PASSWORD=XXXXXX
-export WA_CAMUNDA_NEXUS_USER=XXXXXX
-export AM_ROLE_SERVICE_SDK_KEY=XXXXX
 export WA_BPMNS_DMNS_PATH=<PATH_TO_BPMN_REPO>
 export WA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 ```
-
-**Note:** _the values for the above environment variables can be found on
-this [Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_. If you cannot
-access the page, check with one of the team members.
 
 **WA_BPMNS_DMNS_PATH** = File path to your local copy of the repository [wa-standalone-task-bpmn](https://github.com/hmcts/wa-standalone-task-bpmn)
 **WA_TASK_DMNS_BPMNS_PATH** = File path to your local copy of the repository [wa-task-configuration-template](https://github.com/hmcts/wa-task-configuration-template)
