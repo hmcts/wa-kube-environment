@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/github/license/hmcts/wa-task-management-api)](https://opensource.org/licenses/MIT)
 
-Last reviewed on: 09/06/2025
+Last reviewed on: 10/06/2025
 
 ## Summary
 
@@ -99,8 +99,10 @@ export DOCMOSIS_ACCESS_KEY=change-me
 
 ```
 
-**Note:** The values for sensitive environment values above can be found in the Azure Vault.
-Please see the following [Private Confluence Page](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_ for more info or check with one of the Work Allocation / Task Management team members.
+**Note:** The values for sensitive environment variables listed above are securely stored in the MS Azure Vault within HMCTS.
+There are some instructions if you have the required permissions here: [MiniKube Secrets](https://tools.hmcts.net/confluence/display/WA/Kube+Environment+Secrets)
+See the following page regarding Camunda: [Camunda License](https://tools.hmcts.net/confluence/display/WA/Camunda+Enterprise+Licence+Key)_
+For further info or help reach out to the Work Allocation / Task Management team members.
 
 You will also need to provide the paths to essential Camunda artifacts
 
