@@ -1,7 +1,8 @@
 image:
   debug: true
-  repository: bitnami/postgresql
-  tag: 14.5.0
+  registry: hmctspublic.azurecr.io
+  repository: imported/bitnami/postgresql
+  tag: '15.9.0'
   pullPolicy: IfNotPresent
 
 fullnameOverride: ccd-shared-database
@@ -19,7 +20,6 @@ service:
 
 volumePermissions:
   enabled: true
-
 networkPolicy:
   enabled: false
   allowExternal: true
