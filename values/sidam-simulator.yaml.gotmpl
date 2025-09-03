@@ -13,6 +13,8 @@ app:
         value: 5000
       - key: "SIMULATOR_OPENID_BASE_URL"
         value: http://sidam-simulator
+      - key: "JAVA_TOOL_OPTIONS"
+        value: "-XX:UseSVE=0"
     readinessProbe:
       enabled: true
       httpGet:
