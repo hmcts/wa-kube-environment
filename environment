@@ -19,6 +19,10 @@ function environment_pull() {
   ./scripts/environment/pull.sh
 }
 
+function environment_local_pull() {
+  ./scripts/environment/update-local-repos.sh
+}
+
 function environment_patch() {
   ./scripts/environment/patch.sh
 }
@@ -42,6 +46,9 @@ login)
   environment_login
   ;;
 pull)
+  environment_pull
+  ;;
+pull-local)
   environment_pull
   ;;
 patch)
