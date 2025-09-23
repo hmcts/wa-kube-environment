@@ -12,3 +12,6 @@ echo "Setup Wiremock responses for Professional Reference Data based on existing
 
 echo "Deploying camunda bpmn and dmn"
 ./camunda-deployment.sh
+
+echo "Uploading CCD definitions"
+./upload-ccd-definitions.sh
