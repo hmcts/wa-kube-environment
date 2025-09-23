@@ -129,6 +129,11 @@ export WA_TASK_DMNS_BPMNS_PATH=<PATH_TO_DMN_REPO>
 ./environment pull
 ```
 
+### Update local projects (make sure $PROJECT_PATH is updated in update-local-repos.sh)
+```shell
+./environment pull-local
+```
+
 If you get an error regarding authentication when attempting to pull the images like:
 
   ```

@@ -49,7 +49,7 @@ pull)
   environment_pull
   ;;
 pull-local)
-  environment_pull
+  environment_local_pull
   ;;
 patch)
   environment_patch

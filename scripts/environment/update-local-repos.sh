@@ -19,6 +19,7 @@ fi
 
 # The rest use master
 for r in \
+  wa-kube-environment \
   wa-case-event-handler \
   wa-post-deployment-ft-tests \
   wa-standalone-task-bpmn \
