@@ -28,25 +28,23 @@ app:
       - key: "IDAM_S2S_URL"
         value: http://service-auth-provider-api
       - key: "ROLE_ASSIGNMENT_IDAM_CLIENT_ID"
-        value: ccd_gateway
+        value: {{ requiredEnv "WA_IDAM_CLIENT_ID" }}
       - key: "ROLE_ASSIGNMENT_IDAM_CLIENT_SECRET"
-        value: {{ requiredEnv "OAUTH2_CLIENT_CCD_GATEWAY" }}
+        value: {{ requiredEnv "WA_IDAM_CLIENT_SECRET" }}
       - key: "ROLE_ASSIGNMENT_IDAM_REDIRECT_URI"
         value: http://idam-web-public/oauth2redirect
       - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_USERID"
-        value: {{ requiredEnv "IDAM_ADMIN_USER" }}
+        value: {{ requiredEnv "RAS_SYSTEM_USERNAME" }}
       - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_PASSWORD"
-        value: {{ requiredEnv "IDAM_ADMIN_PASSWORD" }}
+        value: {{ requiredEnv "RAS_SYSTEM_PASSWORD" }}
       - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_SCOPE"
         value: search-user
       - key: "CCD_DATA_STORE_URL"
         value: http://ccd-data-store-api
       - key: "MICROSERVICE_NAME"
         value: am_role_assignment_service
-      - key: "LAUNCH_DARKLY_ENV"
+      - key: "RAS_ENV"
         value: pr
-      - key: "LD_SDK_KEY"
-        value: {{ requiredEnv "AM_ROLE_SERVICE_SDK_KEY" }}
       - key: "OPEN_ID_API_BASE_URI"
         value: http://sidam-simulator/o
       - key: "OIDC_ISSUER_URL"

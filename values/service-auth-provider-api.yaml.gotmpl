@@ -47,6 +47,8 @@ app:
         value: {{ requiredEnv "S2S_SECRET_CASE_DOCUMENT_AM_API" }}
       - key: "MICROSERVICEKEYS_TS_TRANSLATION_SERVICE"
         value: {{ requiredEnv "S2S_SECRET_TS_TRANSLATION_SERVICE" }}
+      - key: "MICROSERVICEKEYS_AM_ROLE_ASSIGNMENT_SERVICE"
+        value: {{ requiredEnv "S2S_SECRET_ROLE_ASSIGNMENT_API" }}
     readinessProbe:
       enabled: true
       httpGet:
