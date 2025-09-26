@@ -7,7 +7,6 @@ echo "Setting up ccd import User"
 
 echo "Setting up WA System User"
 ./actions/create-user.sh "${WA_SYSTEM_USERNAME}" "WASystem" "WaUser" "${WA_SYSTEM_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker-ia-system\"}, { \"code\": \"caseworker-wa\"}, { \"code\": \"caseworker-wa-task-configuration\"}]"
-./actions/create-user.sh "${RAS_SYSTEM_USERNAME}" "RASSystem" "RasUser" "${RAS_SYSTEM_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker-wa\"}, { \"code\": \"caseworker-ras-validation\"}, { \"code\": \"caseworker-ia\"}, { \"code\": \"caseworker\"}]"
 #
 #echo "Setting up WA Users and role assignments..."
 #./actions/create-user.sh "${WA_CASEOFFICER_USERNAME}" "WaCaseOfficer" "case worker" "${WA_CASEOFFICER_PASSWORD}" "caseworker" "[{ \"code\": \"caseworker\"}, { \"code\": \"caseworker-wa\"}, {\"code\": \"caseworker-wa-task-officer\"}]"

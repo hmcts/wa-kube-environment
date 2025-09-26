@@ -34,9 +34,9 @@ app:
       - key: "ROLE_ASSIGNMENT_IDAM_REDIRECT_URI"
         value: http://idam-web-public/oauth2redirect
       - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_USERID"
-        value: {{ requiredEnv "RAS_SYSTEM_USERNAME" }}
+        value: {{ requiredEnv "WA_SYSTEM_USERNAME" }}
       - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_PASSWORD"
-        value: {{ requiredEnv "RAS_SYSTEM_PASSWORD" }}
+        value: {{ requiredEnv "WA_SYSTEM_PASSWORD" }}
       - key: "ROLE_ASSIGNMENT_IDAM_ADMIN_SCOPE"
         value: search-user
       - key: "CCD_DATA_STORE_URL"
