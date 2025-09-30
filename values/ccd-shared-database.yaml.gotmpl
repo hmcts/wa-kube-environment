@@ -20,6 +20,11 @@ service:
 
 volumePermissions:
   enabled: true
+  image:
+    registry: hmctspublic.azurecr.io
+    repository: imported/bitnami/os-shell
+    tag: 12-debian-12-r50
+    pullPolicy: IfNotPresent
 networkPolicy:
   enabled: false
   allowExternal: true
