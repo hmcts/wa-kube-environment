@@ -10,7 +10,7 @@ DESCRIPTION="${7:-CCD Gateway}"
 SCOPE="${8:-openid profile roles}"
 
 BASEDIR=$(dirname "$0")
-apiToken=$($BASEDIR/authenticate.sh "${IDAM_URL}" "${IDAM_ADMIN_USER}" "${IDAM_ADMIN_PASSWORD}")
+apiToken=$($BASEDIR/authenticate.sh "${IDAM_URL}" "${WA_SYSTEM_USERNAME}" "${WA_SYSTEM_PASSWORD}")
 
 echo "\nCreating service with:\nLabel: ${LABEL}\nClient ID: ${CLIENT_ID}\nClient Secret: ${CLIENT_SECRET}\nRedirect URL: ${REDIRECT_URLS}\nRoles: ${ALLOWED_ROLES}\n"
 
