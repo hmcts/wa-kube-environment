@@ -54,8 +54,8 @@ If you are using minikube version v1.15.1 or later
 
 ```shell
 minikube start \
-     --memory=24000 \
-     --cpus=16 \
+     --memory=15000 \
+     --cpus=8 \
      --addons=ingress,ingress-dns \
      --driver=docker
 ```

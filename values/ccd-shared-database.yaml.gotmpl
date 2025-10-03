@@ -20,7 +20,11 @@ service:
 
 volumePermissions:
   enabled: true
-
+  image:
+    registry: hmctspublic.azurecr.io
+    repository: imported/bitnami/postgresql
+    tag: '15.9.0'
+    pullPolicy: IfNotPresent
 networkPolicy:
   enabled: false
   allowExternal: true
