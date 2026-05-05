@@ -7,21 +7,21 @@ EXTERNAL_IMAGES=(
 )
 
 PUBLIC_IMAGES=(
-  hmctspublic.azurecr.io/am/role-assignment-service:latest
-  hmctspublic.azurecr.io/rpe/service-auth-provider:latest
-  hmctspublic.azurecr.io/idam/web-admin:stable
-  hmctspublic.azurecr.io/ccd/user-profile-api:latest
-  hmctspublic.azurecr.io/ccd/message-publisher:latest
-  hmctspublic.azurecr.io/ccd/definition-store-api:latest
-  hmctspublic.azurecr.io/ccd/data-store-api:latest
-  hmctspublic.azurecr.io/ccd/api-gateway-web:latest
-  hmctspublic.azurecr.io/ccd/case-document-am-api
-  hmctspublic.azurecr.io/xui/webapp:latest
-  hmctspublic.azurecr.io/hmcts/rse/rse-idam-simulator:latest
+  hmctsprod.azurecr.io/am/role-assignment-service:latest
+  hmctsprod.azurecr.io/rpe/service-auth-provider:latest
+  hmctsprod.azurecr.io/idam/web-admin:stable
+  hmctsprod.azurecr.io/ccd/user-profile-api:latest
+  hmctsprod.azurecr.io/ccd/message-publisher:latest
+  hmctsprod.azurecr.io/ccd/definition-store-api:latest
+  hmctsprod.azurecr.io/ccd/data-store-api:latest
+  hmctsprod.azurecr.io/ccd/api-gateway-web:latest
+  hmctsprod.azurecr.io/ccd/case-document-am-api
+  hmctsprod.azurecr.io/xui/webapp:latest
+  hmctsprod.azurecr.io/hmcts/rse/rse-idam-simulator:latest
 )
 
 PRIVATE_IMAGES=(
-  hmctsprivate.azurecr.io/camunda/bpm:latest
+  hmctsprod.azurecr.io/camunda/bpm:latest
 )
 
 ## Usage: pull_image [type] [image_repository]

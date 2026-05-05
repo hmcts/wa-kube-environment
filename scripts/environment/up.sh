@@ -25,11 +25,11 @@ kubectl patch deployment ingress-nginx-controller --patch "$(cat ./ingress/ingre
 echo "↪️  Obtaining ACR token"
 az login
 az account set -s 8999dec3-0104-4a27-94ee-6588559729d1
-TOKEN=$(az acr login --name hmctsprivate --subscription DCD-CNP-PROD --expose-token | jq --raw-output '.accessToken')
+TOKEN=$(az acr login --name hmctsprod --subscription DCD-CNP-PROD --expose-token | jq --raw-output '.accessToken')
 
 echo "↪️  Saving Token as secret"
 kubectl create secret docker-registry $SECRET_NAME \
-  --docker-server=hmctsprivate.azurecr.io \
+  --docker-server=hmctsprod.azurecr.io \
   --docker-username=00000000-0000-0000-0000-000000000000 \
   --docker-password=$TOKEN \
   -n $NAMESPACE
