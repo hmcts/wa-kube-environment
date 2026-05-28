@@ -127,6 +127,28 @@ environment-up:
 	-e 'tell application "System Events" to tell process "iTerm" to keystroke "./environment patch"' \
     -e 'tell application "System Events" to tell process "iTerm" to key code 52' \
 
+	@read  -p "Would you like to run camunda-bpm locally (y/n)?: " INPUT; \
+            if [ "y" = "$$INPUT" ]; then \
+                osascript \
+                    -e 'tell application "iTerm" to activate' \
+                    -e 'tell application "System Events" to tell process "iTerm" to keystroke "d" using command down' \
+					-e 'tell application "System Events" to tell process "iTerm" to keystroke "i" using command down' \
+					-e 'tell application "System Events" to tell process "iTerm" to keystroke "camunda-bpm"' \
+					-e 'tell application "System Events" to tell process "iTerm" to key code 53' \
+                    -e 'tell application "System Events" to tell process "iTerm" to keystroke "cd ${PROJECT_PATH}/wa-kube-environment; ./scripts/run-local-camunda-bpm.sh;"' \
+                    -e 'tell application "System Events" to tell process "iTerm" to key code 52'; \
+            fi
+
+	@read  -p "Is camunda-bpm ready for BPMN/DMN deployment (y/n)?: " INPUT; \
+	if [ "y" != "$$INPUT" ]; then \
+		while [ "y" != "$$INPUT" ] ; do \
+				echo "\nIs camunda-bpm ready for BPMN/DMN deployment (y/n)?\n"; \
+				sleep 4; \
+				read INPUT; \
+			done; \
+			true; \
+	fi
+
 	sleep 5;
 	@echo "setup script is starting..."
 	osascript \

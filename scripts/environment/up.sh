@@ -34,5 +34,9 @@ kubectl create secret docker-registry $SECRET_NAME \
   --docker-password=$TOKEN \
   -n $NAMESPACE
 
+echo "↪️  Removing legacy camunda-bpm pod deployment if present"
+helm uninstall camunda-local-bpm -n $NAMESPACE --ignore-not-found || true
+kubectl delete deployment camunda-local-bpm service camunda-local-bpm -n $NAMESPACE --ignore-not-found=true || true
+
 echo "↪️  Starting deployments"
 helmfile -n hmcts-local sync

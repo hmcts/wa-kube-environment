@@ -151,7 +151,13 @@ docker logout hmctspublic.azurecr.io
 :warning: You probably notice that the xui-webapp pod is not running. This is because it's waiting for the wiremock
 service to be up. This is a manual step for the moment. Therefore, run the following:
 
-Note to run setup.sh you must have already run the first step to run the service below
+Before running `setup.sh`, start `camunda-bpm` locally and make sure `CAMUNDA_URL` points to `http://localhost:8999/engine-rest`. The setup script deploys BPMNs/DMNs into Camunda.
+
+The local Camunda startup should use the host-side database port from `POSTGRES_PORT`:
+
+```shell
+./scripts/run-local-camunda-bpm.sh
+```
 
 ```shell
    cd scripts
@@ -169,7 +175,7 @@ Generally this step need only be done once per installation, some environments l
 It definitely needs to have been run once before setup script above is run.
 
 ```shell
-echo "$(minikube ip) ccd-shared-database ccd-shared-database-replica service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp camunda-local-bpm am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
+echo "$(minikube ip) ccd-shared-database ccd-shared-database-replica service-auth-provider-api ccd-user-profile-api shared-db ccd-definition-store-api idam-web-admin ccd-definition-store-api ccd-data-store-api ccd-api-gateway wiremock xui-webapp am-role-assignment sidam-simulator local-dm-store ccd-case-document-am-api" | sudo tee -a /etc/hosts
 ```
 
 `$(minikube ip)` should be populated automatically. If not you can replace it manually to get minikube ip, run
