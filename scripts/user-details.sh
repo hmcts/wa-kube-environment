@@ -18,4 +18,4 @@ USER_TOKEN=$($BASEDIR/actions/idam-user-token.sh $USERNAME $PASSWORD)
 echo  $USER_TOKEN
 
 #2. Get details
-curl --silent --show-error -X GET "${IDAM_URL}/details" -H "accept: application/json" -H "authorization: Bearer ${USER_TOKEN}" | jq -r .
+curl --silent --show-error -X GET "${IDAM_URL}/o/userinfo" -H "accept: application/json" -H "authorization: Bearer ${USER_TOKEN}" | jq -r .

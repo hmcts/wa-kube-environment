@@ -8,4 +8,4 @@
 
 USER_TOKEN=${1}
 
-curl --silent --show-error -X GET "${IDAM_URL}/details" -H "accept: application/json" -H "authorization: Bearer ${USER_TOKEN}" | jq -r .id
+curl --silent --show-error -X GET "${IDAM_URL}/o/userinfo" -H "accept: application/json" -H "authorization: Bearer ${USER_TOKEN}" | jq -r .id
