@@ -1,5 +1,7 @@
 # Dynamic image tags
 .tags.env
+.db-ports.env
+.service-ports.env
 .workspace
 
 # IntelliJ IDEA files

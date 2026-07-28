@@ -258,3 +258,65 @@ Open a terminal run following command.
 ```shell
 make environment-up
 ```
+
+### Password-free local environment
+
+The standard `environment-up` target uses `sudo minikube tunnel`. For a complete
+clean startup without administrator access, run:
+
+```shell
+make environment-reset-no-admin-full
+```
+
+This recreates Minikube, deploys the charts, and exposes the required databases
+and HTTP services through fixed localhost ports. It then:
+
+1. Runs the setup/DMN scripts in a separate iTerm pane with success, retry, and
+   abort confirmation.
+2. Generates and uploads the WA CCD definitions in another confirmed pane.
+3. Starts `wa-workflow-api`.
+4. Prompts for TM, Task Monitor, Case Event Handler, and post-deployment tests.
+
+If startup was interrupted or the existing cluster should be reused, resume
+without deleting it:
+
+```shell
+make environment-up-no-admin-full
+```
+
+The readiness check resumes missing or partial Helmfile deployments. To restart
+only TM after setup:
+
+```shell
+make task-management-api-up-no-admin
+```
+
+The full setup writes the fixed database and service routes to
+`~/.bash_profile`, matching the original setup so that IntelliJ can load them.
+To refresh those values without repeating the deployment:
+
+```shell
+make shell-environment-no-admin
+```
+
+After the values are refreshed, fully quit and reopen IntelliJ normally before
+running TM functional tests.
+
+The JDBC forwards use `127.0.0.1:15432` for the primary database and
+`127.0.0.1:15433` for the replica. TM logical replication uses the in-cluster
+publisher `postgresql://ccd-shared-database:5432`.
+
+To select different fixed database ports:
+
+```shell
+make environment-reset-no-admin-full \
+  POSTGRES_LOCAL_PORT=25432 \
+  POSTGRES_REPLICA_LOCAL_PORT=25433
+```
+
+Manage the background forwards with:
+
+```shell
+make port-forwards-status
+make port-forwards-stop
+```
