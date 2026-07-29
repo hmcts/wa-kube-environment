@@ -1,7 +1,97 @@
-.PHONY: start
+.PHONY: start environment-up-no-admin environment-reset-no-admin \
+	ensure-environment-up-no-admin environment-up-no-admin-full \
+	task-management-api-up-no-admin environment-reset-no-admin-full \
+	shell-environment-no-admin \
+	host-environment-up-no-admin \
+	database-port-forwards-start database-port-forwards-stop database-port-forwards-status \
+	application-port-forwards-start application-port-forwards-stop application-port-forwards-status \
+	port-forwards-stop port-forwards-status
 
 PROJECT_PATH:=$(PROVIDE_YOUR_PROJECT_PATH)
 GIT_COMMANDS:=git checkout master; git gc; git pull origin master;
+POSTGRES_LOCAL_PORT ?= 15432
+POSTGRES_REPLICA_LOCAL_PORT ?= 15433
+TASK_MANAGEMENT_API_DIR ?= $(abspath ../wa-task-management-api)
+
+# Deploy Kubernetes without minikube tunnel or sudo. This target exposes the
+# databases through fixed, unprivileged localhost ports after they are ready.
+environment-up-no-admin:
+	minikube start --addons=ingress,ingress-dns --driver=docker
+	bash -c 'source .env && ./environment up'
+	$(MAKE) database-port-forwards-start
+
+# Recreate the cluster before running the password-free deployment.
+environment-reset-no-admin:
+	minikube stop
+	minikube delete
+	$(MAKE) environment-up-no-admin
+
+# Start and deploy the cluster only when it is not already healthy.
+ensure-environment-up-no-admin:
+	@if minikube status >/dev/null 2>&1 && \
+		./scripts/environment/is-environment-ready.sh >/dev/null 2>&1; then \
+		echo "Minikube and the required environment services are already running."; \
+	else \
+		echo "The environment is stopped, missing, or only partially deployed; starting/resuming it..."; \
+		$(MAKE) environment-up-no-admin; \
+	fi
+
+# Full password-free setup without deleting an existing cluster first.
+environment-up-no-admin-full:
+	$(MAKE) host-environment-up-no-admin
+
+# Mirror the host-side setup and repository launch sequence from environment-up
+# without using minikube tunnel or administrator privileges.
+environment-reset-no-admin-full:
+	$(MAKE) environment-reset-no-admin
+	$(MAKE) host-environment-up-no-admin
+
+# Continue the host-side setup when the pods are already deployed.
+host-environment-up-no-admin:
+	$(MAKE) ensure-environment-up-no-admin
+	$(MAKE) shell-environment-no-admin
+	./scripts/environment/run-host-setup-in-iterm.sh
+	./scripts/environment/start-wa-repositories-no-admin.sh
+
+task-management-api-up-no-admin: database-port-forwards-start application-port-forwards-start
+	@test -x "$(TASK_MANAGEMENT_API_DIR)/gradlew" || \
+		(echo "Cannot find wa-task-management-api at $(TASK_MANAGEMENT_API_DIR)"; exit 1)
+	bash -c 'source scripts/environment/activate-local-databases.sh && \
+		export SPRING_PROFILES_ACTIVE=replica && \
+		cd "$(TASK_MANAGEMENT_API_DIR)" && \
+		exec ./gradlew clean bootRun \
+			--args="--replication.subscriptionUrl=postgresql://ccd-shared-database:5432"'
+
+shell-environment-no-admin: database-port-forwards-start application-port-forwards-start
+	./scripts/environment/persist-local-environment.sh
+
+database-port-forwards-start:
+	POSTGRES_LOCAL_PORT=$(POSTGRES_LOCAL_PORT) \
+	POSTGRES_REPLICA_LOCAL_PORT=$(POSTGRES_REPLICA_LOCAL_PORT) \
+	./scripts/environment/database-port-forwards.sh start
+
+database-port-forwards-stop:
+	./scripts/environment/database-port-forwards.sh stop
+
+database-port-forwards-status:
+	./scripts/environment/database-port-forwards.sh status
+
+application-port-forwards-start:
+	./scripts/environment/application-port-forwards.sh start
+
+application-port-forwards-stop:
+	./scripts/environment/application-port-forwards.sh stop
+
+application-port-forwards-status:
+	./scripts/environment/application-port-forwards.sh status
+
+port-forwards-stop:
+	$(MAKE) application-port-forwards-stop
+	$(MAKE) database-port-forwards-stop
+
+port-forwards-status:
+	$(MAKE) database-port-forwards-status
+	$(MAKE) application-port-forwards-status
 
 # Start Environment
 environment-up:
